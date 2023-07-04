@@ -1,0 +1,18 @@
+{
+    "name": "JoystickPack.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d128b76079402134d9e4b5f08dd76af5"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
