@@ -2,6 +2,7 @@
   "dependencies": {
     "com.neuecc.unirx": "7.1.0",
     "com.svermeulen.extenject": "9.2.0-stcf3",
+    "com.cysharp.unitask": "2.3.3",
     "com.unity.addressables": "1.19.19",
     "com.unity.collab-proxy": "2.0.1",
     "com.unity.feature.2d": "1.0.0",
@@ -53,7 +54,8 @@
       "url": "https://package.openupm.com",
       "scopes": [
         "com.svermeulen.extenject",
-        "com.neuecc.unirx"
+        "com.neuecc.unirx",
+        "com.cysharp.unitask"
       ]
     }
   ]
