@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -19,8 +20,8 @@ namespace Game
         public async void Initialize()
         {
             var room = 2;
-            var _roomPrefab = await Addressables.LoadAssetAsync<GameObject>("Room_" + room).Task;
-            var roomObj = Object.Instantiate(_roomPrefab);
+            var roomPrefab = await Addressables.LoadAssetAsync<GameObject>("Room_" + room).ToUniTask();
+            var roomObj = Object.Instantiate(roomPrefab);
             var roomData = roomObj.GetComponent<RoomData>();
             _enemyFactory.Create(roomData);
         }

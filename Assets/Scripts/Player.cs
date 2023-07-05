@@ -8,6 +8,8 @@ namespace Game
         [SerializeField][Range(0.8f, 2f)] private float _speed;
         [SerializeField] private Rigidbody2D _rb;
         private FixedJoystick _joystick;
+        
+        //TODO Player health and taking damage
 
         [Inject]
         private void Construct(FixedJoystick joystick)

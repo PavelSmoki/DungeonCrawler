@@ -7,6 +7,7 @@ namespace Game
     {
         [field: SerializeField] public GameObject Prefab { get; private set; }
         [field: SerializeField] public float Speed { get; private set; }
+        [field: SerializeField] public float Health { get; private set; }
         // [field: SerializeField] public GameObject Particle { get; private set; }
     }
 }

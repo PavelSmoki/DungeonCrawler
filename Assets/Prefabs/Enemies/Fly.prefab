@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3318040342749096084}
   - component: {fileID: 3984968245825663850}
-  - component: {fileID: -8844504071071747609}
+  - component: {fileID: 615158695785665305}
+  - component: {fileID: 4700468551757637302}
+  - component: {fileID: 5496608129587419930}
   m_Layer: 0
   m_Name: Fly
   m_TagString: Untagged
@@ -85,7 +87,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-8844504071071747609
+--- !u!58 &615158695785665305
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6672089500069363669}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &4700468551757637302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,6 +112,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 6672089500069363669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82d4ab7da47d456fbf946e17c4cd59d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 2af7f9b8f0a04634ad2ed62b2ca97332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &5496608129587419930
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6672089500069363669}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 6
+  m_LinearDrag: 10
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

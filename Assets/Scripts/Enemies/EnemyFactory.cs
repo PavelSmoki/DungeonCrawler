@@ -19,7 +19,7 @@ namespace Game
             for (int i = 0; i < roomData.EnemiesData.Count; i++)
             {
                 var enemy = Object.Instantiate(roomData.EnemiesData[i].Prefab, roomData.EnemiesPos[i].GetTransform())
-                    .GetComponent<Enemy>();
+                    .GetComponent<AEnemy>();
                 enemy.SetEnemyData(roomData.EnemiesData[i]);
                 _container.Inject(enemy);
             }
