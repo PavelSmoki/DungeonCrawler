@@ -5,19 +5,19 @@ using Zenject;
 namespace Game
 {
     public class BaseInstaller : MonoInstaller
-    { 
+    {
         [SerializeField] private GameObject _playerPrefab;
         [SerializeField] private FixedJoystick _fixedJoystick;
         [SerializeField] private List<EnemyData> _enemiesData;
 
         public override void InstallBindings()
         {
-            Container.Bind<Player>().FromComponentInNewPrefab(_playerPrefab).AsSingle().NonLazy();
+            Container.Bind<IPlayer>().FromComponentInNewPrefab(_playerPrefab).AsSingle().NonLazy();
             Container.BindInterfacesTo<GameplayController>().AsSingle().NonLazy();
             Container.Bind<FixedJoystick>().FromInstance(_fixedJoystick);
             Container.Bind<EnemyFactory>().AsSingle();
-            
-            
+
+
             InstallScriptableObjects();
         }
 
@@ -27,7 +27,6 @@ namespace Game
             {
                 Container.Bind<EnemyData>().FromInstance(enemyData);
             }
-            
         }
     }
 }

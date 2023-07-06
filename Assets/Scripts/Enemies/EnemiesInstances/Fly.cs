@@ -13,7 +13,7 @@ namespace Game
         {
             if (_isDelayed)
             {
-                transform.position = Vector2.MoveTowards(transform.position, _player.transform.position,
+                transform.position = Vector2.MoveTowards(transform.position, _player.GetCurrentPosition(),
                     _enemyData.Speed * Time.deltaTime);
             }
 
@@ -21,14 +21,6 @@ namespace Game
             var distance = Vector2.Distance(transform.position, _player.transform.position);
             var direction = _player.transform.position - transform.position;
             */
-        }
-
-        private void OnCollisionEnter(Collision other)
-        {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                // TODO Taking Damage
-            }
         }
     }
 }

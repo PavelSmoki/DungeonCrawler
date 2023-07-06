@@ -7,12 +7,12 @@ namespace Game
 {
     public abstract class AEnemy : MonoBehaviour
     {
-        protected Player _player;
+        protected IPlayer _player;
         protected EnemyData _enemyData;
         protected bool _isDelayed { get; private set; }
 
         [Inject]
-        private void Construct(Player player)
+        private void Construct(IPlayer player)
         {
             _player = player;
         }
@@ -30,7 +30,7 @@ namespace Game
 
         private void Start()
         {
-            BehaviorDelayAfterSpawn();
+            BehaviorDelayAfterSpawn().Forget();
         }
     }
 }
