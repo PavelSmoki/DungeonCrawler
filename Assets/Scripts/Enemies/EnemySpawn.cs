@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game
+namespace Game.Enemies
 {
     public class EnemySpawn : MonoBehaviour
     {

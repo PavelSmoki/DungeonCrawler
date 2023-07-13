@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3318040342749096084}
   - component: {fileID: 3984968245825663850}
-  - component: {fileID: 4700468551757637302}
-  - component: {fileID: 615158695785665305}
+  - component: {fileID: 8936338709841575189}
   - component: {fileID: 5496608129587419930}
-  m_Layer: 9
-  m_Name: Fly
-  m_TagString: Enemy
+  - component: {fileID: 5700973742986758414}
+  m_Layer: 7
+  m_Name: Doll
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8855da2c3b6dd27418308a944f69dab6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4700468551757637302
+--- !u!114 &8936338709841575189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,28 +96,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6672089500069363669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2af7f9b8f0a04634ad2ed62b2ca97332, type: 3}
+  m_Script: {fileID: 11500000, guid: b04f5071042161241a95474b630ca04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 3
-  <Health>k__BackingField: 1
-  <Damage>k__BackingField: 1
---- !u!58 &615158695785665305
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6672089500069363669}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  <Speed>k__BackingField: 0
+  <Health>k__BackingField: Infinity
+  <Damage>k__BackingField: 0
 --- !u!50 &5496608129587419930
 Rigidbody2D:
   serializedVersion: 4
@@ -138,4 +122,20 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
+--- !u!70 &5700973742986758414
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6672089500069363669}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.53, y: 0.96}
+  m_Direction: 0

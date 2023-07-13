@@ -1,6 +1,8 @@
-namespace Game
+using Game.Gameplay;
+
+namespace Game.Player
 {
-    public class Kalisey : APlayer
+    public class Kalisey : PlayerBase
     {
         private void Start()
         {

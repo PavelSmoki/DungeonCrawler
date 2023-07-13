@@ -1,4 +1,4 @@
-namespace Game
+namespace Game.Gameplay
 {
     public class Heart 
     {

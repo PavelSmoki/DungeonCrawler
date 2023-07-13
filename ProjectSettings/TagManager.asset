@@ -12,10 +12,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Flyable
+  - Player
+  - Enemy
   - Obstacle
-  - Invinsible
-  - 
+  - FlyableEnemy
   - 
   - 
   - 

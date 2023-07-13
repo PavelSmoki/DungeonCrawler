@@ -1,14 +1,11 @@
 using System.Collections.Generic;
+using Game.Enemies;
 using UnityEngine;
 
-namespace Game
+namespace Game.Gameplay
 {
     public class RoomData : MonoBehaviour
     {
-        [field:SerializeField] public List<EnemySpawn> EnemiesPos { get; private set; }
-        [field: SerializeField] public List<EnemyData> EnemiesData { get; private set; }
-        
+        [field: SerializeField] public List<EnemyInfo> EnemiesInfos { get; private set; }
     }
 }
-
-

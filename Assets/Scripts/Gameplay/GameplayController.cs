@@ -1,10 +1,11 @@
 using Cysharp.Threading.Tasks;
+using Game.Enemies;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-namespace Game
+namespace Game.Gameplay
 {
     [UsedImplicitly]
     public class GameplayController : IInitializable
@@ -19,8 +20,9 @@ namespace Game
 
         public async void Initialize()
         {
-            var room = 2;
-            var roomPrefab = await Addressables.LoadAssetAsync<GameObject>("Room_" + room).ToUniTask();
+            // var room = 1;
+            // var roomPrefab = await Addressables.LoadAssetAsync<GameObject>("Room_" + room).ToUniTask();
+            var roomPrefab = await Addressables.LoadAssetAsync<GameObject>("DebugRoom").ToUniTask();
             var roomObj = Object.Instantiate(roomPrefab);
             var roomData = roomObj.GetComponent<RoomData>();
             _enemyFactory.Create(roomData);

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Game
+namespace Game.Enemies.EnemiesInstances
 {
-    public class Fly : AEnemy
+    public class Fly : EnemyBase
     {
         private void Update()
         {
@@ -11,10 +11,10 @@ namespace Game
 
         private void Follow()
         {
-            if (_isDelayed)
+            if (IsDelayed)
             {
-                transform.position = Vector2.MoveTowards(transform.position, _player.GetCurrentPosition(),
-                    _enemyData.Speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, Player.GetCurrentPosition(),
+                    Speed * Time.deltaTime);
             }
 
             /*

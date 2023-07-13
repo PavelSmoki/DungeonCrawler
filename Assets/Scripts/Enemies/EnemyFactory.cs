@@ -1,8 +1,10 @@
+using System.Linq;
+using Game.Gameplay;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace Game.Enemies
 {
     [UsedImplicitly]
     public class EnemyFactory
@@ -16,11 +18,10 @@ namespace Game
 
         public void Create(RoomData roomData)
         {
-            for (int i = 0; i < roomData.EnemiesData.Count; i++)
+            foreach (var enemy in roomData.EnemiesInfos.Select(enemyInfo => Object
+                         .Instantiate(enemyInfo.Prefab, enemyInfo.EnemySpawn.GetTransform())
+                         .GetComponent<EnemyBase>()))
             {
-                var enemy = Object.Instantiate(roomData.EnemiesData[i].Prefab, roomData.EnemiesPos[i].GetTransform())
-                    .GetComponent<AEnemy>();
-                enemy.SetEnemyData(roomData.EnemiesData[i]);
                 _container.Inject(enemy);
             }
         }

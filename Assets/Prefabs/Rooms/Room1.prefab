@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 922603864355479040}
   - component: {fileID: 922603864355479041}
   - component: {fileID: 922603864355479043}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,12 +243,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 495281b350c0cfc44a17861d3baf1bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <EnemiesPos>k__BackingField:
-  - {fileID: 7665194471009388360}
-  - {fileID: 6451611193448293184}
-  <EnemiesData>k__BackingField:
-  - {fileID: 11400000, guid: afff013758938e048bfe51892857ec56, type: 2}
-  - {fileID: 11400000, guid: afff013758938e048bfe51892857ec56, type: 2}
+  <EnemiesInfos>k__BackingField:
+  - EnemySpawn: {fileID: 7665194471009388360}
+    Prefab: {fileID: 6672089500069363669, guid: c3d69f3be0e581b48a2cf51a25d53182, type: 3}
+  - EnemySpawn: {fileID: 6451611193448293184}
+    Prefab: {fileID: 6672089500069363669, guid: c3d69f3be0e581b48a2cf51a25d53182, type: 3}
 --- !u!1 &3021806693220603517
 GameObject:
   m_ObjectHideFlags: 0
