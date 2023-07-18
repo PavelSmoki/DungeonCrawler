@@ -1,9 +1,9 @@
 namespace Game.Items.Armor
 {
-    public enum ArmorSlot
+    public enum ArmorType
     {
-        HEAD,
-        BODY,
-        FOOT
+        Head,
+        Body,
+        Foot
     }
 }
