@@ -131,5 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Rareness>k__BackingField: 0
   <Damage>k__BackingField: 1
+  <CritChance>k__BackingField: 0.05
+  <CritModifier>k__BackingField: 2
   <AttackSpeed>k__BackingField: 1
   <AttackRange>k__BackingField: 1.7

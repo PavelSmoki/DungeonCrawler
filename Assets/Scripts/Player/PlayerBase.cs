@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Game.Gameplay;
 using Game.Items.Armor;
 using Game.Items.Weapons;
 using ModestTree;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Game.Player
@@ -13,55 +15,148 @@ namespace Game.Player
     public abstract class PlayerBase : MonoBehaviour, IPlayer
     {
         [SerializeField] private Rigidbody2D _rb;
-        
+        [SerializeField] private int _speed;
+
+
         [SerializeField] private WeaponBase _firstWeapon;
         [SerializeField] private WeaponBase _secondWeapon;
-        [SerializeField] private Armor _head;
-        [SerializeField] private Armor _body;
-        [SerializeField] private Armor _foot;
-        
+        [SerializeField] private List<ArmorSlot> _defaultArmors;
+
+        private Dictionary<ArmorType, Armor> _currentArmors;
         private WeaponBase _currentWeapon;
 
-        private DiContainer _diContainer;
-        private FixedJoystick _MoveJoystick;
-        private FixedJoystick _AttackJoystick;
-        
+        private FixedJoystick _moveJoystick;
+        private FixedJoystick _attackJoystick;
+        private Button _weaponSwitchButton;
+
+        private float _timeBeforeShoot;
         private bool _isInvincible;
+        private bool _isAttackDelayed;
+        private float _delayTemp;
 
         protected readonly Stack<Heart> Hearts = new(10);
-        [SerializeField] [Range(0.8f, 2f)] private float _speed;
-
-        //
+        private PlayerModifiers _playerModifiers;
+        [SerializeField] [Range(0.8f, 2f)] private float _defaultSpeedModifier;
 
         [Inject]
-        private void Construct(DiContainer diContainer, [Inject(Id = "MoveJoystick")] FixedJoystick moveJoystick,
-            [Inject(Id = "AttackJoystick")] FixedJoystick attackJoystick)
+        private void Construct([Inject(Id = "MoveJoystick")] FixedJoystick moveJoystick,
+            [Inject(Id = "AttackJoystick")] FixedJoystick attackJoystick, Button weaponSwitchButton)
         {
-            _diContainer = diContainer;
-            _MoveJoystick = moveJoystick;
-            _AttackJoystick = attackJoystick;
+            _moveJoystick = moveJoystick;
+            _attackJoystick = attackJoystick;
+            _weaponSwitchButton = weaponSwitchButton;
             Init();
         }
 
         private void Init()
         {
             SetWeapon(_firstWeapon);
+            SetDefaultArmors();
+            _playerModifiers = new PlayerModifiers(GetSpeedModifier(), GetDamageModifier(), GetCritChanceModifier(),
+                GetAttackSpeedModifier(), GetAttackRangeModifier(), GetShotSpeedModifier());
+            _weaponSwitchButton.onClick.AddListener(SwitchWeapon);
+            SetButtonWeaponSprite();
         }
-        
+
+        private void SwitchWeapon()
+        {
+            if (_secondWeapon == null) return;
+
+            if (_currentWeapon == _firstWeapon)
+            {
+                SetWeapon(_secondWeapon);
+                _firstWeapon.gameObject.SetActive(false);
+                _secondWeapon.gameObject.SetActive(true);
+                SetButtonWeaponSprite();
+            }
+            else
+            {
+                SetWeapon(_firstWeapon);
+                _firstWeapon.gameObject.SetActive(true);
+                _secondWeapon.gameObject.SetActive(false);
+                SetButtonWeaponSprite();
+            }
+        }
+
+        private void SetButtonWeaponSprite()
+        {
+            _weaponSwitchButton.transform.GetChild(0).GetComponent<Image>().sprite =
+                _currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite;
+        }
+
         private void SetWeapon(WeaponBase weaponBase)
         {
             _currentWeapon = weaponBase;
         }
 
+        private void SetDefaultArmors()
+        {
+            _currentArmors = new Dictionary<ArmorType, Armor>
+            {
+                [ArmorType.Head] = _defaultArmors.FirstOrDefault(armor => armor.ArmorType == ArmorType.Head)?.Armor,
+                [ArmorType.Body] = _defaultArmors.FirstOrDefault(armor => armor.ArmorType == ArmorType.Body)?.Armor,
+                [ArmorType.Foot] = _defaultArmors.FirstOrDefault(armor => armor.ArmorType == ArmorType.Foot)?.Armor
+            };
+        }
+
+        private float GetSpeedModifier()
+        {
+            var bonus = _currentArmors.Where(armor => armor.Value != null)
+                .Sum(armor => armor.Value.MoveSpeedBonus);
+            return Mathf.Clamp(_defaultSpeedModifier + bonus, 0.8f, 2f);
+        }
+
+        private float GetDamageModifier()
+        {
+            var bonus = _currentArmors.Where(armor => armor.Value != null)
+                .Sum(armor => armor.Value.DamageBonus);
+            return bonus;
+        }
+
+        private float GetCritChanceModifier()
+        {
+            var bonus = _currentArmors.Where(armor => armor.Value != null)
+                .Sum(armor => armor.Value.CritChanceBonus);
+            return bonus;
+        }
+
+        private float GetAttackSpeedModifier()
+        {
+            var bonus = _currentArmors.Where(armor => armor.Value != null)
+                .Sum(armor => armor.Value.AttackSpeedBonus);
+            return bonus;
+        }
+
+        private float GetAttackRangeModifier()
+        {
+            var bonus = _currentArmors.Where(armor => armor.Value != null)
+                .Sum(armor => armor.Value.AttackRangeBonus);
+            return bonus;
+        }
+
+        private float GetShotSpeedModifier()
+        {
+            var bonus = _currentArmors.Where(armor => armor.Value != null)
+                .Sum(armor => armor.Value.ShotSpeedBonus);
+            return bonus;
+        }
+
         private void FixedUpdate()
         {
-            _rb.velocity = new Vector2(_MoveJoystick.Horizontal * 7 * _speed, _MoveJoystick.Vertical * 7 * _speed);
+            _rb.velocity = new Vector2(_moveJoystick.Horizontal * _speed * _defaultSpeedModifier,
+                _moveJoystick.Vertical * _speed * _defaultSpeedModifier);
+        }
 
-
-            var lookDirection = new Vector2(_AttackJoystick.Horizontal, _AttackJoystick.Vertical);
-            var moveDirection = new Vector2(_MoveJoystick.Horizontal, _MoveJoystick.Vertical);
+        private void Update()
+        {
+            var lookDirection = new Vector2(_attackJoystick.Horizontal, _attackJoystick.Vertical);
+            var moveDirection = new Vector2(_moveJoystick.Horizontal, _moveJoystick.Vertical);
             
-
+            if (_timeBeforeShoot > 0)
+            {
+                _timeBeforeShoot -= Time.deltaTime;
+            } 
+            
             if (lookDirection.Equals(Vector2.zero))
             {
                 var toRotation = Quaternion.LookRotation(Vector3.forward, moveDirection);
@@ -71,9 +166,19 @@ namespace Game.Player
             {
                 var toRotation = Quaternion.LookRotation(Vector3.forward, lookDirection);
                 _currentWeapon.transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 180);
-                _currentWeapon.Attack();
+                AttackProcessing();
             }
-           
+        }
+
+        private void AttackProcessing()
+        {
+            
+            if (_timeBeforeShoot <= 0)
+            {
+                _currentWeapon.Attack(_playerModifiers.DamageModifier, _playerModifiers.CritChanceModifier,
+                    _playerModifiers.AttackRangeModifier, _playerModifiers.ShotSpeedModifier);
+                _timeBeforeShoot = 1 / (_playerModifiers.AttackSpeedModifier * _currentWeapon.AttackSpeed);
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -93,9 +198,17 @@ namespace Game.Player
 
                     Debug.Log("Heart Destroyed!");
                 }
+
                 TakingDamageDelay().Forget();
             }
-            
+
+            if (other.gameObject.CompareTag("Item"))
+            {
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D other)
+        {
         }
 
         private async UniTaskVoid TakingDamageDelay()
@@ -104,7 +217,7 @@ namespace Game.Player
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
             _isInvincible = false;
         }
-        
+
         public Vector2 GetCurrentPosition()
         {
             return transform.position;

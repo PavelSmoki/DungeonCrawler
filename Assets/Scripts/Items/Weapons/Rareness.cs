@@ -2,10 +2,10 @@ namespace Game.Items.Weapons
 {
     public enum Rareness
     {
-        COMMON,
-        UNCOMMON,
-        RARE,
-        MYTHIC,
-        LEGENDARY
+        Common,
+        Uncommon,
+        Rare,
+        Mythic,
+        Legendary
     }
 }

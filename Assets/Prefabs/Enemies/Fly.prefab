@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 3
-  <Health>k__BackingField: 1
+  <Health>k__BackingField: 10
   <Damage>k__BackingField: 1
 --- !u!58 &615158695785665305
 CircleCollider2D:

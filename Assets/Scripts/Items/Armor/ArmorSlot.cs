@@ -1,9 +1,10 @@
+using UnityEngine;
+
 namespace Game.Items.Armor
 {
-    public enum ArmorSlot
+    public class ArmorSlot
     {
-        HEAD,
-        BODY,
-        FOOT
+        [field: SerializeField] public ArmorType ArmorType { get; private set; }
+        [field: SerializeField] public Armor Armor { get; private set; }
     }
 }

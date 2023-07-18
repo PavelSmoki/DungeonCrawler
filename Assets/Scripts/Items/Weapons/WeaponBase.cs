@@ -1,22 +1,28 @@
-using Game.Player;
 using UnityEditor;
 using UnityEngine;
-using Zenject;
 
 namespace Game.Items.Weapons
 {
     public abstract class WeaponBase : MonoBehaviour
     {
-        [field: SerializeField] protected Rareness Rareness { get; set; }
-        [field: SerializeField] protected float Damage { get; set; }
-        [field: SerializeField] protected float CritChance { get; set; }
-        [field: SerializeField] protected float AttackSpeed { get; set; }
-        [field: SerializeField] protected float AttackRange { get; set; }
+        [field: SerializeField] public Rareness Rareness { get; protected set; }
+        [field: SerializeField] public float Damage { get; protected set; }
+        [field: SerializeField] public float CritChance { get; protected set; }
+
+        [field: SerializeField]
+        [field: Min(2f)]
+        public float CritModifier { get; protected set; }
+
+        [field: SerializeField] public float AttackSpeed { get; protected set; }
+        [field: SerializeField] public float AttackRange { get; protected set; }
 
         protected const string EnemyLayerName = "Enemy";
         protected const string FlyableEnemyLayerName = "FlyableEnemy";
 
-        public virtual void Attack() {}
+        public virtual void Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
+            float shotSpeedModifier)
+        {
+        }
 
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()

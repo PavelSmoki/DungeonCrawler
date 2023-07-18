@@ -17,7 +17,6 @@ namespace Game.Gameplay
             _enemyFactory = enemyFactory;
         }
 
-
         public async void Initialize()
         {
             // var room = 1;
