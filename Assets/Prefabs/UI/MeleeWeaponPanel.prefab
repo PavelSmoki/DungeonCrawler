@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 340524916733520536}
   - component: {fileID: 3401869373180679004}
   - component: {fileID: 5831696844188497658}
+  - component: {fileID: 3993932188470042277}
   m_Layer: 5
   m_Name: MeleeWeaponPanel
   m_TagString: Untagged
@@ -295,6 +296,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 50
+--- !u!114 &3993932188470042277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3232262463623035061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4552baa9708251441804853d8d15c7ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NameLabel: {fileID: 5173193402395845616}
+  RarenessLabel: {fileID: 5518486937193710069}
+  DamageLabel: {fileID: 7457918749725001514}
+  AttackSpeedLabel: {fileID: 1803342711909422397}
+  CritChanceLabel: {fileID: 264433445977271890}
+  CritModifierLabel: {fileID: 7138836587776256337}
+  AttackRangeLabel: {fileID: 389190788935436759}
 --- !u!1 &4941793479837557582
 GameObject:
   m_ObjectHideFlags: 0

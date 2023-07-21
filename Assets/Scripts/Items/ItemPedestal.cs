@@ -1,5 +1,6 @@
 using Game.Items.Weapons;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game
 {
@@ -31,6 +32,8 @@ namespace Game
             if (_item.TryGetComponent<MeleeWeapon>(out var itemStats))
             {
                 _meleeWeaponPanel.gameObject.SetActive(true);
+                _meleeWeaponPanel.transform.GetChild(0).GetComponentInChildren<Image>().sprite =
+                    _item.GetComponentInChildren<SpriteRenderer>().sprite;
                 _meleeWeaponPanel.SetupLabels(
                     itemStats.Name, itemStats.Rareness, itemStats.Damage, itemStats.AttackSpeed,
                     itemStats.CritChance, itemStats.CritModifier, itemStats.AttackRange);
@@ -38,6 +41,8 @@ namespace Game
             else if (_item.TryGetComponent<RangedWeapon>(out var itemStats1))
             {
                 _rangedWeaponPanel.gameObject.SetActive(true);
+                _rangedWeaponPanel.transform.GetChild(0).GetComponentInChildren<Image>().sprite =
+                    _item.GetComponentInChildren<SpriteRenderer>().sprite;
                 _rangedWeaponPanel.SetupLabels(
                     itemStats1.Name, itemStats1.Rareness, itemStats1.Damage, itemStats1.AttackSpeed,
                     itemStats1.CritChance, itemStats1.CritModifier, itemStats1.AttackRange,

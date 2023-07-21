@@ -8,10 +8,10 @@ namespace Game
     {
         [SerializeField] private TextMeshProUGUI _shotSpeedLabel;
 
-        public void SetupLabels(string name, Rareness rareness, float damage, float attackSpeed, float critChance,
+        public void SetupLabels(string itemName, Rareness rareness, float damage, float attackSpeed, float critChance,
             float critModifier, float attackRange, float shotSpeed)
         {
-            base.SetupLabels(name, rareness, damage, attackSpeed, critChance, critModifier, attackRange);
+            base.SetupLabels(itemName, rareness, damage, attackSpeed, critChance, critModifier, attackRange);
             _shotSpeedLabel.text = $"Shot Speed: {shotSpeed}";
         }
     }
