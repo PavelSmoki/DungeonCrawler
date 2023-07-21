@@ -55,30 +55,30 @@ namespace Game.Player
             _playerModifiers = new PlayerModifiers(GetSpeedModifier(), GetDamageModifier(), GetCritChanceModifier(),
                 GetAttackSpeedModifier(), GetAttackRangeModifier(), GetShotSpeedModifier());
             _weaponSwitchButton.onClick.AddListener(SwitchWeapon);
-            SetButtonWeaponSprite();
+            SetWeaponSpriteOnButton();
         }
 
         private void SwitchWeapon()
         {
-            if (_secondWeapon == null) return;
+            if (_firstWeapon == null || _secondWeapon == null) return;
 
             if (_currentWeapon == _firstWeapon)
             {
                 SetWeapon(_secondWeapon);
                 _firstWeapon.gameObject.SetActive(false);
                 _secondWeapon.gameObject.SetActive(true);
-                SetButtonWeaponSprite();
+                SetWeaponSpriteOnButton();
             }
             else
             {
                 SetWeapon(_firstWeapon);
                 _firstWeapon.gameObject.SetActive(true);
                 _secondWeapon.gameObject.SetActive(false);
-                SetButtonWeaponSprite();
+                SetWeaponSpriteOnButton();
             }
         }
 
-        private void SetButtonWeaponSprite()
+        private void SetWeaponSpriteOnButton()
         {
             _weaponSwitchButton.transform.GetChild(0).GetComponent<Image>().sprite =
                 _currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite;
@@ -151,12 +151,12 @@ namespace Game.Player
         {
             var lookDirection = new Vector2(_attackJoystick.Horizontal, _attackJoystick.Vertical);
             var moveDirection = new Vector2(_moveJoystick.Horizontal, _moveJoystick.Vertical);
-            
+
             if (_timeBeforeShoot > 0)
             {
                 _timeBeforeShoot -= Time.deltaTime;
-            } 
-            
+            }
+
             if (lookDirection.Equals(Vector2.zero))
             {
                 var toRotation = Quaternion.LookRotation(Vector3.forward, moveDirection);
@@ -172,7 +172,6 @@ namespace Game.Player
 
         private void AttackProcessing()
         {
-            
             if (_timeBeforeShoot <= 0)
             {
                 _currentWeapon.Attack(_playerModifiers.DamageModifier, _playerModifiers.CritChanceModifier,
@@ -182,6 +181,16 @@ namespace Game.Player
         }
 
         private void OnCollisionEnter2D(Collision2D other)
+        {
+            TakeDamage(other);
+        }
+
+        private void OnCollisionStay2D(Collision2D other)
+        {
+            TakeDamage(other);
+        }
+
+        private void TakeDamage(Collision2D other)
         {
             if (other.gameObject.CompareTag("Enemy") && !_isInvincible)
             {
@@ -198,17 +207,8 @@ namespace Game.Player
 
                     Debug.Log("Heart Destroyed!");
                 }
-
                 TakingDamageDelay().Forget();
             }
-
-            if (other.gameObject.CompareTag("Item"))
-            {
-            }
-        }
-
-        private void OnCollisionExit2D(Collision2D other)
-        {
         }
 
         private async UniTaskVoid TakingDamageDelay()
@@ -218,7 +218,7 @@ namespace Game.Player
             _isInvincible = false;
         }
 
-        public Vector2 GetCurrentPosition()
+        Vector2 IPlayer.GetCurrentPosition()
         {
             return transform.position;
         }

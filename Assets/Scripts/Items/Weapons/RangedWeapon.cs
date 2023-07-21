@@ -4,7 +4,7 @@ namespace Game.Items.Weapons
 {
     public class RangedWeapon : WeaponBase
     {
-        [SerializeField] private float _shotSpeed;
+        [field: SerializeField] public float ShotSpeed { get; protected set; }
         [SerializeField] private GameObject _ammoPrefab;
 
         public override void Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
@@ -13,7 +13,7 @@ namespace Game.Items.Weapons
             var damage = Damage * damageModifier;
             var critChance = CritChance * critChanceModifier;
             var attackRange = AttackRange * attackRangeModifier;
-            var shotSpeed = _shotSpeed * shotSpeedModifier;
+            var shotSpeed = ShotSpeed * shotSpeedModifier;
 
             var ammoLifeTime = attackRange / shotSpeed;
 

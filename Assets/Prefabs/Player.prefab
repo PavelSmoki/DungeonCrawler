@@ -233,7 +233,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0.9811321, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -273,7 +273,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -340,6 +340,10 @@ PrefabInstance:
     - target: {fileID: 3811249145120927244, guid: c3dcdc1f30dcaaf48a9e3e7190e918ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800011828606380123, guid: c3dcdc1f30dcaaf48a9e3e7190e918ee, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7278198764757504995, guid: c3dcdc1f30dcaaf48a9e3e7190e918ee, type: 3}
       propertyPath: _shotSpeed
@@ -421,6 +425,10 @@ PrefabInstance:
     - target: {fileID: 3073519654114473989, guid: d451747fa74d6a549b4039310abef20d, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416795136886378012, guid: d451747fa74d6a549b4039310abef20d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d451747fa74d6a549b4039310abef20d, type: 3}

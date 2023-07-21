@@ -8,21 +8,21 @@ namespace Game.Items.Weapons
 {
     public class Projectile : MonoBehaviour
     {
-        private float AmmoLifeTime;
-        private float Damage;
+        private float _ammoLifeTime;
+        private float _damage;
         private CancellationTokenSource _cancellationTokenSource;
 
         public void SetAmmoFields(float ammoLifeTime, float damage)
         {
-            AmmoLifeTime = ammoLifeTime;
-            Damage = damage;
-            _cancellationTokenSource = new ();
+            _ammoLifeTime = ammoLifeTime;
+            _damage = damage;
+            _cancellationTokenSource = new CancellationTokenSource();
             Life().Forget();
         }
 
         private async UniTaskVoid Life()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(AmmoLifeTime), cancellationToken: _cancellationTokenSource.Token)
+            await UniTask.Delay(TimeSpan.FromSeconds(_ammoLifeTime), cancellationToken: _cancellationTokenSource.Token)
                 .SuppressCancellationThrow();
             if (_cancellationTokenSource.IsCancellationRequested) return;
             Destroy(gameObject);
@@ -31,7 +31,7 @@ namespace Game.Items.Weapons
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.CompareTag("Enemy"))
-                other.gameObject.GetComponent<EnemyBase>().TakeDamage(Damage);
+                other.gameObject.GetComponent<EnemyBase>().TakeDamage(_damage);
             _cancellationTokenSource.Cancel();
             Destroy(gameObject);
         }

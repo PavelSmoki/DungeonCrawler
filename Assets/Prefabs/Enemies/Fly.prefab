@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af7f9b8f0a04634ad2ed62b2ca97332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 3
-  <Health>k__BackingField: 10
+  <Speed>k__BackingField: 2
+  <Health>k__BackingField: 2
   <Damage>k__BackingField: 1
 --- !u!58 &615158695785665305
 CircleCollider2D:
@@ -130,7 +130,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 6
+  m_Mass: 1
   m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 1

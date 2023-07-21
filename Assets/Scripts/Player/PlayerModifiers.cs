@@ -15,7 +15,7 @@ namespace Game.Player
             float attackSpeedModifier, float attackRangeModifier,
             float shotSpeedModifier)
         {
-            SpeedModifier = speedModifier;
+            SpeedModifier = speedModifier;  
             DamageModifier = damageModifier + 1;
             CritChanceModifier = critChanceModifier + 1;
             AttackSpeedModifier = attackSpeedModifier + 1;
