@@ -8,12 +8,17 @@ namespace Game.Items.Weapons
 {
     public class Projectile : MonoBehaviour
     {
+        private const string EnemyTag = "Enemy";
+
+        [SerializeField] private Rigidbody2D _rb;
+        
         private float _ammoLifeTime;
         private float _damage;
         private CancellationTokenSource _cancellationTokenSource;
 
-        public void SetAmmoFields(float ammoLifeTime, float damage)
+        public void SetAmmoFields(float ammoLifeTime, float damage, Vector2 force)
         {
+            _rb.AddForce(force, ForceMode2D.Impulse);
             _ammoLifeTime = ammoLifeTime;
             _damage = damage;
             _cancellationTokenSource = new CancellationTokenSource();
@@ -30,8 +35,8 @@ namespace Game.Items.Weapons
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("Enemy"))
-                other.gameObject.GetComponent<EnemyBase>().TakeDamage(_damage);
+            if (other.gameObject.CompareTag(EnemyTag))
+                other.gameObject.GetComponent<EnemyBase>().TakeDamage(_damage, Vector2.zero, 0);
             _cancellationTokenSource.Cancel();
             Destroy(gameObject);
         }

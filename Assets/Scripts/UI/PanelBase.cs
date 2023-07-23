@@ -1,24 +1,39 @@
 using Game.Items.Weapons;
+using Game.Player;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
-namespace Game
+namespace Game.UI
 {
     public abstract class PanelBase : MonoBehaviour
     {
-        [SerializeField] protected TextMeshProUGUI NameLabel;
-        [SerializeField] protected TextMeshProUGUI RarenessLabel;
-        [SerializeField] protected TextMeshProUGUI DamageLabel;
-        [SerializeField] protected TextMeshProUGUI AttackSpeedLabel;
-        [SerializeField] protected TextMeshProUGUI CritChanceLabel;
-        [SerializeField] protected TextMeshProUGUI CritModifierLabel;
-        [SerializeField] protected TextMeshProUGUI AttackRangeLabel;
+        [Header("LABELS")]
+        [SerializeField] private TextMeshProUGUI _nameLabel;
+        [SerializeField] private TextMeshProUGUI _rarenessLabel;
+        [SerializeField] private TextMeshProUGUI _damageLabel;
+        [SerializeField] private TextMeshProUGUI _attackSpeedLabel;
+        [SerializeField] private TextMeshProUGUI _critChanceLabel;
+        [SerializeField] private TextMeshProUGUI _critModifierLabel;
+        [SerializeField] private TextMeshProUGUI _attackRangeLabel;
 
-        public void SetupLabels(string itemName, Rareness rareness, float damage, float attackSpeed,
+        private GameObject _item;
+
+        private IPlayer _player;
+
+        [Inject]
+        private void Construct(IPlayer player)
+        {
+            _player = player;
+        }
+
+        public void Setup(GameObject item, string itemName, Rareness rareness, float damage, float attackSpeed,
             float critChance, float critModifier, float attackRange)
         {
-            NameLabel.text = itemName.ToUpper();
-            RarenessLabel.text = rareness.ToString().ToUpper();
+            _item = item;
+            
+            _nameLabel.text = itemName.ToUpper();
+            _rarenessLabel.text = rareness.ToString().ToUpper();
             var color = rareness switch
             {
                 Rareness.Uncommon => new Color(0.2f, 0.79f, 1f),
@@ -27,12 +42,17 @@ namespace Game
                 Rareness.Legendary => new Color(1f, 0.502f, 0f),
                 _ => Color.white
             };
-            RarenessLabel.color = color;
-            DamageLabel.text = $"Damage: {damage}";
-            AttackSpeedLabel.text = $"Attack Speed: {attackSpeed}";
-            CritChanceLabel.text = $"Crit Chance: {critChance * 100}%";
-            CritModifierLabel.text = $"Crit Modifier: {critModifier}x ";
-            AttackRangeLabel.text = $"Attack Range: {attackRange}";
+            _rarenessLabel.color = color;
+            _damageLabel.text = $"Damage: {damage}";
+            _attackSpeedLabel.text = $"Attack Speed: {attackSpeed}";
+            _critChanceLabel.text = $"Crit Chance: {critChance * 100}%";
+            _critModifierLabel.text = $"Crit Modifier: {critModifier}x ";
+            _attackRangeLabel.text = $"Attack Range: {attackRange}";
+        }
+
+        public void TakeItem()
+        {
+            _player.TakeItem(_item);
         }
     }
 }

@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b04f5071042161241a95474b630ca04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rb: {fileID: 5496608129587419930}
   <Speed>k__BackingField: 0
   <Health>k__BackingField: Infinity
-  <Damage>k__BackingField: 0
 --- !u!50 &5496608129587419930
 Rigidbody2D:
   serializedVersion: 4

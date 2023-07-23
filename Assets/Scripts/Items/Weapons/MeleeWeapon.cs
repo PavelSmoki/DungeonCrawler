@@ -30,9 +30,8 @@ namespace Game.Items.Weapons
                     var knockbackDirection = hit.transform.position - transform.position;
                     
                     if (Random.Range(0f, 1f) <= critChance) damage *= CritModifier;
-
-                    enemy.GetComponent<Rigidbody2D>().AddForce(knockbackDirection * KnockBack, ForceMode2D.Impulse);
-                    enemy.GetComponent<EnemyBase>().TakeDamage(damage);
+                    
+                    enemy.GetComponent<EnemyBase>().TakeDamage(damage, knockbackDirection, KnockBack);
                 }
             }
         }

@@ -5,46 +5,40 @@ using Cysharp.Threading.Tasks;
 using Game.Gameplay;
 using Game.Items.Armor;
 using Game.Items.Weapons;
+using Game.UI;
 using ModestTree;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Game.Player
 {
     public abstract class PlayerBase : MonoBehaviour, IPlayer
     {
+        private const string EnemyTag = "Enemy";
+        
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private int _speed;
-
 
         [SerializeField] private WeaponBase _firstWeapon;
         [SerializeField] private WeaponBase _secondWeapon;
         [SerializeField] private List<ArmorSlot> _defaultArmors;
 
+        private GameUI _gameUI;
+
         private Dictionary<ArmorType, Armor> _currentArmors;
         private WeaponBase _currentWeapon;
 
-        private FixedJoystick _moveJoystick;
-        private FixedJoystick _attackJoystick;
-        private Button _weaponSwitchButton;
-
         private float _timeBeforeShoot;
         private bool _isInvincible;
-        private bool _isAttackDelayed;
-        private float _delayTemp;
 
         protected readonly Stack<Heart> Hearts = new(10);
         private PlayerModifiers _playerModifiers;
         [SerializeField] [Range(0.8f, 2f)] private float _defaultSpeedModifier;
 
         [Inject]
-        private void Construct([Inject(Id = "MoveJoystick")] FixedJoystick moveJoystick,
-            [Inject(Id = "AttackJoystick")] FixedJoystick attackJoystick, Button weaponSwitchButton)
+        private void Construct(GameUI gameUI)
         {
-            _moveJoystick = moveJoystick;
-            _attackJoystick = attackJoystick;
-            _weaponSwitchButton = weaponSwitchButton;
+            _gameUI = gameUI;
             Init();
         }
 
@@ -52,36 +46,34 @@ namespace Game.Player
         {
             SetWeapon(_firstWeapon);
             SetDefaultArmors();
+            
             _playerModifiers = new PlayerModifiers(GetSpeedModifier(), GetDamageModifier(), GetCritChanceModifier(),
                 GetAttackSpeedModifier(), GetAttackRangeModifier(), GetShotSpeedModifier());
-            _weaponSwitchButton.onClick.AddListener(SwitchWeapon);
-            SetWeaponSpriteOnButton();
+            
+            _gameUI.OnWeaponSwitch += SwitchWeapon;
+            _gameUI.OnMove += Move;
+            _gameUI.OnAttack += Attack;
+            _gameUI.SetWeaponImage(_currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite);
         }
 
         private void SwitchWeapon()
         {
             if (_firstWeapon == null || _secondWeapon == null) return;
-
+            
             if (_currentWeapon == _firstWeapon)
             {
                 SetWeapon(_secondWeapon);
                 _firstWeapon.gameObject.SetActive(false);
                 _secondWeapon.gameObject.SetActive(true);
-                SetWeaponSpriteOnButton();
+                _gameUI.SetWeaponImage(_currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite);
             }
             else
             {
                 SetWeapon(_firstWeapon);
                 _firstWeapon.gameObject.SetActive(true);
                 _secondWeapon.gameObject.SetActive(false);
-                SetWeaponSpriteOnButton();
+                _gameUI.SetWeaponImage(_currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite);
             }
-        }
-
-        private void SetWeaponSpriteOnButton()
-        {
-            _weaponSwitchButton.transform.GetChild(0).GetComponent<Image>().sprite =
-                _currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite;
         }
 
         private void SetWeapon(WeaponBase weaponBase)
@@ -141,33 +133,39 @@ namespace Game.Player
             return bonus;
         }
 
-        private void FixedUpdate()
+        private void Move(float horizontal, float vertical)
         {
-            _rb.velocity = new Vector2(_moveJoystick.Horizontal * _speed * _defaultSpeedModifier,
-                _moveJoystick.Vertical * _speed * _defaultSpeedModifier);
+            _rb.velocity = new Vector2(horizontal * _speed * _defaultSpeedModifier,
+                vertical * _speed * _defaultSpeedModifier);
         }
 
-        private void Update()
+        private void Attack(Vector2 moveDirection, Vector2 lookDirection)
         {
-            var lookDirection = new Vector2(_attackJoystick.Horizontal, _attackJoystick.Vertical);
-            var moveDirection = new Vector2(_moveJoystick.Horizontal, _moveJoystick.Vertical);
+            AttackTick();
 
+            if (lookDirection.Equals(Vector2.zero))
+            {
+                RotateWeapon(moveDirection);
+            }
+            else
+            {
+                RotateWeapon(lookDirection);
+                AttackProcessing();
+            }
+        }
+
+        private void AttackTick()
+        {
             if (_timeBeforeShoot > 0)
             {
                 _timeBeforeShoot -= Time.deltaTime;
             }
+        }
 
-            if (lookDirection.Equals(Vector2.zero))
-            {
-                var toRotation = Quaternion.LookRotation(Vector3.forward, moveDirection);
-                _currentWeapon.transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 180);
-            }
-            else
-            {
-                var toRotation = Quaternion.LookRotation(Vector3.forward, lookDirection);
-                _currentWeapon.transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 180);
-                AttackProcessing();
-            }
+        private void RotateWeapon(Vector2 direction)
+        {
+            var toRotation = Quaternion.LookRotation(Vector3.forward, direction);
+            _currentWeapon.transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 180);
         }
 
         private void AttackProcessing()
@@ -192,7 +190,7 @@ namespace Game.Player
 
         private void TakeDamage(Collision2D other)
         {
-            if (other.gameObject.CompareTag("Enemy") && !_isInvincible)
+            if (other.gameObject.CompareTag(EnemyTag) && !_isInvincible)
             {
                 var lastHeart = Hearts.Peek();
                 lastHeart.TakeDamage();
@@ -207,6 +205,7 @@ namespace Game.Player
 
                     Debug.Log("Heart Destroyed!");
                 }
+
                 TakingDamageDelay().Forget();
             }
         }
@@ -221,6 +220,21 @@ namespace Game.Player
         Vector2 IPlayer.GetCurrentPosition()
         {
             return transform.position;
+        }
+
+        void IPlayer.TakeItem(GameObject item)
+        {
+            if (item.GetType() == typeof(WeaponBase))
+            {
+                if (_currentWeapon == _firstWeapon)
+                {
+                    _firstWeapon = item.GetComponent<WeaponBase>();
+                }
+                else
+                {
+                    _secondWeapon = item.GetComponent<WeaponBase>();
+                }
+            }
         }
     }
 }

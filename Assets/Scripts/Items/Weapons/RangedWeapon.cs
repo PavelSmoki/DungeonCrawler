@@ -21,8 +21,7 @@ namespace Game.Items.Weapons
 
             var ammo = Instantiate(_ammoPrefab, transform.position, Quaternion.identity);
             ammo.transform.rotation = transform.rotation;
-            ammo.GetComponent<Rigidbody2D>().AddForce(ammo.transform.up * shotSpeed, ForceMode2D.Impulse);
-            ammo.GetComponent<Projectile>().SetAmmoFields(ammoLifeTime, damage);
+            ammo.GetComponent<Projectile>().SetAmmoFields(ammoLifeTime, damage, ammo.transform.up * shotSpeed);
         }
     }
 }

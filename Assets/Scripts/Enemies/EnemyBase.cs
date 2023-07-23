@@ -8,9 +8,10 @@ namespace Game.Enemies
 {
     public abstract class EnemyBase : MonoBehaviour
     {
+        [SerializeField] protected Rigidbody2D _rb;
+        
         [field: SerializeField] protected float Speed { get; set; }
         [field: SerializeField] protected float Health { get; set; }
-        [field: SerializeField] protected float Damage { get; set; }
         // [field: SerializeField] public GameObject Particle { get; private set; }
         
         protected IPlayer Player;
@@ -29,13 +30,15 @@ namespace Game.Enemies
             IsDelayed = true;
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             BehaviorDelayAfterSpawn().Forget();
         }
 
-        public void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage, Vector2 knockbackDirection, float knockBack)
         {
+            _rb.AddForce(knockbackDirection * knockBack, ForceMode2D.Impulse);
+            
             Health -= damage;
             if (Health <= 0)
             {

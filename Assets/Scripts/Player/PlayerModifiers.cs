@@ -4,12 +4,12 @@ namespace Game.Player
 {
     public class PlayerModifiers
     {
-        [field: Min(1f)] public float SpeedModifier { get; private set; }
-        [field: Min(1f)] public float DamageModifier { get; private set; }
-        [field: Min(1f)] public float CritChanceModifier { get; private set; }
-        [field: Min(1f)] public float AttackSpeedModifier { get; private set; }
-        [field: Min(1f)] public float AttackRangeModifier { get; private set; }
-        [field: Min(1f)] public float ShotSpeedModifier { get; private set; }
+        public float SpeedModifier { get; private set; }
+        public float DamageModifier { get; private set; }
+        public float CritChanceModifier { get; private set; }
+        public float AttackSpeedModifier { get; private set; }
+        public float AttackRangeModifier { get; private set; }
+        public float ShotSpeedModifier { get; private set; }
 
         public PlayerModifiers(float speedModifier, float damageModifier, float critChanceModifier,
             float attackSpeedModifier, float attackRangeModifier,

@@ -809,9 +809,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 6545526344173415824, guid: 1bd95db0b007756479356206b66626bf, type: 3}
-  _MoveJoystick: {fileID: 1325339754}
-  _AttackJoystick: {fileID: 1126055071}
+  _moveJoystick: {fileID: 1325339754}
+  _attackJoystick: {fileID: 1126055071}
   _weaponSwitchButton: {fileID: 318007617}
+  _meleeWeaponPanel: {fileID: 3993932188470042277, guid: a5b590a5fbf0c52449333f35aada460f, type: 3}
+  _rangeWeaponPanel: {fileID: 2097745502321379470, guid: 8840cfeb013b5e646ab48586a5c21265, type: 3}
 --- !u!4 &1946342692
 Transform:
   m_ObjectHideFlags: 0
