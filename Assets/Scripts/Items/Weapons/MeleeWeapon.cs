@@ -1,4 +1,3 @@
-using System.Numerics;
 using Game.Enemies;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
@@ -8,6 +7,7 @@ namespace Game.Items.Weapons
     public class MeleeWeapon : WeaponBase
     {
         [SerializeField] protected float KnockBack;
+        private readonly RaycastHit2D[] _hits = new RaycastHit2D[5];
 
         public override void Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
             float shotSpeedModifier)
@@ -17,10 +17,11 @@ namespace Game.Items.Weapons
             var attackRange = AttackRange * attackRangeModifier;
 
             var mask = LayerMask.GetMask(EnemyLayerName, FlyableEnemyLayerName);
-            var hits = Physics2D.CircleCastAll(transform.position, attackRange,
-                Vector2.one, 0, mask);
 
-            foreach (var hit in hits)
+            Physics2D.CircleCastNonAlloc(transform.position, attackRange,
+                Vector2.one, _hits, mask);
+
+            foreach (var hit in _hits)
             {
                 var angle = Vector2.Dot(transform.up,
                     (hit.point - new Vector2(transform.position.x, transform.position.y)).normalized);

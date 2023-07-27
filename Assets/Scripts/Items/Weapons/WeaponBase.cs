@@ -1,9 +1,10 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
 namespace Game.Items.Weapons
 {
-    public abstract class WeaponBase : MonoBehaviour
+    public abstract class WeaponBase : Item
     {
         [field: Header("INFO")]
         [field: SerializeField] public string Name { get; private set; }

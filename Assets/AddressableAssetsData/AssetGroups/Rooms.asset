@@ -18,15 +18,23 @@ MonoBehaviour:
   m_GUID: 98347dc5743c1e04b94d42a5340e19db
   m_SerializeEntries:
   - m_GUID: 0b81433568031f84cbc30971fb58c1d5
-    m_Address: Room_1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 417f860b4e34d354ebbc5fd90f2a6aba
-    m_Address: Room_2
+    m_Address: StartingRoom
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: f56047bdc639b994b8da7ec40e4a784a
     m_Address: DebugRoom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 32a454422142ca44aa0a8f52494d008f
+    m_Address: Room1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2ef9b1975a3a6e9499dc99529e31e432
+    m_Address: Room2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e14354e4c5d24de4c92bd332dd73f1c0
+    m_Address: Room3
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

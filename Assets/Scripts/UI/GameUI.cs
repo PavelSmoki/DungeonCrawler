@@ -8,7 +8,7 @@ namespace Game.UI
     {
         [SerializeField] private FixedJoystick _moveJoystick;
         [SerializeField] private FixedJoystick _attackJoystick;
-        [SerializeField] private Button _weaponSwitchButton;
+        [SerializeField] private Image _weaponSwitchButtonImage;
 
         public Action OnWeaponSwitch;
         public Action<float, float> OnMove;
@@ -21,7 +21,7 @@ namespace Game.UI
 
         public void SetWeaponImage(Sprite sprite)
         {
-            _weaponSwitchButton.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
+            _weaponSwitchButtonImage.sprite = sprite;
         }
 
         private void FixedUpdate()

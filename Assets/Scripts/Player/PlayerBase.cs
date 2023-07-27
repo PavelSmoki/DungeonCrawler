@@ -15,7 +15,7 @@ namespace Game.Player
     public abstract class PlayerBase : MonoBehaviour, IPlayer
     {
         private const string EnemyTag = "Enemy";
-        
+
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private int _speed;
 
@@ -39,6 +39,10 @@ namespace Game.Player
         private void Construct(GameUI gameUI)
         {
             _gameUI = gameUI;
+        }
+
+        private void Awake()
+        {
             Init();
         }
 
@@ -46,10 +50,10 @@ namespace Game.Player
         {
             SetWeapon(_firstWeapon);
             SetDefaultArmors();
-            
+
             _playerModifiers = new PlayerModifiers(GetSpeedModifier(), GetDamageModifier(), GetCritChanceModifier(),
                 GetAttackSpeedModifier(), GetAttackRangeModifier(), GetShotSpeedModifier());
-            
+
             _gameUI.OnWeaponSwitch += SwitchWeapon;
             _gameUI.OnMove += Move;
             _gameUI.OnAttack += Attack;
@@ -59,26 +63,25 @@ namespace Game.Player
         private void SwitchWeapon()
         {
             if (_firstWeapon == null || _secondWeapon == null) return;
-            
+
             if (_currentWeapon == _firstWeapon)
             {
                 SetWeapon(_secondWeapon);
                 _firstWeapon.gameObject.SetActive(false);
                 _secondWeapon.gameObject.SetActive(true);
-                _gameUI.SetWeaponImage(_currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite);
             }
             else
             {
                 SetWeapon(_firstWeapon);
                 _firstWeapon.gameObject.SetActive(true);
                 _secondWeapon.gameObject.SetActive(false);
-                _gameUI.SetWeaponImage(_currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite);
             }
         }
 
         private void SetWeapon(WeaponBase weaponBase)
         {
             _currentWeapon = weaponBase;
+            _gameUI.SetWeaponImage(_currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite);
         }
 
         private void SetDefaultArmors()
@@ -174,19 +177,14 @@ namespace Game.Player
             {
                 _currentWeapon.Attack(_playerModifiers.DamageModifier, _playerModifiers.CritChanceModifier,
                     _playerModifiers.AttackRangeModifier, _playerModifiers.ShotSpeedModifier);
+                
                 _timeBeforeShoot = 1 / (_playerModifiers.AttackSpeedModifier * _currentWeapon.AttackSpeed);
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-            TakeDamage(other);
-        }
+        private void OnCollisionEnter2D(Collision2D other) => TakeDamage(other);
 
-        private void OnCollisionStay2D(Collision2D other)
-        {
-            TakeDamage(other);
-        }
+        private void OnCollisionStay2D(Collision2D other) => TakeDamage(other);
 
         private void TakeDamage(Collision2D other)
         {
@@ -221,20 +219,59 @@ namespace Game.Player
         {
             return transform.position;
         }
-
-        void IPlayer.TakeItem(GameObject item)
+        
+        GameObject IPlayer.TakeItem(WeaponBase item)
         {
             if (item.GetType() == typeof(WeaponBase))
             {
+                if (_secondWeapon == null)
+                {
+                    _secondWeapon = item.GetComponent<WeaponBase>();
+                    SetWeapon(_secondWeapon);
+                    return null;
+                }
                 if (_currentWeapon == _firstWeapon)
                 {
                     _firstWeapon = item.GetComponent<WeaponBase>();
+                    SetWeapon(_firstWeapon);
                 }
                 else
                 {
                     _secondWeapon = item.GetComponent<WeaponBase>();
+                    SetWeapon(_secondWeapon);
+                }
+
+                return _currentWeapon.gameObject;
+            }
+            
+            var pickedArmor = item.GetComponent<Armor>();
+            switch (pickedArmor.ArmorType)
+            {
+                case ArmorType.Head:
+                {
+                    var dressedArmor = _currentArmors[ArmorType.Head].gameObject;
+                    _currentArmors[ArmorType.Head] = pickedArmor;
+                    return dressedArmor;
+                }
+                case ArmorType.Body:
+                {
+                    var dressedArmor = _currentArmors[ArmorType.Body].gameObject;
+                    _currentArmors[ArmorType.Body] = pickedArmor;
+                    return dressedArmor;
+                }
+                case ArmorType.Foot:
+                {
+                    var dressedArmor = _currentArmors[ArmorType.Foot].gameObject;
+                    _currentArmors[ArmorType.Foot] = pickedArmor;
+                    return dressedArmor;
                 }
             }
+            return null;
+        }
+
+        GameObject IPlayer.TakeItem(Armor item)
+        {
+            return null;
         }
     }
 }

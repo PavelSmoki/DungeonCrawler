@@ -3,7 +3,6 @@ using Game.Gameplay;
 using Game.Player;
 using Game.UI;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Game.Installers
@@ -12,9 +11,7 @@ namespace Game.Installers
     {
         [SerializeField] private GameObject _playerPrefab;
         [SerializeField] private GameUI _gameUI;
-        [SerializeField] private MeleeWeaponPanel _meleeWeaponPanel;
-        [SerializeField] private RangedWeaponPanel _rangeWeaponPanel;
-        
+        [SerializeField] private Grid _grid;
 
         public override void InstallBindings()
         {
@@ -22,8 +19,7 @@ namespace Game.Installers
             Container.BindInterfacesTo<GameplayController>().AsSingle().NonLazy();
             Container.Bind<GameUI>().FromInstance(_gameUI);
             Container.Bind<EnemyFactory>().AsSingle();
-            Container.Bind<MeleeWeaponPanel>().FromInstance(_meleeWeaponPanel);
-            Container.Bind<RangedWeaponPanel>().FromInstance(_rangeWeaponPanel);
+            Container.Bind<Grid>().FromInstance(_grid);
         }
     }
 }

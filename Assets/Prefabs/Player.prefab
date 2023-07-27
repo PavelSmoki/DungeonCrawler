@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8282692694e227d448b774f74dcc50cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Name>k__BackingField: 
   <Rareness>k__BackingField: 0
   <ArmorType>k__BackingField: 0
   <MoveSpeedBonus>k__BackingField: 0

@@ -282,7 +282,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 318007618}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2085913186}
+        m_TargetAssemblyTypeName: Game.UI.GameUI, Game
+        m_MethodName: OnWeaponSwitchPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &318007618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +527,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
   m_PrefabInstance: {fileID: 582374807}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &864912656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 864912658}
+  - component: {fileID: 864912657}
+  m_Layer: 0
+  m_Name: Grid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!156049354 &864912657
+Grid:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864912656}
+  m_Enabled: 1
+  m_CellSize: {x: 1, y: 1, z: 0}
+  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellLayout: 0
+  m_CellSwizzle: 0
+--- !u!4 &864912658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864912656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1036357281
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,11 +865,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 6545526344173415824, guid: 1bd95db0b007756479356206b66626bf, type: 3}
-  _moveJoystick: {fileID: 1325339754}
-  _attackJoystick: {fileID: 1126055071}
-  _weaponSwitchButton: {fileID: 318007617}
-  _meleeWeaponPanel: {fileID: 3993932188470042277, guid: a5b590a5fbf0c52449333f35aada460f, type: 3}
-  _rangeWeaponPanel: {fileID: 2097745502321379470, guid: 8840cfeb013b5e646ab48586a5c21265, type: 3}
+  _gameUI: {fileID: 2085913186}
+  _grid: {fileID: 864912657}
 --- !u!4 &1946342692
 Transform:
   m_ObjectHideFlags: 0
@@ -841,8 +894,9 @@ GameObject:
   - component: {fileID: 2085913184}
   - component: {fileID: 2085913183}
   - component: {fileID: 2085913182}
+  - component: {fileID: 2085913186}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: GameUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -932,3 +986,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2085913186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085913181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f7a540cb85c264d8ef1865938293c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveJoystick: {fileID: 1325339754}
+  _attackJoystick: {fileID: 1126055071}
+  _weaponSwitchButtonImage: {fileID: 301704272}

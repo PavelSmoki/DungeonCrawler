@@ -1,37 +1,19 @@
+using System;
 using Game.Items.Weapons;
-using Game.Player;
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 namespace Game.UI
 {
     public abstract class PanelBase : MonoBehaviour
     {
-        [Header("LABELS")]
         [SerializeField] private TextMeshProUGUI _nameLabel;
         [SerializeField] private TextMeshProUGUI _rarenessLabel;
-        [SerializeField] private TextMeshProUGUI _damageLabel;
-        [SerializeField] private TextMeshProUGUI _attackSpeedLabel;
-        [SerializeField] private TextMeshProUGUI _critChanceLabel;
-        [SerializeField] private TextMeshProUGUI _critModifierLabel;
-        [SerializeField] private TextMeshProUGUI _attackRangeLabel;
 
-        private GameObject _item;
+        public Action OnTakeItem;
 
-        private IPlayer _player;
-
-        [Inject]
-        private void Construct(IPlayer player)
+        protected void BaseSetup(string itemName, Rareness rareness)
         {
-            _player = player;
-        }
-
-        public void Setup(GameObject item, string itemName, Rareness rareness, float damage, float attackSpeed,
-            float critChance, float critModifier, float attackRange)
-        {
-            _item = item;
-            
             _nameLabel.text = itemName.ToUpper();
             _rarenessLabel.text = rareness.ToString().ToUpper();
             var color = rareness switch
@@ -43,16 +25,11 @@ namespace Game.UI
                 _ => Color.white
             };
             _rarenessLabel.color = color;
-            _damageLabel.text = $"Damage: {damage}";
-            _attackSpeedLabel.text = $"Attack Speed: {attackSpeed}";
-            _critChanceLabel.text = $"Crit Chance: {critChance * 100}%";
-            _critModifierLabel.text = $"Crit Modifier: {critModifier}x ";
-            _attackRangeLabel.text = $"Attack Range: {attackRange}";
         }
 
-        public void TakeItem()
+        public void OnTakeItemButtonClick()
         {
-            _player.TakeItem(_item);
+            OnTakeItem?.Invoke();
         }
     }
 }
