@@ -2,7 +2,6 @@ using Game.Items.Weapons;
 using Game.Player;
 using Game.UI;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Game.Items
@@ -11,13 +10,13 @@ namespace Game.Items
     {
         private const string PlayerTag = "Player";
 
-        [SerializeField] private MeleeWeaponPanel _meleeWeaponPanel;
-        [SerializeField] private RangedWeaponPanel _rangedWeaponPanel;
-        [SerializeField] private ArmorPanel _armorPanel;
-        [SerializeField] private GameObject _itemPrefab;
+        [SerializeField] private Panel _panel;
+
+        private Item _item;
 
         private readonly Vector3 _itemSpawnOffset = new(0, 0.65f, 0);
-        private GameObject _item;
+        private bool _isWeapon;
+
         private IPlayer _player;
 
         [Inject]
@@ -28,17 +27,30 @@ namespace Game.Items
 
         private void Start()
         {
-            InitPanelAction(_meleeWeaponPanel);
-            InitPanelAction(_rangedWeaponPanel);
-            InitPanelAction(_armorPanel);
-            
-            _item = Instantiate(_itemPrefab, transform.position + _itemSpawnOffset, Quaternion.identity);
+            InitPanelAction();
+            SpawnItem();
             _item.gameObject.SetActive(false);
         }
 
-        private void InitPanelAction(PanelBase panel)
-        { 
-            panel.OnTakeItem += TakeItem;
+        private void SpawnItem()
+        {
+            if (Random.Range(0, 5) == 0)
+            {
+                _item = Instantiate(ItemGenerator.GenerateWeapon(), transform.position + _itemSpawnOffset,
+                    Quaternion.identity);
+                _isWeapon = true;
+            }
+            else
+            {
+                _item = Instantiate(ItemGenerator.GenerateArmor(), transform.position + _itemSpawnOffset,
+                    Quaternion.identity);
+                _isWeapon = false;
+            }
+        }
+
+        private void InitPanelAction()
+        {
+            _panel.OnTakeItem += TakeItem;
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -57,48 +69,52 @@ namespace Game.Items
         {
             if (other.gameObject.CompareTag(PlayerTag))
             {
-                _item.gameObject.SetActive(false);
-                _meleeWeaponPanel.gameObject.SetActive(false);
-                _rangedWeaponPanel.gameObject.SetActive(false);
+                if (_item != null)
+                {
+                    _item.gameObject.SetActive(false);
+                    _panel.gameObject.SetActive(false);
+                }
             }
         }
 
         private void PanelSetup()
         {
-            if (_item.TryGetComponent<MeleeWeapon>(out var itemStats))
-            {
-                _meleeWeaponPanel.gameObject.SetActive(true);
-                SetItemSprite(_meleeWeaponPanel);
-                _meleeWeaponPanel.Setup(itemStats.Name, itemStats.Rareness, itemStats.Damage, itemStats.AttackSpeed,
-                    itemStats.CritChance, itemStats.CritModifier, itemStats.AttackRange);
-            }
-            else if (_item.TryGetComponent<RangedWeapon>(out var itemStats1))
-            {
-                _rangedWeaponPanel.gameObject.SetActive(true);
-                SetItemSprite(_rangedWeaponPanel);
-                _rangedWeaponPanel.Setup(itemStats1.Name, itemStats1.Rareness, itemStats1.Damage, itemStats1.AttackSpeed,
-                    itemStats1.CritChance, itemStats1.CritModifier, itemStats1.AttackRange,
-                    itemStats1.ShotSpeed);
-            }
-            else if (_item.TryGetComponent<Armor.Armor>(out var itemStats2))
-            {
-                _armorPanel.gameObject.SetActive(true);
-                SetItemSprite(_armorPanel);
-                _armorPanel.Setup(itemStats2.Name, itemStats2.Rareness, itemStats2.MoveSpeedBonus,
-                    itemStats2.DamageBonus, itemStats2.AttackSpeedBonus, itemStats2.CritChanceBonus,
-                    itemStats2.AttackRangeBonus, itemStats2.ShotSpeedBonus);
-            }
-        }
-
-        private void SetItemSprite(PanelBase panel)
-        {
-            panel.transform.GetChild(0).GetComponentInChildren<Image>().sprite =
-                _item.GetComponentInChildren<SpriteRenderer>().sprite;
+            _panel.DestroySegments();
+            _panel.Setup(_item.Infos, _item.Name, _item.Rareness,
+                _item.GetComponentInChildren<SpriteRenderer>().sprite);
+            _panel.gameObject.SetActive(true);
         }
 
         private void TakeItem()
         {
-           
+            if (_isWeapon)
+            {
+                var item = _player.TakeItem((WeaponBase)_item, transform);
+                if (item == null)
+                {
+                    _panel.gameObject.SetActive(false);
+                }
+                else
+                {
+                    _item = item;
+                    _item.transform.position = transform.position + _itemSpawnOffset;
+                    PanelSetup();
+                }
+            }
+            else
+            {
+                var item = _player.TakeItem((Armor.Armor)_item, transform);
+                if (item == null)
+                {
+                    _panel.gameObject.SetActive(false);
+                }
+                else
+                {
+                    _item = item;
+                    _item.transform.position = transform.position + _itemSpawnOffset;
+                    PanelSetup();
+                }
+            }
         }
     }
 }

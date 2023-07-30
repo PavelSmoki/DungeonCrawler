@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Cysharp.Threading.Tasks;
 using Game.Enemies;
 using JetBrains.Annotations;
+using UniRx;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -17,6 +17,10 @@ namespace Game.Gameplay
         private const string StartingRoomKey = "StartingRoom";
         private const string LeftRightTransitionKey = "LeftRightTransition";
         private const string UpDownTransitionKey = "UpDownTransition";
+        private const int GridSize = 32;
+        private const int TransitionToGridOffset = 16;
+        private const int RoomsAmount = 8;
+        private readonly Vector2Int roomToGridOffset = new(4, 4);
 
         private GameObject[,] _spawnedRooms;
         private RoomData[,] _spawnedRoomsData;
@@ -24,6 +28,8 @@ namespace Game.Gameplay
         private readonly EnemyFactory _enemyFactory;
         private readonly DiContainer _container;
         private readonly Grid _grid;
+
+        private Vector2Int _treasureRoomPlace;
 
         public GameplayController(EnemyFactory enemyFactory, DiContainer container, Grid grid)
         {
@@ -37,20 +43,25 @@ namespace Game.Gameplay
             _spawnedRooms = new GameObject[9, 9];
             _spawnedRoomsData = new RoomData[9, 9];
 
-            _spawnedRooms[4, 4] = Addressables.LoadAssetAsync<GameObject>(StartingRoomKey).WaitForCompletion();
-            var startingRoom = Object.Instantiate(_spawnedRooms[4, 4].GetComponent<RoomData>());
-            _spawnedRoomsData[4, 4] = startingRoom;
+            var startingRoomPrefab = Addressables.LoadAssetAsync<GameObject>(StartingRoomKey).WaitForCompletion();
+            var startingRoomObj = Object.Instantiate(startingRoomPrefab);
+            var startingRoomData = startingRoomObj.GetComponent<RoomData>();
 
-            _enemyFactory.Create(startingRoom);
-            _container.InjectGameObject(startingRoom.gameObject);
+            _spawnedRooms[4, 4] = startingRoomObj;
+            _spawnedRoomsData[4, 4] = startingRoomData;
 
-            for (var i = 0; i < 10; i++)
+            for (var i = 0; i < RoomsAmount; i++)
             {
                 PlaceOneRoom();
             }
+
+            PlaceTreasureRoom();
+            PlaceBossRoom();
+
+            startingRoomData.OpenAllTransitions();
         }
 
-        private void PlaceOneRoom()
+        private HashSet<Vector2Int> FindVacantPlaces()
         {
             var vacantPlaces = new HashSet<Vector2Int>();
             for (var x = 0; x < _spawnedRooms.GetLength(0); x++)
@@ -69,63 +80,190 @@ namespace Game.Gameplay
                 }
             }
 
-            var newRoomPrefab = Addressables.LoadAssetAsync<GameObject>("Room" + Random.Range(1, 4))
+            return vacantPlaces;
+        }
+
+        private GameObject InstantiateRoom(HashSet<Vector2Int> vacantPlaces, out RoomData newRoomData,
+            out Vector2Int position, string roomKey)
+        {
+            var newRoomPrefab = Addressables.LoadAssetAsync<GameObject>(roomKey)
                 .WaitForCompletion();
             var newRoomObj = Object.Instantiate(newRoomPrefab);
-            var newRoomData = newRoomObj.GetComponent<RoomData>();
-            var position = vacantPlaces.ElementAt(Random.Range(0, vacantPlaces.Count));
-            newRoomObj.transform.position = new Vector3((position.x - 4) * 30, (position.y - 4) * 30, 0);
-            
+
+            newRoomData = newRoomObj.GetComponent<RoomData>();
+
+            position = vacantPlaces.ElementAt(Random.Range(0, vacantPlaces.Count));
+            newRoomObj.transform.position = new Vector3((position.x - roomToGridOffset.x) * GridSize,
+                (position.y - roomToGridOffset.y) * GridSize, 0);
+
+            return newRoomObj;
+        }
+
+        private void SetArraysElements(Vector2Int position, GameObject newRoomObj, RoomData newRoomData)
+        {
             _spawnedRooms[position.x, position.y] = newRoomObj;
             _spawnedRoomsData[position.x, position.y] = newRoomData;
-            
+
+            _spawnedRoomsData[position.x, position.y].OnRoomEnter += OnRoomEntered;
+        }
+
+        private void PlaceOneRoom()
+        {
+            var vacantPlaces = FindVacantPlaces();
+            var newRoomObj = InstantiateRoom(vacantPlaces, out var newRoomData, out var position,
+                "Room" + Random.Range(1, 4));
+            SetArraysElements(position, newRoomObj, newRoomData);
             PlaceTransitions(newRoomData, position);
+        }
+
+        private void PlaceTreasureRoom()
+        {
+            var vacantPlaces = FindVacantPlaces();
+            var treasureRoomVacantPlaces = FindVacantPlacesWithOneNeighbour(vacantPlaces);
+            var newRoomObj = InstantiateRoom(treasureRoomVacantPlaces, out var newRoomData, out var position,
+                "TreasureRoom");
+            SetArraysElements(position, newRoomObj, newRoomData);
+            PlaceTransitions(newRoomData, position);
+            _container.InjectGameObject(newRoomObj);
+
+            _treasureRoomPlace = new Vector2Int(position.x, position.y);
+        }
+
+        private void PlaceBossRoom()
+        {
+            var allVacantPlaces = FindVacantPlaces();
+            var bossRoomVacantPlaces = FindVacantPlacesWithOneNeighbour(allVacantPlaces);
+            bossRoomVacantPlaces.RemoveWhere(pos => pos == _treasureRoomPlace);
+            var newRoomObj = InstantiateRoom(bossRoomVacantPlaces, out var newRoomData, out var position,
+                "BossRoom");
+            SetArraysElements(position, newRoomObj, newRoomData);
+            PlaceTransitions(newRoomData, position);
+        }
+
+        private HashSet<Vector2Int> FindVacantPlacesWithOneNeighbour(HashSet<Vector2Int> allVacantPlaces)
+        {
+            var maxX = _spawnedRooms.GetLength(0) - 1;
+            var maxY = _spawnedRooms.GetLength(1) - 1;
+
+            var vacantPlacesWithOneNeighbour = new HashSet<Vector2Int>();
+
+            foreach (var pos in allVacantPlaces)
+            {
+                var neighboursAmount = 0;
+                if (pos.x - 1 > 0 && _spawnedRooms[pos.x - 1, pos.y] != null)
+                {
+                    neighboursAmount++;
+                }
+
+                if (pos.x + 1 < maxX && _spawnedRooms[pos.x + 1, pos.y] != null)
+                {
+                    neighboursAmount++;
+                }
+
+                if (pos.y - 1 > 0 && _spawnedRooms[pos.x, pos.y - 1] != null)
+                {
+                    neighboursAmount++;
+                }
+
+                if (pos.y + 1 < maxY && _spawnedRooms[pos.x, pos.y + 1] != null)
+                {
+                    neighboursAmount++;
+                }
+
+                if (neighboursAmount == 1)
+                {
+                    vacantPlacesWithOneNeighbour.Add(new Vector2Int(pos.x, pos.y));
+                }
+            }
+
+            return vacantPlacesWithOneNeighbour;
         }
 
         private void PlaceTransitions(RoomData room, Vector2Int pos)
         {
-            // Left Neighbour
-            if (_spawnedRoomsData[pos.x - 1, pos.y] != null && _spawnedRoomsData[pos.x - 1, pos.y].RightTransition == null)
+            var maxX = _spawnedRooms.GetLength(0) - 1;
+            var maxY = _spawnedRooms.GetLength(1) - 1;
+            var leftNeighbour = _spawnedRoomsData[pos.x - 1, pos.y];
+            var rightNeighbour = _spawnedRoomsData[pos.x + 1, pos.y];
+            var upperNeighbour = _spawnedRoomsData[pos.x, pos.y + 1];
+            var lowerNeighbour = _spawnedRoomsData[pos.x, pos.y - 1];
+
+            if (pos.x - 1 > 0 && leftNeighbour != null && leftNeighbour.RightTransition == null)
             {
                 var transitionPrefab =
                     Addressables.LoadAssetAsync<GameObject>(LeftRightTransitionKey).WaitForCompletion();
-                var transition = Object.Instantiate(transitionPrefab, _grid.transform);
-                transition.transform.position = room.transform.position + Vector3.left * 15;
+                var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                transition.transform.position = room.transform.position + Vector3.left * TransitionToGridOffset;
+
                 room.LeftTransition = transition;
-                _spawnedRoomsData[pos.x - 1, pos.y].RightTransition = transition;
+                leftNeighbour.RightTransition = transition;
+
+                room.RemoveHorizontalWallOnTransition(transition.transform.position + new Vector3(5.5f, 0.5f, 0f));
+                leftNeighbour.RemoveHorizontalWallOnTransition(transition.transform.position +
+                                                               new Vector3(-4.5f, 0.5f, 0f));
             }
 
-            // Right Neighbour
-            if (_spawnedRoomsData[pos.x + 1, pos.y] != null && _spawnedRoomsData[pos.x + 1, pos.y].LeftTransition == null)
+            if (pos.x + 1 < maxX && rightNeighbour != null && rightNeighbour.LeftTransition == null)
             {
                 var transitionPrefab =
                     Addressables.LoadAssetAsync<GameObject>(LeftRightTransitionKey).WaitForCompletion();
-                var transition = Object.Instantiate(transitionPrefab, _grid.transform);
-                transition.transform.position = room.transform.position + Vector3.right * 15;
+                var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                transition.transform.position = room.transform.position + Vector3.right * TransitionToGridOffset;
+
                 room.RightTransition = transition;
-                _spawnedRoomsData[pos.x + 1, pos.y].LeftTransition = transition;
+                rightNeighbour.LeftTransition = transition;
+
+                room.RemoveHorizontalWallOnTransition(transition.transform.position + new Vector3(-4.5f, 0.5f, 0f));
+                rightNeighbour
+                    .RemoveHorizontalWallOnTransition(transition.transform.position + new Vector3(5.5f, 0.5f, 0f));
             }
 
-            // Up Neighbour
-            if (_spawnedRoomsData[pos.x, pos.y + 1] != null && _spawnedRoomsData[pos.x, pos.y + 1].DownTransition == null)
+            if (pos.y + 1 < maxY && upperNeighbour != null && upperNeighbour.LowerTransition == null)
             {
                 var transitionPrefab =
                     Addressables.LoadAssetAsync<GameObject>(UpDownTransitionKey).WaitForCompletion();
-                var transition = Object.Instantiate(transitionPrefab, _grid.transform);
-                transition.transform.position = room.transform.position + Vector3.up * 15;
-                room.UpTransition = transition;
-                _spawnedRoomsData[pos.x, pos.y + 1].DownTransition = transition;
+                var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                transition.transform.position = room.transform.position + Vector3.up * TransitionToGridOffset;
+
+                room.UpperTransition = transition;
+                upperNeighbour.LowerTransition = transition;
+
+                room.RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, -4.5f, 0f));
+                upperNeighbour
+                    .RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, 5.5f, 0f));
             }
 
-            // Down Neighbour
-            if (_spawnedRoomsData[pos.x, pos.y - 1] != null && _spawnedRoomsData[pos.x, pos.y - 1].UpTransition == null)
+            if (pos.y - 1 > 0 && lowerNeighbour != null && lowerNeighbour.UpperTransition == null)
             {
                 var transitionPrefab =
                     Addressables.LoadAssetAsync<GameObject>(UpDownTransitionKey).WaitForCompletion();
-                var transition = Object.Instantiate(transitionPrefab, _grid.transform);
-                transition.transform.position = room.transform.position + Vector3.down * 15;
-                room.DownTransition = transition;
-                _spawnedRoomsData[pos.x, pos.y - 1].UpTransition = transition;
+                var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                transition.transform.position = room.transform.position + Vector3.down * TransitionToGridOffset;
+
+                room.LowerTransition = transition;
+                lowerNeighbour.UpperTransition = transition;
+
+                room.RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, 5.5f, 0f));
+                lowerNeighbour
+                    .RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, -4.5f, 0f));
+            }
+        }
+
+        private void OnRoomEntered(RoomData roomData)
+        {
+            if (roomData.IsRoomCleared) return;
+
+            _enemyFactory.Create(roomData);
+
+            roomData.CloseAllTransitions();
+            roomData.EnemyCount.Subscribe(_ => CheckForEnemies(roomData));
+        }
+
+        private void CheckForEnemies(RoomData roomData)
+        {
+            if (roomData.EnemyCount.Value == 0)
+            {
+                roomData.OpenAllTransitions();
             }
         }
     }

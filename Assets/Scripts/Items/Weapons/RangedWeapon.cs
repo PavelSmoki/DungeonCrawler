@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Items.Weapons
@@ -22,6 +23,19 @@ namespace Game.Items.Weapons
             var ammo = Instantiate(_ammoPrefab, transform.position, Quaternion.identity);
             ammo.transform.rotation = transform.rotation;
             ammo.GetComponent<Projectile>().SetAmmoFields(ammoLifeTime, damage, ammo.transform.up * shotSpeed);
+        }
+
+        protected override void Awake()
+        {
+            Infos = new List<ItemInfo>
+            {
+                new("Damage", Damage),
+                new("CritChance", CritChance),
+                new("CritModifier", CritModifier),
+                new("AttackSpeed", AttackSpeed),
+                new("AttackRange", AttackRange),
+                new("ShotSpeed", ShotSpeed)
+            };
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,10 +7,6 @@ namespace Game.Items.Weapons
 {
     public abstract class WeaponBase : Item
     {
-        [field: Header("INFO")]
-        [field: SerializeField] public string Name { get; private set; }
-        [field: SerializeField] public Rareness Rareness { get; private set; }
-
         [field: Header("STATS")]
         [field: SerializeField] public float Damage { get; protected set; }
         [field: SerializeField] public float CritChance { get; protected set; }
@@ -22,6 +19,10 @@ namespace Game.Items.Weapons
 
         public virtual void Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
             float shotSpeedModifier)
+        {
+        }
+
+        protected virtual void Awake()
         {
         }
 

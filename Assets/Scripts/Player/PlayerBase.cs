@@ -18,6 +18,7 @@ namespace Game.Player
 
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private int _speed;
+        [SerializeField] private Transform _weaponPosTransform;
 
         [SerializeField] private WeaponBase _firstWeapon;
         [SerializeField] private WeaponBase _secondWeapon;
@@ -51,8 +52,7 @@ namespace Game.Player
             SetWeapon(_firstWeapon);
             SetDefaultArmors();
 
-            _playerModifiers = new PlayerModifiers(GetSpeedModifier(), GetDamageModifier(), GetCritChanceModifier(),
-                GetAttackSpeedModifier(), GetAttackRangeModifier(), GetShotSpeedModifier());
+            CalculateModifiers();
 
             _gameUI.OnWeaponSwitch += SwitchWeapon;
             _gameUI.OnMove += Move;
@@ -92,6 +92,12 @@ namespace Game.Player
                 [ArmorType.Body] = _defaultArmors.FirstOrDefault(armor => armor.ArmorType == ArmorType.Body)?.Armor,
                 [ArmorType.Foot] = _defaultArmors.FirstOrDefault(armor => armor.ArmorType == ArmorType.Foot)?.Armor
             };
+        }
+
+        private void CalculateModifiers()
+        {
+            _playerModifiers = new PlayerModifiers(GetSpeedModifier(), GetDamageModifier(), GetCritChanceModifier(),
+                GetAttackSpeedModifier(), GetAttackRangeModifier(), GetShotSpeedModifier());
         }
 
         private float GetSpeedModifier()
@@ -138,8 +144,8 @@ namespace Game.Player
 
         private void Move(float horizontal, float vertical)
         {
-            _rb.velocity = new Vector2(horizontal * _speed * _defaultSpeedModifier,
-                vertical * _speed * _defaultSpeedModifier);
+            _rb.velocity = new Vector2(horizontal * _speed * _playerModifiers.SpeedModifier,
+                vertical * _speed * _playerModifiers.SpeedModifier);
         }
 
         private void Attack(Vector2 moveDirection, Vector2 lookDirection)
@@ -177,7 +183,7 @@ namespace Game.Player
             {
                 _currentWeapon.Attack(_playerModifiers.DamageModifier, _playerModifiers.CritChanceModifier,
                     _playerModifiers.AttackRangeModifier, _playerModifiers.ShotSpeedModifier);
-                
+
                 _timeBeforeShoot = 1 / (_playerModifiers.AttackSpeedModifier * _currentWeapon.AttackSpeed);
             }
         }
@@ -219,59 +225,73 @@ namespace Game.Player
         {
             return transform.position;
         }
-        
-        GameObject IPlayer.TakeItem(WeaponBase item)
-        {
-            if (item.GetType() == typeof(WeaponBase))
-            {
-                if (_secondWeapon == null)
-                {
-                    _secondWeapon = item.GetComponent<WeaponBase>();
-                    SetWeapon(_secondWeapon);
-                    return null;
-                }
-                if (_currentWeapon == _firstWeapon)
-                {
-                    _firstWeapon = item.GetComponent<WeaponBase>();
-                    SetWeapon(_firstWeapon);
-                }
-                else
-                {
-                    _secondWeapon = item.GetComponent<WeaponBase>();
-                    SetWeapon(_secondWeapon);
-                }
 
-                return _currentWeapon.gameObject;
+        WeaponBase IPlayer.TakeItem(WeaponBase item, Transform chestTransform)
+        {
+            if (_secondWeapon == null)
+            {
+                _secondWeapon = item;
+                SetWeapon(_secondWeapon);
+                return null;
             }
-            
-            var pickedArmor = item.GetComponent<Armor>();
-            switch (pickedArmor.ArmorType)
+
+            WeaponBase dressedWeapon;
+            if (_currentWeapon == _firstWeapon)
+            {
+                dressedWeapon = _firstWeapon;
+                _firstWeapon = item;
+                _firstWeapon.transform.SetParent(_weaponPosTransform);
+                _firstWeapon.transform.position = _weaponPosTransform.position;
+                SetWeapon(_firstWeapon);
+            }
+            else
+            {
+                dressedWeapon = _secondWeapon;
+                _secondWeapon = item;
+                _secondWeapon.transform.SetParent(_weaponPosTransform);
+                _secondWeapon.transform.position = _weaponPosTransform.position;
+                SetWeapon(_secondWeapon);
+            }
+
+            dressedWeapon.transform.SetParent(chestTransform);
+            return dressedWeapon;
+        }
+
+        Armor IPlayer.TakeItem(Armor item, Transform chestTransform)
+        {
+            Armor dressedArmor;
+            switch (item.ArmorType)
             {
                 case ArmorType.Head:
                 {
-                    var dressedArmor = _currentArmors[ArmorType.Head].gameObject;
-                    _currentArmors[ArmorType.Head] = pickedArmor;
-                    return dressedArmor;
+                    dressedArmor = _currentArmors[ArmorType.Head];
+                    _currentArmors[ArmorType.Head] = item;
+                    break;
                 }
                 case ArmorType.Body:
                 {
-                    var dressedArmor = _currentArmors[ArmorType.Body].gameObject;
-                    _currentArmors[ArmorType.Body] = pickedArmor;
-                    return dressedArmor;
+                    dressedArmor = _currentArmors[ArmorType.Body];
+                    _currentArmors[ArmorType.Body] = item;
+                    break;
                 }
                 case ArmorType.Foot:
                 {
-                    var dressedArmor = _currentArmors[ArmorType.Foot].gameObject;
-                    _currentArmors[ArmorType.Foot] = pickedArmor;
-                    return dressedArmor;
+                    dressedArmor = _currentArmors[ArmorType.Foot];
+                    _currentArmors[ArmorType.Foot] = item;
+                    break;
                 }
+                default: return null;
             }
-            return null;
+
+            CalculateModifiers();
+            return dressedArmor;
         }
 
-        GameObject IPlayer.TakeItem(Armor item)
+        private void OnDestroy()
         {
-            return null;
+            _gameUI.OnWeaponSwitch -= SwitchWeapon;
+            _gameUI.OnMove -= Move;
+            _gameUI.OnAttack -= Attack;
         }
     }
 }

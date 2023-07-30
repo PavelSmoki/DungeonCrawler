@@ -18,11 +18,12 @@ namespace Game.Enemies
 
         public void Create(RoomData roomData)
         {
-            foreach (var enemy in roomData.EnemiesInfos.Select(enemyInfo => Object
-                         .Instantiate(enemyInfo.Prefab, enemyInfo.EnemySpawn.GetTransform())
-                         .GetComponent<EnemyBase>()))
+            foreach (var enemyInfo in roomData.EnemiesInfos)
             {
+                var enemy = Object.Instantiate(enemyInfo.Prefab, enemyInfo.EnemySpawn.GetTransform()).GetComponent<EnemyBase>();
                 _container.Inject(enemy);
+                roomData.EnemyCount.Value++;
+                enemy.SetCurrentRoomData(roomData);
             }
         }
     }

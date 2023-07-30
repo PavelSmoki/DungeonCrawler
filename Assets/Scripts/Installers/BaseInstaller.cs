@@ -17,9 +17,9 @@ namespace Game.Installers
         {
             Container.Bind<IPlayer>().FromComponentInNewPrefab(_playerPrefab).AsSingle().NonLazy();
             Container.BindInterfacesTo<GameplayController>().AsSingle().NonLazy();
-            Container.Bind<GameUI>().FromInstance(_gameUI);
             Container.Bind<EnemyFactory>().AsSingle();
-            Container.Bind<Grid>().FromInstance(_grid);
+            Container.BindInstance(_gameUI);
+            Container.BindInstance(_grid);
         }
     }
 }

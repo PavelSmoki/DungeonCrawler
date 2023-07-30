@@ -7,7 +7,7 @@ namespace Game.Player
     public interface IPlayer
     {
         Vector2 GetCurrentPosition();
-        GameObject TakeItem(WeaponBase item);
-        GameObject TakeItem(Armor item);
+        WeaponBase TakeItem(WeaponBase item, Transform chestTransform);
+        Armor TakeItem(Armor item, Transform chestTransform);
     }
 }

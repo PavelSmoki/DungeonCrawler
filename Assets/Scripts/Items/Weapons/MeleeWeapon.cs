@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Enemies;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
@@ -19,7 +20,7 @@ namespace Game.Items.Weapons
             var mask = LayerMask.GetMask(EnemyLayerName, FlyableEnemyLayerName);
 
             Physics2D.CircleCastNonAlloc(transform.position, attackRange,
-                Vector2.one, _hits, mask);
+                Vector2.one, _hits, 0, mask);
 
             foreach (var hit in _hits)
             {
@@ -27,14 +28,30 @@ namespace Game.Items.Weapons
                     (hit.point - new Vector2(transform.position.x, transform.position.y)).normalized);
                 if (angle >= 0.2f)
                 {
+                    if (hit.transform == null)
+                    {
+                        return;
+                    }
                     var enemy = hit.transform.gameObject;
                     var knockbackDirection = hit.transform.position - transform.position;
-                    
+
                     if (Random.Range(0f, 1f) <= critChance) damage *= CritModifier;
-                    
+
                     enemy.GetComponent<EnemyBase>().TakeDamage(damage, knockbackDirection, KnockBack);
                 }
             }
+        }
+
+        protected override void Awake()
+        {
+            Infos = new List<ItemInfo>
+            {
+                new("Damage", Damage),
+                new("CritChance", CritChance),
+                new("CritModifier", CritModifier),
+                new("AttackSpeed", AttackSpeed),
+                new("AttackRange", AttackRange)
+            };
         }
     }
 }

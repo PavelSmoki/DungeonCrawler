@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d158f1febc6444b87ee37ccf050be98, type: 3}
+  m_Name: SegmentInfoProvider
+  m_EditorClassIdentifier: 
+  <MoveSpeedBonusSprite>k__BackingField: {fileID: 172571015, guid: 765f009d169ae77459916d3ed919de17, type: 3}
+  <DamageBonusSprite>k__BackingField: {fileID: -1965175233, guid: 765f009d169ae77459916d3ed919de17, type: 3}
+  <CritChanceBonusSprite>k__BackingField: {fileID: 1788645663, guid: 765f009d169ae77459916d3ed919de17, type: 3}
+  <AttackSpeedBonusSprite>k__BackingField: {fileID: -1988284397, guid: 765f009d169ae77459916d3ed919de17, type: 3}
+  <AttackRangeBonusSprite>k__BackingField: {fileID: 1622458779, guid: 765f009d169ae77459916d3ed919de17, type: 3}
+  <ShotSpeedBonusSprite>k__BackingField: {fileID: 260185881, guid: 765f009d169ae77459916d3ed919de17, type: 3}
+  <DamageSprite>k__BackingField: {fileID: -1047080183, guid: ddeed4c819706fe4da2e94390c6d1ff7, type: 3}
+  <CritChanceSprite>k__BackingField: {fileID: -439298375, guid: ddeed4c819706fe4da2e94390c6d1ff7, type: 3}
+  <CritModifierSprite>k__BackingField: {fileID: 1795278442, guid: ddeed4c819706fe4da2e94390c6d1ff7, type: 3}
+  <AttackSpeedSprite>k__BackingField: {fileID: -1129855683, guid: ddeed4c819706fe4da2e94390c6d1ff7, type: 3}
+  <AttackRangeSprite>k__BackingField: {fileID: 1268144849, guid: ddeed4c819706fe4da2e94390c6d1ff7, type: 3}
+  <ShotSpeedSprite>k__BackingField: {fileID: 1823906974, guid: ddeed4c819706fe4da2e94390c6d1ff7, type: 3}

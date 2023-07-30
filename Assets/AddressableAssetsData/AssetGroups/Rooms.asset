@@ -21,10 +21,6 @@ MonoBehaviour:
     m_Address: StartingRoom
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: f56047bdc639b994b8da7ec40e4a784a
-    m_Address: DebugRoom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 32a454422142ca44aa0a8f52494d008f
     m_Address: Room1
     m_ReadOnly: 0
@@ -35,6 +31,10 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: e14354e4c5d24de4c92bd332dd73f1c0
     m_Address: Room3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 146b70e01167e9a4e89cbbb42015d8ca
+    m_Address: BossRoom
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
