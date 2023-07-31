@@ -37,6 +37,10 @@ MonoBehaviour:
     m_Address: BossRoom
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 09dd95e43d7e8ed47be8a6d7e052b6c4
+    m_Address: TreasureRoom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7b471a70ff418474fbe344cb2be22985, type: 2}
   m_SchemaSet:

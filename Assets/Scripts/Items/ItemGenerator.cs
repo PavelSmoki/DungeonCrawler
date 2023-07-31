@@ -15,7 +15,7 @@ namespace Game.Items
 
         public static Armor.Armor GenerateArmor()
         {
-            var item = Addressables.LoadAssetAsync<GameObject>("Armor" + 1).WaitForCompletion()
+            var item = Addressables.LoadAssetAsync<GameObject>("Armor" + Random.Range(1, 5)).WaitForCompletion()
                 .GetComponent<Armor.Armor>();
             return item;
         }

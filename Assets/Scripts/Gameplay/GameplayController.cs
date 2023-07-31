@@ -133,7 +133,9 @@ namespace Game.Gameplay
         {
             var allVacantPlaces = FindVacantPlaces();
             var bossRoomVacantPlaces = FindVacantPlacesWithOneNeighbour(allVacantPlaces);
-            bossRoomVacantPlaces.RemoveWhere(pos => pos == _treasureRoomPlace);
+            bossRoomVacantPlaces.RemoveWhere(pos =>
+                pos == _treasureRoomPlace + Vector2Int.left && pos == _treasureRoomPlace + Vector2Int.right &&
+                pos == _treasureRoomPlace + Vector2Int.up && pos == _treasureRoomPlace + Vector2Int.down);
             var newRoomObj = InstantiateRoom(bossRoomVacantPlaces, out var newRoomData, out var position,
                 "BossRoom");
             SetArraysElements(position, newRoomObj, newRoomData);
@@ -187,12 +189,13 @@ namespace Game.Gameplay
             if (pos.x - 1 >= 0)
             {
                 var leftNeighbour = _spawnedRoomsData[pos.x - 1, pos.y];
-                
+
                 if (leftNeighbour != null && leftNeighbour.RightTransition == null)
                 {
                     var transitionPrefab =
                         Addressables.LoadAssetAsync<GameObject>(LeftRightTransitionKey).WaitForCompletion();
-                    var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                    var transition = Object.Instantiate(transitionPrefab, _grid.transform)
+                        .GetComponent<RoomTransition>();
                     transition.transform.position = room.transform.position + Vector3.left * TransitionToGridOffset;
 
                     room.LeftTransition = transition;
@@ -211,7 +214,8 @@ namespace Game.Gameplay
                 {
                     var transitionPrefab =
                         Addressables.LoadAssetAsync<GameObject>(LeftRightTransitionKey).WaitForCompletion();
-                    var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                    var transition = Object.Instantiate(transitionPrefab, _grid.transform)
+                        .GetComponent<RoomTransition>();
                     transition.transform.position = room.transform.position + Vector3.right * TransitionToGridOffset;
 
                     room.RightTransition = transition;
@@ -230,7 +234,8 @@ namespace Game.Gameplay
                 {
                     var transitionPrefab =
                         Addressables.LoadAssetAsync<GameObject>(UpDownTransitionKey).WaitForCompletion();
-                    var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                    var transition = Object.Instantiate(transitionPrefab, _grid.transform)
+                        .GetComponent<RoomTransition>();
                     transition.transform.position = room.transform.position + Vector3.up * TransitionToGridOffset;
 
                     room.UpperTransition = transition;
@@ -249,7 +254,8 @@ namespace Game.Gameplay
                 {
                     var transitionPrefab =
                         Addressables.LoadAssetAsync<GameObject>(UpDownTransitionKey).WaitForCompletion();
-                    var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                    var transition = Object.Instantiate(transitionPrefab, _grid.transform)
+                        .GetComponent<RoomTransition>();
                     transition.transform.position = room.transform.position + Vector3.down * TransitionToGridOffset;
 
                     room.LowerTransition = transition;

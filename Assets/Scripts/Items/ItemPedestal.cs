@@ -27,14 +27,14 @@ namespace Game.Items
 
         private void Start()
         {
-            InitPanelAction();
+            _panel.OnTakeItem += TakeItem;
             SpawnItem();
             _item.gameObject.SetActive(false);
         }
 
         private void SpawnItem()
         {
-            if (Random.Range(0, 5) == 0)
+            if (Random.Range(0, 2) == 0)
             {
                 _item = Instantiate(ItemGenerator.GenerateWeapon(), transform.position + _itemSpawnOffset,
                     Quaternion.identity);
@@ -46,11 +46,6 @@ namespace Game.Items
                     Quaternion.identity);
                 _isWeapon = false;
             }
-        }
-
-        private void InitPanelAction()
-        {
-            _panel.OnTakeItem += TakeItem;
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -89,7 +84,7 @@ namespace Game.Items
         {
             if (_isWeapon)
             {
-                var item = _player.TakeItem((WeaponBase)_item, transform);
+                var item = _player.TakeItem((WeaponBase)_item);
                 if (item == null)
                 {
                     _panel.gameObject.SetActive(false);
@@ -97,20 +92,23 @@ namespace Game.Items
                 else
                 {
                     _item = item;
+                    _item.transform.SetParent(transform);
                     _item.transform.position = transform.position + _itemSpawnOffset;
                     PanelSetup();
                 }
             }
             else
             {
-                var item = _player.TakeItem((Armor.Armor)_item, transform);
+                var item = _player.TakeItem((Armor.Armor)_item);
                 if (item == null)
                 {
                     _panel.gameObject.SetActive(false);
                 }
                 else
                 {
+                    item.SpriteRenderer.enabled = true;
                     _item = item;
+                    _item.transform.SetParent(transform);
                     _item.transform.position = transform.position + _itemSpawnOffset;
                     PanelSetup();
                 }

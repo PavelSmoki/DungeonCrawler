@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5038287364017835616}
   - component: {fileID: 5561998905339889911}
   - component: {fileID: 208510352884402799}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: ItemPedestal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,6 +160,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 521500817887670413}
     m_Modifications:
+    - target: {fileID: 243449113803704315, guid: f9a23b6c02589b348b6dc084a3b19f70,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1049339828820448968}
+    - target: {fileID: 243449113803704315, guid: f9a23b6c02589b348b6dc084a3b19f70,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Game.UI.Panel, Game
+      objectReference: {fileID: 0}
     - target: {fileID: 320252217053969781, guid: f9a23b6c02589b348b6dc084a3b19f70,
         type: 3}
       propertyPath: m_AnchoredPosition.x

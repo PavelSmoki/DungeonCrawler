@@ -54,6 +54,7 @@ MonoBehaviour:
   <AttackSpeedBonus>k__BackingField: 1
   <AttackRangeBonus>k__BackingField: 0.5
   <ShotSpeedBonus>k__BackingField: 0.5
+  <SpriteRenderer>k__BackingField: {fileID: 5404344477467813510}
 --- !u!212 &5404344477467813510
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 41e35cf770f06e14a94302700e54b9ee
+guid: a50fbba42899e7e4a86c0ae84cfb50e8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -129,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hearts_0
+      name: Wizzard_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 99
-        width: 45
-        height: 45
+        x: 5
+        y: 54
+        width: 14
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +143,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9aec2262ec672854ab2c453296481bdb
-      internalID: 853434376
+      spriteID: d61e6258bd212f743ae0e5f1a516fdba
+      internalID: -1901823569
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_1
+      name: Wizzard_1
       rect:
         serializedVersion: 2
-        x: 48
-        y: 99
-        width: 45
-        height: 45
+        x: 69
+        y: 54
+        width: 14
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +164,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ba97cddbd2811648b43e8946287a121
-      internalID: -1195289864
+      spriteID: 502aeb4525ccec14da1b896303664267
+      internalID: 1084834466
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_2
+      name: Wizzard_2
       rect:
         serializedVersion: 2
-        x: 96
-        y: 99
-        width: 45
-        height: 45
+        x: 133
+        y: 56
+        width: 14
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,20 +185,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 018d5bbdd64eac146b3fb6fcfbe4f697
-      internalID: 1022562268
+      spriteID: 12911c39866841a47ad4efdd4487bbed
+      internalID: 650745130
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_3
+      name: Wizzard_3
       rect:
         serializedVersion: 2
-        x: 144
-        y: 99
-        width: 45
-        height: 45
+        x: 197
+        y: 54
+        width: 14
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,20 +206,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f171d0342a164c489a771d2a0ec9766
-      internalID: 1242485695
+      spriteID: 48cb3bb0e751eab4893e669f884a8181
+      internalID: -1164854374
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_4
+      name: Wizzard_4
       rect:
         serializedVersion: 2
-        x: 192
-        y: 99
-        width: 45
-        height: 45
+        x: 261
+        y: 54
+        width: 14
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,20 +227,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a67807b0010196419e4db243f222df7
-      internalID: -976537842
+      spriteID: d2e505953914fc34585948ced616548b
+      internalID: 480410310
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_5
+      name: Wizzard_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 51
-        width: 45
-        height: 45
+        x: 325
+        y: 54
+        width: 14
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,20 +248,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebcc8c32888c63146b1e028943085ed5
-      internalID: -1861311660
+      spriteID: 01722ed45036e084cb05eb8149005175
+      internalID: -2138271459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_6
+      name: Wizzard_6
       rect:
         serializedVersion: 2
-        x: 48
-        y: 51
-        width: 45
-        height: 45
+        x: 389
+        y: 56
+        width: 14
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -269,20 +269,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f50e6967b920bd4983a495cd3ca98c1
-      internalID: 654215932
+      spriteID: aed0ebed32849094482183735cd13e61
+      internalID: 2057122416
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_7
+      name: Wizzard_7
       rect:
         serializedVersion: 2
-        x: 96
-        y: 51
-        width: 45
-        height: 45
+        x: 453
+        y: 54
+        width: 14
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,20 +290,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7862d97f99fb9f9469e3dd05db2f7d20
-      internalID: 120630625
+      spriteID: 8b07e2ff68c5e1e43b09e448fcb41bcc
+      internalID: 142743358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_8
+      name: Wizzard_8
       rect:
         serializedVersion: 2
-        x: 144
-        y: 51
-        width: 45
-        height: 45
+        x: 5
+        y: 6
+        width: 14
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -311,20 +311,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 845a5afa82718f542a3e975805701fb4
-      internalID: -1993061910
+      spriteID: 9a61459de49b64e4380fffae0be0b341
+      internalID: -1795202724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_9
+      name: Wizzard_9
       rect:
         serializedVersion: 2
-        x: 192
-        y: 51
-        width: 45
-        height: 45
+        x: 69
+        y: 6
+        width: 14
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -332,20 +332,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ad1b7e32fe1a2240b1681e2e6105e35
-      internalID: -489446872
+      spriteID: f77d0866ad9871b41a9e95ae5e48441a
+      internalID: -227000255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_10
+      name: Wizzard_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 3
-        width: 45
-        height: 45
+        x: 133
+        y: 6
+        width: 14
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -353,20 +353,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c335ed7890e418541a07af6995b48573
-      internalID: 220766905
+      spriteID: d4539215fcb0d334cb8e686cf895657a
+      internalID: -739132379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_11
+      name: Wizzard_11
       rect:
         serializedVersion: 2
-        x: 48
-        y: 3
-        width: 45
-        height: 45
+        x: 197
+        y: 6
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -374,20 +374,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 804585f6b04704d44a967a8b889ec1f3
-      internalID: 758350799
+      spriteID: 1b652e293a6104a42825ddbd5f8927ff
+      internalID: 1578199809
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_12
+      name: Wizzard_12
       rect:
         serializedVersion: 2
-        x: 96
-        y: 3
-        width: 45
-        height: 45
+        x: 261
+        y: 6
+        width: 14
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -395,20 +395,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9da2b74de2402a44883bbf905ab756e1
-      internalID: -1263968930
+      spriteID: 94c8bb010e55d194b87275806cdaa854
+      internalID: 1893818068
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_13
+      name: Wizzard_13
       rect:
         serializedVersion: 2
-        x: 144
-        y: 3
-        width: 45
-        height: 45
+        x: 310
+        y: 6
+        width: 14
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -416,20 +416,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2f6f1a80c40da042b01f230b94d2fa0
-      internalID: 1252353130
+      spriteID: b88b6d356d7e5b248b21e917c2e89b29
+      internalID: -531379403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hearts_14
+      name: Wizzard_14
       rect:
         serializedVersion: 2
-        x: 192
-        y: 3
-        width: 45
-        height: 45
+        x: 351
+        y: 9
+        width: 21
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -437,8 +437,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27934c4a451b10041bd380ec64ea7b91
-      internalID: -2107879027
+      spriteID: c7f88dcf8ed003b4dbabc9f0fa6e99cc
+      internalID: -1710130694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizzard_15
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 11
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e45b4c2aa211034ebc921ec43251bfc
+      internalID: 1312558911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizzard_16
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 5
+        width: 22
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8712bfffba103149b92466caf6fad30
+      internalID: 1738638492
       vertices: []
       indices: 
       edges: []
@@ -454,21 +496,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hearts_0: 853434376
-      Hearts_1: -1195289864
-      Hearts_10: 220766905
-      Hearts_11: 758350799
-      Hearts_12: -1263968930
-      Hearts_13: 1252353130
-      Hearts_14: -2107879027
-      Hearts_2: 1022562268
-      Hearts_3: 1242485695
-      Hearts_4: -976537842
-      Hearts_5: -1861311660
-      Hearts_6: 654215932
-      Hearts_7: 120630625
-      Hearts_8: -1993061910
-      Hearts_9: -489446872
+      Wizzard_0: -1901823569
+      Wizzard_1: 1084834466
+      Wizzard_10: -739132379
+      Wizzard_11: 1578199809
+      Wizzard_12: 1893818068
+      Wizzard_13: -531379403
+      Wizzard_14: -1710130694
+      Wizzard_15: 1312558911
+      Wizzard_16: 1738638492
+      Wizzard_2: 650745130
+      Wizzard_3: -1164854374
+      Wizzard_4: 480410310
+      Wizzard_5: -2138271459
+      Wizzard_6: 2057122416
+      Wizzard_7: 142743358
+      Wizzard_8: -1795202724
+      Wizzard_9: -227000255
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

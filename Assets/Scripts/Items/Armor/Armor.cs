@@ -15,6 +15,8 @@ namespace Game.Items.Armor
         [field: SerializeField] public float AttackRangeBonus { get; private set; }
         [field: SerializeField] public float ShotSpeedBonus { get; private set; }
 
+        [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
+
         private void Awake()
         {
             Infos = new List<ItemInfo>
