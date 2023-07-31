@@ -74,8 +74,8 @@ namespace Game.Gameplay
                     var maxY = _spawnedRooms.GetLength(1) - 1;
 
                     if (x > 0 && _spawnedRooms[x - 1, y] == null) vacantPlaces.Add(new Vector2Int(x - 1, y));
-                    if (y > 0 && _spawnedRooms[x, y - 1] == null) vacantPlaces.Add(new Vector2Int(x, y - 1));
                     if (x < maxX && _spawnedRooms[x + 1, y] == null) vacantPlaces.Add(new Vector2Int(x + 1, y));
+                    if (y > 0 && _spawnedRooms[x, y - 1] == null) vacantPlaces.Add(new Vector2Int(x, y - 1));
                     if (y < maxY && _spawnedRooms[x, y + 1] == null) vacantPlaces.Add(new Vector2Int(x, y + 1));
                 }
             }
@@ -150,22 +150,22 @@ namespace Game.Gameplay
             foreach (var pos in allVacantPlaces)
             {
                 var neighboursAmount = 0;
-                if (pos.x - 1 > 0 && _spawnedRooms[pos.x - 1, pos.y] != null)
+                if (pos.x - 1 >= 0 && _spawnedRooms[pos.x - 1, pos.y] != null)
                 {
                     neighboursAmount++;
                 }
 
-                if (pos.x + 1 < maxX && _spawnedRooms[pos.x + 1, pos.y] != null)
+                if (pos.x + 1 <= maxX && _spawnedRooms[pos.x + 1, pos.y] != null)
                 {
                     neighboursAmount++;
                 }
 
-                if (pos.y - 1 > 0 && _spawnedRooms[pos.x, pos.y - 1] != null)
+                if (pos.y - 1 >= 0 && _spawnedRooms[pos.x, pos.y - 1] != null)
                 {
                     neighboursAmount++;
                 }
 
-                if (pos.y + 1 < maxY && _spawnedRooms[pos.x, pos.y + 1] != null)
+                if (pos.y + 1 <= maxY && _spawnedRooms[pos.x, pos.y + 1] != null)
                 {
                     neighboursAmount++;
                 }
@@ -183,69 +183,82 @@ namespace Game.Gameplay
         {
             var maxX = _spawnedRooms.GetLength(0) - 1;
             var maxY = _spawnedRooms.GetLength(1) - 1;
-            var leftNeighbour = _spawnedRoomsData[pos.x - 1, pos.y];
-            var rightNeighbour = _spawnedRoomsData[pos.x + 1, pos.y];
-            var upperNeighbour = _spawnedRoomsData[pos.x, pos.y + 1];
-            var lowerNeighbour = _spawnedRoomsData[pos.x, pos.y - 1];
 
-            if (pos.x - 1 > 0 && leftNeighbour != null && leftNeighbour.RightTransition == null)
+            if (pos.x - 1 >= 0)
             {
-                var transitionPrefab =
-                    Addressables.LoadAssetAsync<GameObject>(LeftRightTransitionKey).WaitForCompletion();
-                var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
-                transition.transform.position = room.transform.position + Vector3.left * TransitionToGridOffset;
+                var leftNeighbour = _spawnedRoomsData[pos.x - 1, pos.y];
+                
+                if (leftNeighbour != null && leftNeighbour.RightTransition == null)
+                {
+                    var transitionPrefab =
+                        Addressables.LoadAssetAsync<GameObject>(LeftRightTransitionKey).WaitForCompletion();
+                    var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                    transition.transform.position = room.transform.position + Vector3.left * TransitionToGridOffset;
 
-                room.LeftTransition = transition;
-                leftNeighbour.RightTransition = transition;
+                    room.LeftTransition = transition;
+                    leftNeighbour.RightTransition = transition;
 
-                room.RemoveHorizontalWallOnTransition(transition.transform.position + new Vector3(5.5f, 0.5f, 0f));
-                leftNeighbour.RemoveHorizontalWallOnTransition(transition.transform.position +
-                                                               new Vector3(-4.5f, 0.5f, 0f));
+                    room.RemoveHorizontalWallOnTransition(transition.transform.position + new Vector3(5.5f, 0.5f, 0f));
+                    leftNeighbour.RemoveHorizontalWallOnTransition(transition.transform.position +
+                                                                   new Vector3(-4.5f, 0.5f, 0f));
+                }
             }
 
-            if (pos.x + 1 < maxX && rightNeighbour != null && rightNeighbour.LeftTransition == null)
+            if (pos.x + 1 <= maxX)
             {
-                var transitionPrefab =
-                    Addressables.LoadAssetAsync<GameObject>(LeftRightTransitionKey).WaitForCompletion();
-                var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
-                transition.transform.position = room.transform.position + Vector3.right * TransitionToGridOffset;
+                var rightNeighbour = _spawnedRoomsData[pos.x + 1, pos.y];
+                if (rightNeighbour != null && rightNeighbour.LeftTransition == null)
+                {
+                    var transitionPrefab =
+                        Addressables.LoadAssetAsync<GameObject>(LeftRightTransitionKey).WaitForCompletion();
+                    var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                    transition.transform.position = room.transform.position + Vector3.right * TransitionToGridOffset;
 
-                room.RightTransition = transition;
-                rightNeighbour.LeftTransition = transition;
+                    room.RightTransition = transition;
+                    rightNeighbour.LeftTransition = transition;
 
-                room.RemoveHorizontalWallOnTransition(transition.transform.position + new Vector3(-4.5f, 0.5f, 0f));
-                rightNeighbour
-                    .RemoveHorizontalWallOnTransition(transition.transform.position + new Vector3(5.5f, 0.5f, 0f));
+                    room.RemoveHorizontalWallOnTransition(transition.transform.position + new Vector3(-4.5f, 0.5f, 0f));
+                    rightNeighbour
+                        .RemoveHorizontalWallOnTransition(transition.transform.position + new Vector3(5.5f, 0.5f, 0f));
+                }
             }
 
-            if (pos.y + 1 < maxY && upperNeighbour != null && upperNeighbour.LowerTransition == null)
+            if (pos.y + 1 <= maxY)
             {
-                var transitionPrefab =
-                    Addressables.LoadAssetAsync<GameObject>(UpDownTransitionKey).WaitForCompletion();
-                var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
-                transition.transform.position = room.transform.position + Vector3.up * TransitionToGridOffset;
+                var upperNeighbour = _spawnedRoomsData[pos.x, pos.y + 1];
+                if (upperNeighbour != null && upperNeighbour.LowerTransition == null)
+                {
+                    var transitionPrefab =
+                        Addressables.LoadAssetAsync<GameObject>(UpDownTransitionKey).WaitForCompletion();
+                    var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                    transition.transform.position = room.transform.position + Vector3.up * TransitionToGridOffset;
 
-                room.UpperTransition = transition;
-                upperNeighbour.LowerTransition = transition;
+                    room.UpperTransition = transition;
+                    upperNeighbour.LowerTransition = transition;
 
-                room.RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, -4.5f, 0f));
-                upperNeighbour
-                    .RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, 5.5f, 0f));
+                    room.RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, -4.5f, 0f));
+                    upperNeighbour
+                        .RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, 5.5f, 0f));
+                }
             }
 
-            if (pos.y - 1 > 0 && lowerNeighbour != null && lowerNeighbour.UpperTransition == null)
+            if (pos.y - 1 >= 0)
             {
-                var transitionPrefab =
-                    Addressables.LoadAssetAsync<GameObject>(UpDownTransitionKey).WaitForCompletion();
-                var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
-                transition.transform.position = room.transform.position + Vector3.down * TransitionToGridOffset;
+                var lowerNeighbour = _spawnedRoomsData[pos.x, pos.y - 1];
+                if (lowerNeighbour != null && lowerNeighbour.UpperTransition == null)
+                {
+                    var transitionPrefab =
+                        Addressables.LoadAssetAsync<GameObject>(UpDownTransitionKey).WaitForCompletion();
+                    var transition = Object.Instantiate(transitionPrefab, _grid.transform).GetComponent<RoomTransition>();
+                    transition.transform.position = room.transform.position + Vector3.down * TransitionToGridOffset;
 
-                room.LowerTransition = transition;
-                lowerNeighbour.UpperTransition = transition;
+                    room.LowerTransition = transition;
+                    lowerNeighbour.UpperTransition = transition;
 
-                room.RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, 5.5f, 0f));
-                lowerNeighbour
-                    .RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, -4.5f, 0f));
+                    room.RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, 5.5f, 0f));
+                    lowerNeighbour
+                        .RemoveVerticalWallOnTransition(transition.transform.position + new Vector3(-0.5f, -4.5f, 0f));
+                }
             }
         }
 
