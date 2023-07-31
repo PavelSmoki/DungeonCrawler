@@ -190,6 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 6545526344173415834}
   _animator: {fileID: 7416365376879170785}
+  _camera: {fileID: 4384310883047899863}
   _heartsCount: 1
   _weaponPosTransform: {fileID: 4116059435062319541}
   _spriteTransform: {fileID: 4232769433588839624}

@@ -32,14 +32,26 @@ namespace Game.Items.Weapons
                     {
                         return;
                     }
+
                     var enemy = hit.transform.gameObject;
+
                     var knockbackDirection = hit.transform.position - transform.position;
+                    var isCrit = IsCrit(critChance, ref damage);
 
-                    if (Random.Range(0f, 1f) <= critChance) damage *= CritModifier;
-
-                    enemy.GetComponent<EnemyBase>().TakeDamage(damage, knockbackDirection, KnockBack);
+                    enemy.GetComponent<EnemyBase>().TakeDamage(damage, knockbackDirection, KnockBack, isCrit);
                 }
             }
+        }
+
+        private bool IsCrit(float critChance, ref float damage)
+        {
+            if (Random.Range(0f, 1f) <= critChance)
+            {
+                damage *= CritModifier;
+                return true;
+            }
+
+            return false;
         }
 
         protected override void Awake()

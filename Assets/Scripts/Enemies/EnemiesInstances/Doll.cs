@@ -6,7 +6,7 @@ namespace Game.Enemies.EnemiesInstances
     {
         private Vector3 _spawn;
 
-        public override void TakeDamage(float damage, Vector2 knockbackDirection, float knockBack)
+        public override void TakeDamage(float damage, Vector2 knockbackDirection, float knockBack, bool isCrit)
         {
 
         }

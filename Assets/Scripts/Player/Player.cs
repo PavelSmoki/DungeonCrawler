@@ -22,6 +22,7 @@ namespace Game.Player
 
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private Animator _animator;
+        [SerializeField] private Camera _camera;
         [SerializeField] private int _heartsCount;
         [SerializeField] private Transform _weaponPosTransform;
         [SerializeField] private Transform _spriteTransform;
@@ -38,7 +39,7 @@ namespace Game.Player
 
         private Dictionary<ArmorType, Armor> _currentArmors;
         private WeaponBase _currentWeapon;
-        
+
         private PlayerModifiers _playerModifiers;
 
         private float _timeBeforeShoot;
@@ -321,6 +322,11 @@ namespace Game.Player
 
             CalculateModifiers();
             return dressedArmor;
+        }
+
+        public Camera GetCamera()
+        {
+            return _camera;
         }
 
         private void OnDestroy()

@@ -14,13 +14,15 @@ namespace Game.Items.Weapons
         
         private float _ammoLifeTime;
         private float _damage;
+        private bool _isCrit;
         private CancellationTokenSource _cancellationTokenSource;
 
-        public void SetAmmoFields(float ammoLifeTime, float damage, Vector2 force)
+        public void SetAmmoFields(float ammoLifeTime, float damage, Vector2 force, bool isCrit)
         {
             _rb.AddForce(force, ForceMode2D.Impulse);
             _ammoLifeTime = ammoLifeTime;
             _damage = damage;
+            _isCrit = isCrit;
             _cancellationTokenSource = new CancellationTokenSource();
             Life().Forget();
         }
@@ -36,7 +38,7 @@ namespace Game.Items.Weapons
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.CompareTag(EnemyTag))
-                other.gameObject.GetComponent<EnemyBase>().TakeDamage(_damage, Vector2.zero, 0);
+                other.gameObject.GetComponent<EnemyBase>().TakeDamage(_damage, Vector2.zero, 0, _isCrit);
             _cancellationTokenSource.Cancel();
             Destroy(gameObject);
         }

@@ -9,5 +9,6 @@ namespace Game.Player
         Vector2 GetCurrentPosition();
         WeaponBase TakeItem(WeaponBase item);
         Armor TakeItem(Armor item);
+        Camera GetCamera();
     }
 }
