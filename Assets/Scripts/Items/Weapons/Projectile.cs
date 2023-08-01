@@ -17,7 +17,7 @@ namespace Game.Items.Weapons
         private bool _isCrit;
         private CancellationTokenSource _cancellationTokenSource;
 
-        public void SetAmmoFields(float ammoLifeTime, float damage, Vector2 force, bool isCrit)
+        public void SetProjectileFields(float ammoLifeTime, float damage, Vector2 force, bool isCrit)
         {
             _rb.AddForce(force, ForceMode2D.Impulse);
             _ammoLifeTime = ammoLifeTime;

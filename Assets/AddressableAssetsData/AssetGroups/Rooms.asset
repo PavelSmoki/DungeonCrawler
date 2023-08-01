@@ -41,6 +41,26 @@ MonoBehaviour:
     m_Address: TreasureRoom
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 19b19fe95abbb3f428afa98ae4f28dbe
+    m_Address: Room4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: da201e2b65077b648bbf3af5c3d8573f
+    m_Address: Room5
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 75db4c20d7a74924eb83ffc365682673
+    m_Address: Room6
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0029ab1ffdb08d94f9f21289c03f0a1b
+    m_Address: Room7
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e036909e4951f2e4581500fd4762dd9b
+    m_Address: Room8
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7b471a70ff418474fbe344cb2be22985, type: 2}
   m_SchemaSet:

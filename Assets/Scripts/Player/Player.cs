@@ -16,6 +16,7 @@ namespace Game.Player
     {
         private const string EnemyTag = "Enemy";
         private const int Speed = 7;
+        private const string EnemyProjectile = "EnemyProjectile";
         private static readonly int IsRunning = Animator.StringToHash("IsRunning");
         private static readonly int Damaged = Animator.StringToHash("Damaged");
         private static readonly int Died = Animator.StringToHash("Died");
@@ -225,7 +226,7 @@ namespace Game.Player
 
         private void TakeDamage(Collision2D other)
         {
-            if (other.gameObject.CompareTag(EnemyTag) && !_isInvincible)
+            if (other.gameObject.CompareTag(EnemyTag) || other.gameObject.CompareTag(EnemyProjectile) && !_isInvincible)
             {
                 var lastHeart = _hearts.Peek();
                 lastHeart.TakeDamage();
@@ -254,6 +255,11 @@ namespace Game.Player
         Vector2 IPlayer.GetCurrentPosition()
         {
             return transform.position;
+        }
+
+        Camera IPlayer.GetCamera()
+        {
+            return _camera;
         }
 
         WeaponBase IPlayer.TakeItem(WeaponBase item)
@@ -322,11 +328,6 @@ namespace Game.Player
 
             CalculateModifiers();
             return dressedArmor;
-        }
-
-        public Camera GetCamera()
-        {
-            return _camera;
         }
 
         private void OnDestroy()

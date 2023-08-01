@@ -6,7 +6,8 @@ namespace Game.Items.Weapons
     public class RangedWeapon : WeaponBase
     {
         [field: SerializeField] public float ShotSpeed { get; protected set; }
-        [SerializeField] private GameObject _ammoPrefab;
+        
+        [SerializeField] private GameObject _projectilePrefab;
 
         public override void Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
             float shotSpeedModifier)
@@ -16,13 +17,13 @@ namespace Game.Items.Weapons
             var attackRange = AttackRange * attackRangeModifier;
             var shotSpeed = ShotSpeed * shotSpeedModifier;
 
-            var ammoLifeTime = attackRange / shotSpeed;
+            var projectileLifeTime = attackRange / shotSpeed;
 
             var isCrit = IsCrit(critChance, ref damage);
 
-            var ammo = Instantiate(_ammoPrefab, transform.position, Quaternion.identity);
-            ammo.transform.rotation = transform.rotation;
-            ammo.GetComponent<Projectile>().SetAmmoFields(ammoLifeTime, damage, ammo.transform.up * shotSpeed, isCrit);
+            var projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
+            projectile.transform.rotation = transform.rotation;
+            projectile.GetComponent<Projectile>().SetProjectileFields(projectileLifeTime, damage, projectile.transform.up * shotSpeed, isCrit);
         }
 
         private bool IsCrit(float critChance, ref float damage)

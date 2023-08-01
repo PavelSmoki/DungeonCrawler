@@ -49,6 +49,7 @@ namespace Game.Gameplay
 
             _spawnedRooms[4, 4] = startingRoomObj;
             _spawnedRoomsData[4, 4] = startingRoomData;
+            _enemyFactory.Create(startingRoomData);
 
             for (var i = 0; i < RoomsAmount; i++)
             {
@@ -111,7 +112,7 @@ namespace Game.Gameplay
         {
             var vacantPlaces = FindVacantPlaces();
             var newRoomObj = InstantiateRoom(vacantPlaces, out var newRoomData, out var position,
-                "Room" + Random.Range(1, 4));
+                "Room" + Random.Range(1, 9));
             SetArraysElements(position, newRoomObj, newRoomData);
             PlaceTransitions(newRoomData, position);
         }

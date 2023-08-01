@@ -53,7 +53,7 @@ MonoBehaviour:
   <AttackSpeed>k__BackingField: 1
   <AttackRange>k__BackingField: 15
   <ShotSpeed>k__BackingField: 10
-  _ammoPrefab: {fileID: 5688468524823916082, guid: 8350689e271e1154790a7b128d8c1c4e,
+  _projectilePrefab: {fileID: 5688468524823916082, guid: 8350689e271e1154790a7b128d8c1c4e,
     type: 3}
 --- !u!1 &2038863149915087728
 GameObject:

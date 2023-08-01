@@ -33,6 +33,7 @@ Transform:
   - {fileID: 5634285244740044116}
   - {fileID: 8934793481475941325}
   - {fileID: 2324070329086606213}
+  - {fileID: 3546951821970648611}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,7 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 495281b350c0cfc44a17861d3baf1bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <EnemiesInfos>k__BackingField: []
+  <EnemiesInfos>k__BackingField:
+  - EnemySpawn: {fileID: 408613022278439422}
+    Prefab: {fileID: 6672089500069363669, guid: 70cd9499ff15fd8408d9ed51631c16c1,
+      type: 3}
   _wallTilemap: {fileID: 1936103420570968169}
 --- !u!61 &6757785587834065126
 BoxCollider2D:
@@ -1493,7 +1497,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2479193402908157495}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.04, y: 4.62, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -6063,3 +6067,47 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!1 &8891132755744821339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3546951821970648611}
+  - component: {fileID: 408613022278439422}
+  m_Layer: 0
+  m_Name: EnemySpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3546951821970648611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8891132755744821339}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.47, y: 7.19, z: -0.092583604}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 922603865871358423}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &408613022278439422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8891132755744821339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d0a873423d48479965cd5e75e2407f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

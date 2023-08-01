@@ -11,17 +11,21 @@ namespace Game.Enemies
 {
     public abstract class EnemyBase : MonoBehaviour
     {
+        private static readonly int Damaged = Animator.StringToHash("Damaged");
+        private static readonly int Died = Animator.StringToHash("Died");
+
         [SerializeField] protected Rigidbody2D Rb;
-        [SerializeField] protected TextMeshProUGUI DealedDamage;
-        
+        [SerializeField] protected Animator Animator;
+        [SerializeField] private Collider2D _collider;
+
         [field: SerializeField] protected float Speed { get; set; }
         [field: SerializeField] protected float Health { get; set; }
-        // [field: SerializeField] public GameObject Particle { get; private set; }
-        
-        protected IPlayer Player;
-        private DamageUI _damageUI;
 
+        protected IPlayer Player;
+        
+        private DamageUI _damageUI;
         private RoomData _roomData;
+        
         protected bool IsDelayed { get; private set; }
 
         [Inject]
@@ -47,18 +51,53 @@ namespace Game.Enemies
             BehaviorDelayAfterSpawn().Forget();
         }
 
+        protected virtual void Update()
+        {
+            Rotate();
+        }
+
+        private void Rotate()
+        {
+            var rot = transform.rotation;
+            if (Player.GetCurrentPosition().x - transform.position.x < 0)
+            {
+                rot.y = 180;
+                transform.rotation = rot;
+            }
+            else
+            {
+                rot.y = 0;
+                transform.rotation = rot;
+            }
+        }
+
         public virtual void TakeDamage(float damage, Vector2 knockbackDirection, float knockBack, bool isCrit)
         {
             _damageUI.ShowDamage((int)damage, transform.position, isCrit);
             
+            Animator.SetTrigger(Damaged);
+
             Rb.AddForce(knockbackDirection * knockBack, ForceMode2D.Impulse);
             
             Health -= damage;
             if (Health <= 0)
             {
                 _roomData.EnemyCount.Value--;
-                Destroy(gameObject);
+                
+                Animator.SetTrigger(Died);
+                
+                Speed = 0;
+                _collider.isTrigger = true;
+                gameObject.layer = 13;
+                
+                DelayDestroy().Forget();
             }
+        }
+
+        private async UniTaskVoid DelayDestroy()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(2f));
+            Destroy(gameObject);
         }
     }
 }

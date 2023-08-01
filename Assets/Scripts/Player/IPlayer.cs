@@ -7,8 +7,8 @@ namespace Game.Player
     public interface IPlayer
     {
         Vector2 GetCurrentPosition();
+        Camera GetCamera();
         WeaponBase TakeItem(WeaponBase item);
         Armor TakeItem(Armor item);
-        Camera GetCamera();
     }
 }
