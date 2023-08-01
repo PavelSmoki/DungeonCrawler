@@ -203,12 +203,6 @@ namespace Game.Player
             }
         }
 
-        private void RotateWeapon(Vector2 direction)
-        {
-            var toRotation = Quaternion.LookRotation(Vector3.forward, direction);
-            _currentWeapon.transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 180);
-        }
-
         private void AttackProcessing()
         {
             if (_timeBeforeShoot <= 0)
@@ -220,13 +214,19 @@ namespace Game.Player
             }
         }
 
+        private void RotateWeapon(Vector2 direction)
+        {
+            var toRotation = Quaternion.LookRotation(Vector3.forward, direction);
+            _currentWeapon.transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 180);
+        }
+
         private void OnCollisionEnter2D(Collision2D other) => TakeDamage(other);
 
         private void OnCollisionStay2D(Collision2D other) => TakeDamage(other);
 
         private void TakeDamage(Collision2D other)
         {
-            if (other.gameObject.CompareTag(EnemyTag) || other.gameObject.CompareTag(EnemyProjectile) && !_isInvincible)
+            if ((other.gameObject.CompareTag(EnemyTag) || other.gameObject.CompareTag(EnemyProjectile)) && !_isInvincible)
             {
                 var lastHeart = _hearts.Peek();
                 lastHeart.TakeDamage();

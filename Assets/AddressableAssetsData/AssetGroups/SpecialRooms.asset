@@ -12,11 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: SpecialRooms
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: SpecialRooms
   m_Data:
     m_SerializedData: []
   m_GUID: da9b3b48af12af341b3f05fab46a62b6
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 146b70e01167e9a4e89cbbb42015d8ca
+    m_Address: BossRoom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 09dd95e43d7e8ed47be8a6d7e052b6c4
+    m_Address: TreasureRoom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0b81433568031f84cbc30971fb58c1d5
+    m_Address: StartingRoom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7b471a70ff418474fbe344cb2be22985, type: 2}
   m_SchemaSet:

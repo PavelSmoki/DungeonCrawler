@@ -3,7 +3,6 @@ using Cysharp.Threading.Tasks;
 using Game.Gameplay;
 using Game.Player;
 using Game.UI;
-using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -25,7 +24,8 @@ namespace Game.Enemies
         
         private DamageUI _damageUI;
         private RoomData _roomData;
-        
+        private bool _isDead;
+
         protected bool IsDelayed { get; private set; }
 
         [Inject]
@@ -73,24 +73,28 @@ namespace Game.Enemies
 
         public virtual void TakeDamage(float damage, Vector2 knockbackDirection, float knockBack, bool isCrit)
         {
-            _damageUI.ShowDamage((int)damage, transform.position, isCrit);
-            
-            Animator.SetTrigger(Damaged);
-
-            Rb.AddForce(knockbackDirection * knockBack, ForceMode2D.Impulse);
-            
-            Health -= damage;
-            if (Health <= 0)
+            if(!_isDead)
             {
-                _roomData.EnemyCount.Value--;
-                
-                Animator.SetTrigger(Died);
-                
-                Speed = 0;
-                _collider.isTrigger = true;
-                gameObject.layer = 13;
-                
-                DelayDestroy().Forget();
+                _damageUI.ShowDamage((int)damage, transform.position, isCrit);
+
+                Animator.SetTrigger(Damaged);
+
+                Rb.AddForce(knockbackDirection * knockBack, ForceMode2D.Impulse);
+
+                Health -= damage;
+
+                if (Health <= 0)
+                {
+                    _isDead = true;
+                    _roomData.EnemyCount.Value--;
+
+                    Animator.SetTrigger(Died);
+
+                    Speed = 0;
+                    _collider.isTrigger = true;
+
+                    DelayDestroy().Forget();
+                }
             }
         }
 
