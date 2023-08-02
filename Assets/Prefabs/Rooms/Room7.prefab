@@ -1719,7 +1719,7 @@ GameObject:
   - component: {fileID: 3389216001273350141}
   - component: {fileID: 7271995781176399960}
   - component: {fileID: 6350496662392638079}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Environment_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

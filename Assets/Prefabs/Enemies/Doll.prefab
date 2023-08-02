@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rb: {fileID: 5496608129587419930}
-  DealedDamage: {fileID: 3882139035241496976, guid: 26e6d52681e958c4f83e160ddec03b72,
-    type: 3}
+  Animator: {fileID: 0}
+  _collider: {fileID: 5700973742986758414}
+  _spriteRenderer: {fileID: 3984968245825663850}
   <Speed>k__BackingField: 0
   <Health>k__BackingField: Infinity
 --- !u!50 &5496608129587419930

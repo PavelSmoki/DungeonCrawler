@@ -8,14 +8,14 @@ namespace Game.Items
     {
         public static WeaponBase GenerateWeapon()
         {
-            var item = Addressables.LoadAssetAsync<GameObject>("Weapon" + Random.Range(1, 3)).WaitForCompletion()
+            var item = Addressables.LoadAssetAsync<GameObject>("Weapon" + Random.Range(1, 14)).WaitForCompletion()
                 .GetComponent<WeaponBase>();
             return item;
         }
 
         public static Armor.Armor GenerateArmor()
         {
-            var item = Addressables.LoadAssetAsync<GameObject>("Armor" + Random.Range(1, 5)).WaitForCompletion()
+            var item = Addressables.LoadAssetAsync<GameObject>("Armor" + Random.Range(1, 16)).WaitForCompletion()
                 .GetComponent<Armor.Armor>();
             return item;
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Game.Gameplay;
 using Game.Player;
@@ -16,13 +17,15 @@ namespace Game.Enemies
         [SerializeField] protected Rigidbody2D Rb;
         [SerializeField] protected Animator Animator;
         [SerializeField] private Collider2D _collider;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
 
         [field: SerializeField] protected float Speed { get; set; }
         [field: SerializeField] protected float Health { get; set; }
 
         protected IPlayer Player;
-        
-        private DamageUI _damageUI;
+
+        private CancellationTokenSource _cancellationTokenSource;
+        protected DamageUI DamageUI;
         private RoomData _roomData;
         private bool _isDead;
 
@@ -32,7 +35,12 @@ namespace Game.Enemies
         private void Construct(IPlayer player, DamageUI damageUI)
         {
             Player = player;
-            _damageUI = damageUI;
+            DamageUI = damageUI;
+        }
+
+        private void Awake()
+        {
+            _cancellationTokenSource = new CancellationTokenSource();
         }
 
         public void SetCurrentRoomData(RoomData roomData)
@@ -56,7 +64,7 @@ namespace Game.Enemies
             Rotate();
         }
 
-        private void Rotate()
+        protected void Rotate()
         {
             var rot = transform.rotation;
             if (Player.GetCurrentPosition().x - transform.position.x < 0)
@@ -73,9 +81,9 @@ namespace Game.Enemies
 
         public virtual void TakeDamage(float damage, Vector2 knockbackDirection, float knockBack, bool isCrit)
         {
-            if(!_isDead)
+            if (!_isDead)
             {
-                _damageUI.ShowDamage((int)damage, transform.position, isCrit);
+                DamageUI.ShowDamage((int)damage, transform.position, isCrit);
 
                 Animator.SetTrigger(Damaged);
 
@@ -101,7 +109,19 @@ namespace Game.Enemies
         private async UniTaskVoid DelayDestroy()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(2f));
+            _cancellationTokenSource.Cancel();
             Destroy(gameObject);
+        }
+
+        public async UniTaskVoid SlowDown(float duration)
+        {
+            Speed /= 2;
+            _spriteRenderer.color = new Color(0.335f, 0.737f, 0.783f);
+            await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: _cancellationTokenSource.Token)
+                .SuppressCancellationThrow();
+            if (_cancellationTokenSource.IsCancellationRequested) return;
+            Speed *= 2;
+            _spriteRenderer.color = Color.white;
         }
     }
 }

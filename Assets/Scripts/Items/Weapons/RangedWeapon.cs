@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Enemies;
 using UnityEngine;
 
 namespace Game.Items.Weapons
@@ -6,10 +7,10 @@ namespace Game.Items.Weapons
     public class RangedWeapon : WeaponBase
     {
         [field: SerializeField] public float ShotSpeed { get; protected set; }
-        
+
         [SerializeField] private GameObject _projectilePrefab;
 
-        public override void Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
+        public override EnemyBase Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
             float shotSpeedModifier)
         {
             var damage = Damage * damageModifier;
@@ -23,7 +24,9 @@ namespace Game.Items.Weapons
 
             var projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
             projectile.transform.rotation = transform.rotation;
-            projectile.GetComponent<Projectile>().SetProjectileFields(projectileLifeTime, damage, projectile.transform.up * shotSpeed, isCrit);
+            projectile.GetComponent<Projectile>().SetProjectileFields(projectileLifeTime, damage,
+                projectile.transform.up * shotSpeed, isCrit);
+            return null;
         }
 
         private bool IsCrit(float critChance, ref float damage)

@@ -25,6 +25,50 @@ MonoBehaviour:
     m_Address: Weapon2
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: b5c08d64a8e6d514080a8daa74431cbc
+    m_Address: Weapon3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1b340b9f52a4aa246b34f15903798c6b
+    m_Address: Weapon4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 562e2d83771bbac4cac95514b708d2cc
+    m_Address: Weapon5
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 69ca7ce3ac3cc9f4a83b97e577ec1db5
+    m_Address: Weapon6
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0331970649925d44bb9cc9b8849a1b49
+    m_Address: Weapon7
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5f725b9f9fe29164ea9c4a9aa08158bf
+    m_Address: Weapon8
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 118f445372c508f4f9df54eafd08cd69
+    m_Address: Weapon9
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a572835013f02f644a2f2a9eb90e0966
+    m_Address: Weapon10
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6e91681f2c7d3f8408279b47b862da3b
+    m_Address: Weapon11
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 827adae7d6d4b1b438fbabf93e4de315
+    m_Address: Weapon12
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5a85a976ec152124c88f983f222ffdc4
+    m_Address: Weapon13
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7b471a70ff418474fbe344cb2be22985, type: 2}
   m_SchemaSet:

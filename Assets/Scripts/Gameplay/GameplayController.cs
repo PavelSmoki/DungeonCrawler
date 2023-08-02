@@ -135,8 +135,8 @@ namespace Game.Gameplay
             var allVacantPlaces = FindVacantPlaces();
             var bossRoomVacantPlaces = FindVacantPlacesWithOneNeighbour(allVacantPlaces);
             bossRoomVacantPlaces.RemoveWhere(pos =>
-                pos == _treasureRoomPlace + Vector2Int.left && pos == _treasureRoomPlace + Vector2Int.right &&
-                pos == _treasureRoomPlace + Vector2Int.up && pos == _treasureRoomPlace + Vector2Int.down);
+                pos == _treasureRoomPlace + Vector2Int.left || pos == _treasureRoomPlace + Vector2Int.right ||
+                pos == _treasureRoomPlace + Vector2Int.up || pos == _treasureRoomPlace + Vector2Int.down);
             var newRoomObj = InstantiateRoom(bossRoomVacantPlaces, out var newRoomData, out var position,
                 "BossRoom");
             SetArraysElements(position, newRoomObj, newRoomData);

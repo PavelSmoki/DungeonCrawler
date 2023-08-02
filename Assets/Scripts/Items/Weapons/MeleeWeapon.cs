@@ -10,7 +10,7 @@ namespace Game.Items.Weapons
         [SerializeField] protected float KnockBack;
         private readonly RaycastHit2D[] _hits = new RaycastHit2D[5];
 
-        public override void Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
+        public override EnemyBase Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
             float shotSpeedModifier)
         {
             var damage = Damage * damageModifier;
@@ -30,7 +30,7 @@ namespace Game.Items.Weapons
                 {
                     if (hit.transform == null)
                     {
-                        return;
+                        return null;
                     }
 
                     var enemy = hit.transform.gameObject;
@@ -38,9 +38,12 @@ namespace Game.Items.Weapons
                     var knockbackDirection = hit.transform.position - transform.position;
                     var isCrit = IsCrit(critChance, ref damage);
 
-                    enemy.GetComponent<EnemyBase>().TakeDamage(damage, knockbackDirection, KnockBack, isCrit);
+                    var enemyBase = enemy.GetComponent<EnemyBase>();
+                    enemyBase.TakeDamage(damage, knockbackDirection, KnockBack, isCrit);
+                    return enemyBase;
                 }
             }
+            return null;
         }
 
         private bool IsCrit(float critChance, ref float damage)

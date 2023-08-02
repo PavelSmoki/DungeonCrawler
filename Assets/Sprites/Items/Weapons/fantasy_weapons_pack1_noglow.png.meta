@@ -132,12 +132,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 129
-        width: 30
-        height: 30
+        x: 0
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -153,12 +153,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_1
       rect:
         serializedVersion: 2
-        x: 35
-        y: 129
-        width: 28
-        height: 28
+        x: 32
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -174,12 +174,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_2
       rect:
         serializedVersion: 2
-        x: 65
-        y: 133
-        width: 30
-        height: 23
+        x: 64
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -195,12 +195,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_3
       rect:
         serializedVersion: 2
-        x: 102
-        y: 134
-        width: 21
-        height: 21
+        x: 96
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -216,12 +216,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_4
       rect:
         serializedVersion: 2
-        x: 130
-        y: 130
-        width: 29
-        height: 29
+        x: 128
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -237,12 +237,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_5
       rect:
         serializedVersion: 2
-        x: 161
-        y: 129
-        width: 30
-        height: 30
+        x: 160
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -258,12 +258,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_6
       rect:
         serializedVersion: 2
-        x: 193
-        y: 131
-        width: 30
-        height: 26
+        x: 192
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -279,12 +279,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_7
       rect:
         serializedVersion: 2
-        x: 229
-        y: 134
-        width: 22
-        height: 22
+        x: 224
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -300,12 +300,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_8
       rect:
         serializedVersion: 2
-        x: 263
-        y: 134
-        width: 21
-        height: 19
+        x: 256
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -321,12 +321,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_9
       rect:
         serializedVersion: 2
-        x: 294
-        y: 129
-        width: 20
-        height: 30
+        x: 288
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -342,12 +342,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_10
       rect:
         serializedVersion: 2
-        x: 1
-        y: 97
-        width: 30
-        height: 30
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -363,12 +363,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_11
       rect:
         serializedVersion: 2
-        x: 34
-        y: 97
-        width: 29
-        height: 30
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -384,12 +384,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_12
       rect:
         serializedVersion: 2
-        x: 65
-        y: 101
-        width: 30
-        height: 24
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -405,12 +405,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_13
       rect:
         serializedVersion: 2
-        x: 100
-        y: 98
-        width: 23
-        height: 26
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -426,12 +426,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_14
       rect:
         serializedVersion: 2
-        x: 129
-        y: 97
-        width: 30
-        height: 30
+        x: 128
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -447,12 +447,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_15
       rect:
         serializedVersion: 2
-        x: 161
-        y: 98
-        width: 30
-        height: 29
+        x: 160
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -468,12 +468,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_16
       rect:
         serializedVersion: 2
-        x: 193
-        y: 98
-        width: 30
-        height: 29
+        x: 192
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -489,12 +489,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_17
       rect:
         serializedVersion: 2
-        x: 229
-        y: 102
-        width: 23
-        height: 23
+        x: 224
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -510,12 +510,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_18
       rect:
         serializedVersion: 2
-        x: 259
-        y: 101
-        width: 25
-        height: 22
+        x: 256
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -531,12 +531,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_19
       rect:
         serializedVersion: 2
-        x: 292
-        y: 102
-        width: 23
-        height: 23
+        x: 288
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -552,12 +552,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_20
       rect:
         serializedVersion: 2
-        x: 3
-        y: 67
-        width: 26
-        height: 26
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -573,12 +573,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_21
       rect:
         serializedVersion: 2
-        x: 35
-        y: 69
-        width: 27
-        height: 22
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -594,12 +594,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_22
       rect:
         serializedVersion: 2
-        x: 65
-        y: 65
-        width: 30
-        height: 30
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -615,12 +615,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_23
       rect:
         serializedVersion: 2
-        x: 103
-        y: 70
-        width: 19
-        height: 19
+        x: 96
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -636,12 +636,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_24
       rect:
         serializedVersion: 2
-        x: 131
-        y: 66
-        width: 27
-        height: 27
+        x: 128
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -657,12 +657,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_25
       rect:
         serializedVersion: 2
-        x: 163
-        y: 65
-        width: 28
-        height: 28
+        x: 160
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -678,12 +678,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_26
       rect:
         serializedVersion: 2
-        x: 193
-        y: 68
-        width: 30
-        height: 25
+        x: 192
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -699,12 +699,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_27
       rect:
         serializedVersion: 2
-        x: 229
-        y: 69
-        width: 22
-        height: 22
+        x: 224
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -720,12 +720,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_28
       rect:
         serializedVersion: 2
-        x: 261
-        y: 70
-        width: 21
-        height: 19
+        x: 256
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -741,12 +741,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_29
       rect:
         serializedVersion: 2
-        x: 291
-        y: 67
-        width: 22
-        height: 26
+        x: 288
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -762,12 +762,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_30
       rect:
         serializedVersion: 2
-        x: 4
-        y: 34
-        width: 25
-        height: 28
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -783,12 +783,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_31
       rect:
         serializedVersion: 2
-        x: 33
-        y: 36
-        width: 30
-        height: 25
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -804,12 +804,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_32
       rect:
         serializedVersion: 2
-        x: 65
-        y: 35
-        width: 30
-        height: 27
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -825,12 +825,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_33
       rect:
         serializedVersion: 2
-        x: 103
-        y: 39
-        width: 19
-        height: 18
+        x: 96
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -846,12 +846,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_34
       rect:
         serializedVersion: 2
-        x: 130
-        y: 33
-        width: 27
-        height: 28
+        x: 128
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -867,12 +867,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_35
       rect:
         serializedVersion: 2
-        x: 161
-        y: 33
-        width: 30
-        height: 30
+        x: 160
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -888,12 +888,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_36
       rect:
         serializedVersion: 2
-        x: 193
-        y: 37
-        width: 30
-        height: 24
+        x: 192
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -909,12 +909,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_37
       rect:
         serializedVersion: 2
-        x: 231
-        y: 38
-        width: 19
-        height: 19
+        x: 224
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -930,12 +930,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_38
       rect:
         serializedVersion: 2
-        x: 261
-        y: 38
-        width: 21
-        height: 19
+        x: 256
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -951,12 +951,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_39
       rect:
         serializedVersion: 2
-        x: 296
-        y: 37
-        width: 16
-        height: 24
+        x: 288
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -972,12 +972,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_40
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 30
-        height: 30
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -993,12 +993,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_41
       rect:
         serializedVersion: 2
-        x: 33
-        y: 1
-        width: 30
-        height: 30
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1014,12 +1014,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_42
       rect:
         serializedVersion: 2
-        x: 65
-        y: 4
-        width: 30
-        height: 25
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1035,12 +1035,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_43
       rect:
         serializedVersion: 2
-        x: 102
-        y: 7
-        width: 21
-        height: 21
+        x: 96
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1056,12 +1056,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_44
       rect:
         serializedVersion: 2
-        x: 131
-        y: 4
-        width: 26
-        height: 26
+        x: 128
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1077,12 +1077,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_45
       rect:
         serializedVersion: 2
-        x: 161
-        y: 1
-        width: 30
-        height: 30
+        x: 160
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1098,12 +1098,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_46
       rect:
         serializedVersion: 2
-        x: 194
-        y: 1
-        width: 29
-        height: 29
+        x: 192
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1119,12 +1119,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_47
       rect:
         serializedVersion: 2
-        x: 228
-        y: 19
-        width: 9
-        height: 9
+        x: 224
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1140,12 +1140,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_48
       rect:
         serializedVersion: 2
-        x: 261
-        y: 6
-        width: 22
-        height: 20
+        x: 256
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1161,12 +1161,12 @@ TextureImporter:
       name: fantasy_weapons_pack1_noglow_49
       rect:
         serializedVersion: 2
-        x: 292
-        y: 3
-        width: 24
-        height: 25
+        x: 288
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1174,27 +1174,6 @@ TextureImporter:
       bones: []
       spriteID: 635b8b1f66276804f922a47557f2980f
       internalID: -1163322674
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fantasy_weapons_pack1_noglow_50
-      rect:
-        serializedVersion: 2
-        x: 237
-        y: 3
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d43ac9e3895198b4bbf1bd36f3f52c61
-      internalID: 2014107505
       vertices: []
       indices: 
       edges: []
@@ -1256,7 +1235,6 @@ TextureImporter:
       fantasy_weapons_pack1_noglow_48: -388477825
       fantasy_weapons_pack1_noglow_49: -1163322674
       fantasy_weapons_pack1_noglow_5: 1324016946
-      fantasy_weapons_pack1_noglow_50: 2014107505
       fantasy_weapons_pack1_noglow_6: 1426550114
       fantasy_weapons_pack1_noglow_7: 253550038
       fantasy_weapons_pack1_noglow_8: 56567446

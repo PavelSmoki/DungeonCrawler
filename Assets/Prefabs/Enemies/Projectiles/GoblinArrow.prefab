@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: -5649445466010646331}
-  _projectileLifeTime: 4
+  _projectileLifeTime: 2
 --- !u!61 &7125071296150532082
 BoxCollider2D:
   m_ObjectHideFlags: 0

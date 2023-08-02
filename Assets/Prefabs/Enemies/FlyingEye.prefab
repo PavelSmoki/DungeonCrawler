@@ -103,6 +103,7 @@ MonoBehaviour:
   Rb: {fileID: 5496608129587419930}
   Animator: {fileID: 3607847050625806921}
   _collider: {fileID: 615158695785665305}
+  _spriteRenderer: {fileID: 3984968245825663850}
   <Speed>k__BackingField: 2
   <Health>k__BackingField: 4
 --- !u!95 &3607847050625806921

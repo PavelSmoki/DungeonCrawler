@@ -202,7 +202,7 @@ namespace Game.Player
                 _timeBeforeShoot -= Time.deltaTime;
             }
         }
-
+        
         private void AttackProcessing()
         {
             if (_timeBeforeShoot <= 0)
@@ -213,7 +213,7 @@ namespace Game.Player
                 _timeBeforeShoot = 1 / (_playerModifiers.AttackSpeedModifier * _currentWeapon.AttackSpeed);
             }
         }
-
+        
         private void RotateWeapon(Vector2 direction)
         {
             var toRotation = Quaternion.LookRotation(Vector3.forward, direction);

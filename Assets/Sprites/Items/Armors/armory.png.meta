@@ -237,8 +237,8 @@ TextureImporter:
       name: armory_5
       rect:
         serializedVersion: 2
-        x: 160
-        y: 128
+        x: 0
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -258,8 +258,8 @@ TextureImporter:
       name: armory_6
       rect:
         serializedVersion: 2
-        x: 192
-        y: 128
+        x: 32
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -279,7 +279,7 @@ TextureImporter:
       name: armory_7
       rect:
         serializedVersion: 2
-        x: 0
+        x: 64
         y: 96
         width: 32
         height: 32
@@ -300,7 +300,7 @@ TextureImporter:
       name: armory_8
       rect:
         serializedVersion: 2
-        x: 32
+        x: 96
         y: 96
         width: 32
         height: 32
@@ -321,7 +321,7 @@ TextureImporter:
       name: armory_9
       rect:
         serializedVersion: 2
-        x: 64
+        x: 128
         y: 96
         width: 32
         height: 32
@@ -342,8 +342,8 @@ TextureImporter:
       name: armory_10
       rect:
         serializedVersion: 2
-        x: 96
-        y: 96
+        x: 0
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -363,8 +363,8 @@ TextureImporter:
       name: armory_11
       rect:
         serializedVersion: 2
-        x: 128
-        y: 96
+        x: 32
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -384,8 +384,8 @@ TextureImporter:
       name: armory_12
       rect:
         serializedVersion: 2
-        x: 160
-        y: 96
+        x: 64
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -405,9 +405,9 @@ TextureImporter:
       name: armory_13
       rect:
         serializedVersion: 2
-        x: 192
-        y: 96
-        width: 32
+        x: 96
+        y: 64
+        width: 33
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -423,32 +423,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: armory_14
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7d48d94a6976fef489626053bd6e5846
-      internalID: -511140458
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: armory_15
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
+        x: 0
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -468,8 +447,8 @@ TextureImporter:
       name: armory_16
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
+        x: 32
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -489,8 +468,8 @@ TextureImporter:
       name: armory_17
       rect:
         serializedVersion: 2
-        x: 96
-        y: 64
+        x: 64
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -510,8 +489,8 @@ TextureImporter:
       name: armory_18
       rect:
         serializedVersion: 2
-        x: 128
-        y: 64
+        x: 96
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -531,8 +510,8 @@ TextureImporter:
       name: armory_19
       rect:
         serializedVersion: 2
-        x: 160
-        y: 64
+        x: 0
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -552,8 +531,8 @@ TextureImporter:
       name: armory_20
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 32
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -573,8 +552,8 @@ TextureImporter:
       name: armory_21
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
+        x: 64
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -594,153 +573,6 @@ TextureImporter:
       name: armory_22
       rect:
         serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9120f5d1c9426924d95d9b1250d77352
-      internalID: 1322796989
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: armory_23
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 03c66c071cc6ead4586fbf91263d095d
-      internalID: 625150458
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: armory_24
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 43972bcbff6230a4891936f1d11fd779
-      internalID: -566275258
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: armory_25
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c5842a400cf1f2245b679447f8f03c66
-      internalID: -1688668614
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: armory_26
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2876cdc7ffe800f47ac0d0ccb52bd180
-      internalID: -1802157803
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: armory_27
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e91267259fac6ab47b462abf84b4826b
-      internalID: 1743860156
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: armory_28
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b9739e9b4244aca4189f3c58f5623c78
-      internalID: -336712071
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: armory_29
-      rect:
-        serializedVersion: 2
         x: 96
         y: 0
         width: 32
@@ -752,50 +584,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f0d0d6c9ee3652409281d4b1aa23ced
-      internalID: 512254558
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: armory_30
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a11782e4f4a1e7a468d1ead077eaca6c
-      internalID: -110399356
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: armory_31
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 01b4a2b9f8940a84face81314d2aa7fe
-      internalID: -1619466984
+      spriteID: b69228b52dbc2ee46bdfd8258cf1daf8
+      internalID: 1013377323
       vertices: []
       indices: 
       edges: []
@@ -826,17 +616,8 @@ TextureImporter:
       armory_2: -274166270
       armory_20: 678295010
       armory_21: -515814091
-      armory_22: 1322796989
-      armory_23: 625150458
-      armory_24: -566275258
-      armory_25: -1688668614
-      armory_26: -1802157803
-      armory_27: 1743860156
-      armory_28: -336712071
-      armory_29: 512254558
+      armory_22: 1013377323
       armory_3: -277109441
-      armory_30: -110399356
-      armory_31: -1619466984
       armory_4: 1245689137
       armory_5: -703156091
       armory_6: 256497092

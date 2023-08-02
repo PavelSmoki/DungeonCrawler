@@ -1,4 +1,5 @@
 using Game.Enemies;
+using Game.Enemies.EnemiesInstances;
 using Game.Gameplay;
 using Game.Player;
 using Game.UI;
