@@ -37,6 +37,7 @@ namespace Game.Player
         private readonly Stack<Heart> _hearts = new(10);
 
         private GameUI _gameUI;
+        private GameOverUI _gameOverUI;
 
         private Dictionary<ArmorType, Armor> _currentArmors;
         private WeaponBase _currentWeapon;
@@ -47,8 +48,9 @@ namespace Game.Player
         private bool _isInvincible;
 
         [Inject]
-        private void Construct(GameUI gameUI)
+        private void Construct(GameUI gameUI, GameOverUI gameOverUI)
         {
+            _gameOverUI = gameOverUI;
             _gameUI = gameUI;
         }
 
@@ -237,6 +239,7 @@ namespace Game.Player
                     if (_hearts.IsEmpty())
                     {
                         _animator.SetTrigger(Died);
+                        _gameOverUI.ShowLoseScreen().Forget();
                     }
                 }
                 

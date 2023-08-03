@@ -14,6 +14,7 @@ namespace Game.Installers
         [SerializeField] private GameUI _gameUI;
         [SerializeField] private Grid _grid;
         [SerializeField] private DamageUI _damageUI;
+        [SerializeField] private GameOverUI _gameOverUI;
 
         public override void InstallBindings()
         {
@@ -23,6 +24,7 @@ namespace Game.Installers
             Container.BindInstance(_gameUI);
             Container.BindInstance(_grid);
             Container.BindInstance(_damageUI);
+            Container.BindInstance(_gameOverUI);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Enemies;
+using Game.UI;
 using JetBrains.Annotations;
 using UniRx;
 using UnityEngine;
@@ -28,14 +29,16 @@ namespace Game.Gameplay
         private readonly EnemyFactory _enemyFactory;
         private readonly DiContainer _container;
         private readonly Grid _grid;
+        private readonly GameOverUI _gameOverUI;
 
         private Vector2Int _treasureRoomPlace;
 
-        public GameplayController(EnemyFactory enemyFactory, DiContainer container, Grid grid)
+        public GameplayController(EnemyFactory enemyFactory, DiContainer container, Grid grid, GameOverUI gameOverUI)
         {
             _enemyFactory = enemyFactory;
             _container = container;
             _grid = grid;
+            _gameOverUI = gameOverUI;
         }
 
         public void Initialize()
@@ -104,8 +107,6 @@ namespace Game.Gameplay
         {
             _spawnedRooms[position.x, position.y] = newRoomObj;
             _spawnedRoomsData[position.x, position.y] = newRoomData;
-
-            _spawnedRoomsData[position.x, position.y].OnRoomEnter += OnRoomEntered;
         }
 
         private void PlaceOneRoom()
@@ -114,6 +115,7 @@ namespace Game.Gameplay
             var newRoomObj = InstantiateRoom(vacantPlaces, out var newRoomData, out var position,
                 "Room" + Random.Range(1, 9));
             SetArraysElements(position, newRoomObj, newRoomData);
+            _spawnedRoomsData[position.x, position.y].OnRoomEnter += OnRoomEntered;
             PlaceTransitions(newRoomData, position);
         }
 
@@ -124,9 +126,9 @@ namespace Game.Gameplay
             var newRoomObj = InstantiateRoom(treasureRoomVacantPlaces, out var newRoomData, out var position,
                 "TreasureRoom");
             SetArraysElements(position, newRoomObj, newRoomData);
+            _spawnedRoomsData[position.x, position.y].OnRoomEnter += OnRoomEntered;
             PlaceTransitions(newRoomData, position);
             _container.InjectGameObject(newRoomObj);
-
             _treasureRoomPlace = new Vector2Int(position.x, position.y);
         }
 
@@ -140,6 +142,7 @@ namespace Game.Gameplay
             var newRoomObj = InstantiateRoom(bossRoomVacantPlaces, out var newRoomData, out var position,
                 "BossRoom");
             SetArraysElements(position, newRoomObj, newRoomData);
+            _spawnedRoomsData[position.x, position.y].OnRoomEnter += OnBossRoomEntered;
             PlaceTransitions(newRoomData, position);
         }
 
@@ -279,11 +282,26 @@ namespace Game.Gameplay
             roomData.EnemyCount.Subscribe(_ => CheckForEnemies(roomData));
         }
 
+        private void OnBossRoomEntered(RoomData roomData)
+        {
+            _enemyFactory.Create(roomData);
+            roomData.CloseAllTransitions();
+            roomData.EnemyCount.Subscribe(_ => Victory(roomData));
+        }
+
         private void CheckForEnemies(RoomData roomData)
         {
             if (roomData.EnemyCount.Value == 0)
             {
                 roomData.OpenAllTransitions();
+            }
+        }
+
+        private void Victory(RoomData roomData)
+        {
+            if (roomData.EnemyCount.Value == 0)
+            {
+                _gameOverUI.ShowWinScreen().Forget();
             }
         }
     }
