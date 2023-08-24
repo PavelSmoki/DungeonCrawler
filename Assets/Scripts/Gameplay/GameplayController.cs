@@ -30,15 +30,18 @@ namespace Game.Gameplay
         private readonly DiContainer _container;
         private readonly Grid _grid;
         private readonly GameOverUI _gameOverUI;
+        private readonly AssetProvider _assetProvider;
 
         private Vector2Int _treasureRoomPlace;
 
-        public GameplayController(EnemyFactory enemyFactory, DiContainer container, Grid grid, GameOverUI gameOverUI)
+        public GameplayController(EnemyFactory enemyFactory, DiContainer container, Grid grid, GameOverUI gameOverUI,
+            AssetProvider assetProvider)
         {
             _enemyFactory = enemyFactory;
             _container = container;
             _grid = grid;
             _gameOverUI = gameOverUI;
+            _assetProvider = assetProvider;
         }
 
         public void Initialize()
@@ -88,6 +91,21 @@ namespace Game.Gameplay
         }
 
         private GameObject InstantiateRoom(HashSet<Vector2Int> vacantPlaces, out RoomData newRoomData,
+            out Vector2Int position)
+        {
+            var assetReference = _assetProvider.Rooms[Random.Range(1, _assetProvider.Rooms.Count)];
+            var roomPrefab = Addressables.LoadAssetAsync<GameObject>(assetReference).WaitForCompletion();
+            var newRoomObj = Object.Instantiate(roomPrefab);
+            newRoomData = newRoomObj.GetComponent<RoomData>();
+
+            position = vacantPlaces.ElementAt(Random.Range(0, vacantPlaces.Count));
+            newRoomObj.transform.position = new Vector3((position.x - roomToGridOffset.x) * GridSize,
+                (position.y - roomToGridOffset.y) * GridSize, 0);
+
+            return newRoomObj;
+        }
+
+        private GameObject InstantiateRoom(HashSet<Vector2Int> vacantPlaces, out RoomData newRoomData,
             out Vector2Int position, string roomKey)
         {
             var newRoomPrefab = Addressables.LoadAssetAsync<GameObject>(roomKey)
@@ -112,8 +130,7 @@ namespace Game.Gameplay
         private void PlaceOneRoom()
         {
             var vacantPlaces = FindVacantPlaces();
-            var newRoomObj = InstantiateRoom(vacantPlaces, out var newRoomData, out var position,
-                "Room" + Random.Range(1, 9));
+            var newRoomObj = InstantiateRoom(vacantPlaces, out var newRoomData, out var position);
             SetArraysElements(position, newRoomObj, newRoomData);
             _spawnedRoomsData[position.x, position.y].OnRoomEnter += OnRoomEntered;
             PlaceTransitions(newRoomData, position);

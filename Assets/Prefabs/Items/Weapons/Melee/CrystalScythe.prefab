@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Crystal Scythe
   <Rareness>k__BackingField: 4
-  <Damage>k__BackingField: 5
+  <Damage>k__BackingField: 2
   <CritChance>k__BackingField: 0.2
   <CritModifier>k__BackingField: 3
   <AttackSpeed>k__BackingField: 1

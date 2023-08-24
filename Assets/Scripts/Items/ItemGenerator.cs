@@ -1,21 +1,30 @@
+using Game.Gameplay;
 using Game.Items.Weapons;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace Game.Items
 {
-    public static class ItemGenerator
+    [UsedImplicitly]
+    public class ItemGenerator
     {
+        private static AssetProvider _assetProvider;
+
+        public ItemGenerator(AssetProvider assetProvider) => _assetProvider = assetProvider;
+
         public static WeaponBase GenerateWeapon()
         {
-            var item = Addressables.LoadAssetAsync<GameObject>("Weapon" + Random.Range(1, 14)).WaitForCompletion()
+            var assetReference = _assetProvider.Weapons[Random.Range(1, _assetProvider.Weapons.Count)];
+            var item = Addressables.LoadAssetAsync<GameObject>(assetReference).WaitForCompletion()
                 .GetComponent<WeaponBase>();
             return item;
         }
 
         public static Armor.Armor GenerateArmor()
         {
-            var item = Addressables.LoadAssetAsync<GameObject>("Armor" + Random.Range(1, 16)).WaitForCompletion()
+            var assetReference = _assetProvider.Armors[Random.Range(1, _assetProvider.Armors.Count)];
+            var item = Addressables.LoadAssetAsync<GameObject>(assetReference).WaitForCompletion()
                 .GetComponent<Armor.Armor>();
             return item;
         }

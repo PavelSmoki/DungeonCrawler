@@ -23,8 +23,6 @@ namespace Game.UI
             Time.timeScale = 0;
         }
         
-        
-
         public void Restart()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
