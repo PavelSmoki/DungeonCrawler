@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Items.Armor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,27 +9,55 @@ namespace Game.UI
 {
     public class GameUI : MonoBehaviour
     {
-        [SerializeField] private FixedJoystick _moveJoystick;
+        [SerializeField] private FloatingJoystick _moveJoystick;
         [SerializeField] private FixedJoystick _attackJoystick;
         [SerializeField] private Image _weaponSwitchButtonImage;
         [SerializeField] private Transform _hpRootTransform;
         [SerializeField] private Image _fullHeartImagePrefab;
         [SerializeField] private Sprite _halfHeartSprite;
+        [SerializeField] private Image _headSlotImage;
+        [SerializeField] private Image _bodySlotImage;
+        [SerializeField] private Image _footSlotImage;
+        [SerializeField] private Sprite _translucentSprite;
         
         private readonly List<Image> _hearts = new();
 
         public Action OnWeaponSwitch;
         public Action<float, float> OnMove;
         public Action<Vector2, Vector2> OnAttack;
+        
 
         public void OnWeaponSwitchPress()
         {
             OnWeaponSwitch?.Invoke();
         }
 
-        public void SetWeaponImage(Sprite sprite)
+        public void SetWeaponSpite(Sprite sprite)
         {
             _weaponSwitchButtonImage.sprite = sprite;
+        }
+
+        public void SetArmorSprite(Sprite sprite, ArmorType armorType)
+        {
+            switch (armorType)
+            {
+                case ArmorType.Head:
+                {
+                    _headSlotImage.sprite = sprite != null ? sprite : _translucentSprite;
+                    break;
+                }
+                case ArmorType.Body:
+                {
+                    _bodySlotImage.sprite = sprite != null ? sprite : _translucentSprite;
+                    break;
+                }
+                case ArmorType.Foot:
+                {
+                    _footSlotImage.sprite = sprite != null ? sprite : _translucentSprite;
+                    break;
+                }
+                default: return;
+            }
         }
 
         public void ChangeHealthOnUI(int lastHeartAmount)
@@ -38,6 +67,7 @@ namespace Game.UI
                 _hearts.Last().sprite = _halfHeartSprite;
                 return;
             }
+
             Destroy(_hearts.Last().gameObject);
             _hearts.RemoveAt(_hearts.Count - 1);
         }

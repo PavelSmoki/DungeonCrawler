@@ -54,7 +54,7 @@ namespace Game.Player
             _gameUI = gameUI;
         }
 
-        private void Awake()
+        private void Start()
         {
             for (var i = 0; i < _heartsCount; i++)
             {
@@ -69,14 +69,22 @@ namespace Game.Player
             SetDefaultArmors();
 
             CalculateModifiers();
+            
+            InitGameUI();
+        }
 
+        private void InitGameUI()
+        {
             _gameUI.OnWeaponSwitch += SwitchWeapon;
             _gameUI.OnMove += Move;
             _gameUI.OnAttack += Attack;
-            _gameUI.SetWeaponImage(_currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite);
             _gameUI.SetHealthOnUI(_hearts.Count);
+            _gameUI.SetWeaponSpite(_currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite);
+            _gameUI.SetArmorSprite(_currentArmors[ArmorType.Head]?.SpriteRenderer.sprite, ArmorType.Head);
+            _gameUI.SetArmorSprite(_currentArmors[ArmorType.Body]?.SpriteRenderer.sprite, ArmorType.Body);
+            _gameUI.SetArmorSprite(_currentArmors[ArmorType.Foot]?.SpriteRenderer.sprite, ArmorType.Foot);
         }
-
+        
         private void SwitchWeapon()
         {
             if (_firstWeapon == null || _secondWeapon == null) return;
@@ -98,7 +106,7 @@ namespace Game.Player
         private void SetWeapon(WeaponBase weaponBase)
         {
             _currentWeapon = weaponBase;
-            _gameUI.SetWeaponImage(_currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite);
+            _gameUI.SetWeaponSpite(_currentWeapon.GetComponentInChildren<SpriteRenderer>().sprite);
         }
 
         private void SetDefaultArmors()
@@ -304,26 +312,17 @@ namespace Game.Player
             {
                 case ArmorType.Head:
                 {
-                    dressedArmor = _currentArmors[ArmorType.Head];
-                    _currentArmors[ArmorType.Head] = item;
-                    _currentArmors[ArmorType.Head].transform.SetParent(transform);
-                    _currentArmors[ArmorType.Head].SpriteRenderer.enabled = false;
+                    dressedArmor = SwitchArmor(item, ArmorType.Head);
                     break;
                 }
                 case ArmorType.Body:
                 {
-                    dressedArmor = _currentArmors[ArmorType.Body];
-                    _currentArmors[ArmorType.Body] = item;
-                    _currentArmors[ArmorType.Body].transform.SetParent(transform);
-                    _currentArmors[ArmorType.Body].SpriteRenderer.enabled = false;
-                    break;
+                    dressedArmor = SwitchArmor(item, ArmorType.Body);
+                    break;  
                 }
                 case ArmorType.Foot:
                 {
-                    dressedArmor = _currentArmors[ArmorType.Foot];
-                    _currentArmors[ArmorType.Foot] = item;
-                    _currentArmors[ArmorType.Foot].transform.SetParent(transform);
-                    _currentArmors[ArmorType.Foot].SpriteRenderer.enabled = false;
+                    dressedArmor = SwitchArmor(item, ArmorType.Foot);
                     break;
                 }
                 default: return null;
@@ -333,6 +332,15 @@ namespace Game.Player
             return dressedArmor;
         }
 
+        private Armor SwitchArmor(Armor item, ArmorType armorType)
+        {
+            var dressedArmor = _currentArmors[armorType];
+            _currentArmors[armorType] = item;
+            _currentArmors[armorType].transform.SetParent(transform);
+            _currentArmors[armorType].SpriteRenderer.enabled = false;
+            _gameUI.SetArmorSprite(_currentArmors[armorType].SpriteRenderer.sprite, armorType);
+            return dressedArmor;
+        }
         private void OnDestroy()
         {
             _gameUI.OnWeaponSwitch -= SwitchWeapon;
