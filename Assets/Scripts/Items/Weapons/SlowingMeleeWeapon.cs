@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Game.Enemies;
 using UnityEngine;
 
@@ -6,17 +7,21 @@ namespace Game.Items.Weapons
 {
     public class SlowingMeleeWeapon : MeleeWeapon
     {
-        [SerializeField] private float slownessDuration;
-        public override EnemyBase Attack(float damageModifier, float critChanceModifier, float attackRangeModifier, float shotSpeedModifier)
+        [SerializeField] private float _slownessDuration;
+
+        public override List<EnemyBase> Attack(float damageModifier, float critChanceModifier,
+            float attackRangeModifier, float shotSpeedModifier)
         {
             var enemyBase = base.Attack(damageModifier, critChanceModifier, attackRangeModifier, shotSpeedModifier);
-            if (enemyBase != null)
+            
+            foreach (var enemy in enemyBase.Where(_ => enemyBase != null))
             {
-                enemyBase.SlowDown(slownessDuration).Forget();
+                enemy.SlowDown(_slownessDuration).Forget();
             }
+
             return enemyBase;
         }
-        
+
         protected override void Awake()
         {
             Infos = new List<ItemInfo>

@@ -8,9 +8,8 @@ namespace Game.Items.Weapons
     public class MeleeWeapon : WeaponBase
     {
         [SerializeField] protected float KnockBack;
-        private readonly RaycastHit2D[] _hits = new RaycastHit2D[5];
 
-        public override EnemyBase Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
+        public override List<EnemyBase> Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
             float shotSpeedModifier)
         {
             var damage = Damage * damageModifier;
@@ -19,20 +18,16 @@ namespace Game.Items.Weapons
 
             var mask = LayerMask.GetMask(EnemyLayerName, FlyableEnemyLayerName);
 
-            Physics2D.CircleCastNonAlloc(transform.position, attackRange,
-                Vector2.one, _hits, 0, mask);
-
-            foreach (var hit in _hits)
+            var hits = Physics2D.CircleCastAll(transform.position, attackRange, 
+            Vector2.zero, 0, mask);
+            var enemies = new List<EnemyBase>();
+            
+            foreach (var hit in hits)
             {
                 var angle = Vector2.Dot(transform.up,
                     (hit.point - new Vector2(transform.position.x, transform.position.y)).normalized);
                 if (angle >= 0.2f)
                 {
-                    if (hit.transform == null)
-                    {
-                        return null;
-                    }
-
                     var enemy = hit.transform.gameObject;
 
                     var knockbackDirection = hit.transform.position - transform.position;
@@ -40,10 +35,11 @@ namespace Game.Items.Weapons
 
                     var enemyBase = enemy.GetComponent<EnemyBase>();
                     enemyBase.TakeDamage(damage, knockbackDirection, KnockBack, isCrit);
-                    return enemyBase;
+                    enemies.Add(enemyBase);
                 }
             }
-            return null;
+
+            return enemies;
         }
 
         private bool IsCrit(float critChance, ref float damage)

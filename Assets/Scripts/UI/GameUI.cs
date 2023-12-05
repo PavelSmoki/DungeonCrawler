@@ -25,7 +25,6 @@ namespace Game.UI
         public Action OnWeaponSwitch;
         public Action<float, float> OnMove;
         public Action<Vector2, Vector2> OnAttack;
-        
 
         public void OnWeaponSwitchPress()
         {

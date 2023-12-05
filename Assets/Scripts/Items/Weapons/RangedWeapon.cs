@@ -10,7 +10,7 @@ namespace Game.Items.Weapons
 
         [SerializeField] private GameObject _projectilePrefab;
 
-        public override EnemyBase Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
+        public override List<EnemyBase> Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
             float shotSpeedModifier)
         {
             var damage = Damage * damageModifier;

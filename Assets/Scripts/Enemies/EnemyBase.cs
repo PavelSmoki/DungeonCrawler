@@ -64,7 +64,7 @@ namespace Game.Enemies
             Rotate();
         }
 
-        protected void Rotate()
+        private void Rotate()
         {
             var rot = transform.rotation;
             if (Player.GetCurrentPosition().x - transform.position.x < 0)

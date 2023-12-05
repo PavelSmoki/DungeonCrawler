@@ -16,7 +16,7 @@ namespace Game.Player
     {
         private const string EnemyTag = "Enemy";
         private const int Speed = 7;
-        private const string EnemyProjectile = "EnemyProjectile";
+        private const string EnemyProjectileTag = "EnemyProjectile";
         private static readonly int IsRunning = Animator.StringToHash("IsRunning");
         private static readonly int Damaged = Animator.StringToHash("Damaged");
         private static readonly int Died = Animator.StringToHash("Died");
@@ -27,8 +27,7 @@ namespace Game.Player
         [SerializeField] private int _heartsCount;
         [SerializeField] private Transform _weaponPosTransform;
         [SerializeField] private Transform _spriteTransform;
-
-
+        
         [SerializeField] private WeaponBase _firstWeapon;
         [SerializeField] private WeaponBase _secondWeapon;
         [SerializeField] private List<ArmorSlot> _defaultArmors;
@@ -236,7 +235,7 @@ namespace Game.Player
 
         private void TakeDamage(Collision2D other)
         {
-            if ((other.gameObject.CompareTag(EnemyTag) || other.gameObject.CompareTag(EnemyProjectile)) && !_isInvincible)
+            if ((other.gameObject.CompareTag(EnemyTag) || other.gameObject.CompareTag(EnemyProjectileTag)) && !_isInvincible)
             {
                 var lastHeart = _hearts.Peek();
                 lastHeart.TakeDamage();
@@ -258,7 +257,7 @@ namespace Game.Player
 
         private async UniTaskVoid TakingDamageDelay()
         {
-            _isInvincible = true;
+            _isInvincible = true;   
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
             _isInvincible = false;
         }

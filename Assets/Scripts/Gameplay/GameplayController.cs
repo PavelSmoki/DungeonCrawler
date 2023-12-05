@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Game.Enemies;
 using Game.UI;
 using JetBrains.Annotations;
@@ -21,7 +23,7 @@ namespace Game.Gameplay
         private const int GridSize = 32;
         private const int TransitionToGridOffset = 16;
         private const int RoomsAmount = 8;
-        private readonly Vector2Int roomToGridOffset = new(4, 4);
+        private readonly Vector2Int _roomToGridOffset = new(4, 4);
 
         private GameObject[,] _spawnedRooms;
         private RoomData[,] _spawnedRoomsData;
@@ -99,8 +101,8 @@ namespace Game.Gameplay
             newRoomData = newRoomObj.GetComponent<RoomData>();
 
             position = vacantPlaces.ElementAt(Random.Range(0, vacantPlaces.Count));
-            newRoomObj.transform.position = new Vector3((position.x - roomToGridOffset.x) * GridSize,
-                (position.y - roomToGridOffset.y) * GridSize, 0);
+            newRoomObj.transform.position = new Vector3((position.x - _roomToGridOffset.x) * GridSize,
+                (position.y - _roomToGridOffset.y) * GridSize, 0);
 
             return newRoomObj;
         }
@@ -115,8 +117,8 @@ namespace Game.Gameplay
             newRoomData = newRoomObj.GetComponent<RoomData>();
 
             position = vacantPlaces.ElementAt(Random.Range(0, vacantPlaces.Count));
-            newRoomObj.transform.position = new Vector3((position.x - roomToGridOffset.x) * GridSize,
-                (position.y - roomToGridOffset.y) * GridSize, 0);
+            newRoomObj.transform.position = new Vector3((position.x - _roomToGridOffset.x) * GridSize,
+                (position.y - _roomToGridOffset.y) * GridSize, 0);
 
             return newRoomObj;
         }
