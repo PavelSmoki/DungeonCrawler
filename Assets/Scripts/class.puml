@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class EnemyBase {
+    - Rb: Rigidbody2D
+    - Animator: Animator
+    - _collider: Collider2D
+    - _spriteRenderer: SpriteRenderer
+    - Speed: float
+    - Health: float
+    - Player: IPlayer
+    - _cancellationTokenSource: CancellationTokenSource
+    - DamageUI: DamageUI
+    - _roomData: RoomData
+    - _isDead: bool
+    - IsDelayed: bool
+    + Construct(player: IPlayer, damageUI: DamageUI): void
+    + Awake(): void
+    + SetCurrentRoomData(roomData: RoomData): void
+    + BehaviorDelayAfterSpawn(): UniTaskVoid
+    + Start(): void
+    + Update(): void
+    + Rotate(): void
+    + TakeDamage(damage: float, knockbackDirection: Vector2, knockBack: float, isCrit: bool): void
+    + DelayDestroy(): UniTaskVoid
+    + SlowDown(duration: float): UniTaskVoid
+}
+
+class GoblinArcher {
+    -arrowCount: int
+    +shootArrow(): void
+}
+
+class Mushroom {
+    +releaseSpores(): void
+}
+
+class Player {
+    -health: int
+    -inventory: Inventory
+    +move(): void
+    +attack(): void
+}
+
+class Inventory {
+    -items: List<Item>
+    +addItem(item: Item): void
+    +removeItem(item: Item): void
+}
+
+class Item {
+    -name: String
+    -description: String
+}
+
+GoblinArcher --|> Enemy : extends
+Mushroom --|> Enemy : extends
+Player "1" -- "*" Inventory : has
+Inventory "1" -- "*" Item : contains
+
+@enduml

@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cysharp.Threading.Tasks;
 using Game.Enemies;
 using Game.UI;
 using JetBrains.Annotations;

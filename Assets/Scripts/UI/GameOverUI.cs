@@ -28,5 +28,11 @@ namespace Game.UI
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Time.timeScale = 1;
         }
+
+        public void QuitMenu()
+        {
+            SceneManager.LoadScene("Menu");
+            Time.timeScale = 1;
+        }
     }
 }
