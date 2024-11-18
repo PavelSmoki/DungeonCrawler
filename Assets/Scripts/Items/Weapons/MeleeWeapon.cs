@@ -12,6 +12,8 @@ namespace Game.Items.Weapons
         public override List<EnemyBase> Attack(float damageModifier, float critChanceModifier, float attackRangeModifier,
             float shotSpeedModifier)
         {
+            base.Attack(damageModifier, critChanceModifier, attackRangeModifier, shotSpeedModifier);
+            
             var damage = Damage * damageModifier;
             var critChance = CritChance * critChanceModifier;
             var attackRange = AttackRange * attackRangeModifier;

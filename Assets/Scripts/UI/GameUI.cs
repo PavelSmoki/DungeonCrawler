@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Items.Armor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Game.UI
@@ -19,6 +20,10 @@ namespace Game.UI
         [SerializeField] private Image _bodySlotImage;
         [SerializeField] private Image _footSlotImage;
         [SerializeField] private Sprite _translucentSprite;
+        
+        [Header("Pause")]
+        [SerializeField] private GameObject _pausePanel;
+        [SerializeField] private Button _pauseButton;
         
         private readonly List<Image> _hearts = new();
 
@@ -89,6 +94,30 @@ namespace Game.UI
             var lookDirection = new Vector2(_attackJoystick.Horizontal, _attackJoystick.Vertical);
             var moveDirection = new Vector2(_moveJoystick.Horizontal, _moveJoystick.Vertical);
             OnAttack?.Invoke(moveDirection, lookDirection);
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Pause();
+            }
+        } 
+
+        public void Pause()
+        {
+            _pausePanel.SetActive(true);
+            Time.timeScale = 0f;
+            _pauseButton.interactable = false;
+        }
+
+        public void Resume()
+        {
+            _pausePanel.SetActive(false);
+            Time.timeScale = 1f;
+            _pauseButton.interactable = true;
+        }
+
+        public void ExitMainMenu()
+        {
+            SceneManager.LoadScene("Menu");
         }
     }
 }

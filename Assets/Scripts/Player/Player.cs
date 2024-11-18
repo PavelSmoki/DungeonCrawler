@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Game.Gameplay;
+using Game.Gameplay.Audio;
 using Game.Items.Armor;
 using Game.Items.Weapons;
 using Game.UI;
@@ -33,6 +34,10 @@ namespace Game.Player
         [SerializeField] private List<ArmorSlot> _defaultArmors;
 
         [SerializeField] [Range(0.2f, 2f)] private float _defaultSpeedModifier;
+
+        [SerializeField] private MoveSound _moveSound;
+        [SerializeField] private PlayerDamagedSound _playerDamagedSound;
+            
         private readonly Stack<Heart> _hearts = new(10);
 
         private GameUI _gameUI;
@@ -168,7 +173,15 @@ namespace Game.Player
 
         private void Move(float horizontal, float vertical)
         {
-            if (horizontal != 0 || vertical != 0) RotatePlayer(horizontal);
+            if (horizontal != 0 || vertical != 0)
+            {
+                if (!_moveSound.IsPlaying)
+                {
+                    _moveSound.PlayMove();
+                }
+                
+                RotatePlayer(horizontal);
+            }
             _rb.velocity = new Vector2(horizontal * Speed * _playerModifiers.SpeedModifier,
                 vertical * Speed * _playerModifiers.SpeedModifier);
             _animator.SetBool(IsRunning, _rb.velocity.sqrMagnitude >= 0.1f);
@@ -251,10 +264,11 @@ namespace Game.Player
                 }
                 
                 _animator.SetTrigger(Damaged);
+                _playerDamagedSound.PlayDamaged();
                 TakingDamageDelay().Forget();
             }
         }
-
+ 
         private async UniTaskVoid TakingDamageDelay()
         {
             _isInvincible = true;   
@@ -287,17 +301,17 @@ namespace Game.Player
             if (_currentWeapon == _firstWeapon)
             {
                 dressedWeapon = _firstWeapon;
+                item.transform.SetParent(_weaponPosTransform);
+                item.transform.position = _weaponPosTransform.position;
                 _firstWeapon = item;
-                _firstWeapon.transform.SetParent(_weaponPosTransform);
-                _firstWeapon.transform.position = _weaponPosTransform.position;
                 SetWeapon(_firstWeapon);
             }
             else
             {
                 dressedWeapon = _secondWeapon;
+                item.transform.SetParent(_weaponPosTransform);
+                item.transform.position = _weaponPosTransform.position;
                 _secondWeapon = item;
-                _secondWeapon.transform.SetParent(_weaponPosTransform);
-                _secondWeapon.transform.position = _weaponPosTransform.position;
                 SetWeapon(_secondWeapon);
             }
 

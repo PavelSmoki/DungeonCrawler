@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6d1c27f34945a58d2d730e07b339ed, type: 3}
+  m_Name: Flying Eye Move Clip Bundle
+  m_EditorClassIdentifier: 
+  _clips:
+  - {fileID: 8300000, guid: 59a1d809f2211f949880e960f7a7e6c4, type: 3}
+  - {fileID: 8300000, guid: ddcd8076f10e4a14dbd15e78732644d4, type: 3}
+  - {fileID: 8300000, guid: 9d3fec2573a95b147a84a30ecbeec85c, type: 3}
+  - {fileID: 8300000, guid: c267f006e5ea1a642b96a28cb5453839, type: 3}
+  - {fileID: 8300000, guid: c03c287d5464f4e4398ae3a9a0db9c34, type: 3}

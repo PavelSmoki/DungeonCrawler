@@ -6,6 +6,7 @@ using JetBrains.Annotations;
 using UniRx;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Profiling;
 using Zenject;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;

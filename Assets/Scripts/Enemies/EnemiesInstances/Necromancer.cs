@@ -1,9 +1,11 @@
+using Game.Gameplay.Audio;
 using UnityEngine;
 
 namespace Game.Enemies.EnemiesInstances
 {
     public class Necromancer : EnemyBase
     {
+        [SerializeField] private EnemyAttackSound _attackSound;
         [SerializeField] private EnemyProjectile _projectilePrefab;
         [SerializeField] private float _shotSpeed;
 
@@ -18,6 +20,8 @@ namespace Game.Enemies.EnemiesInstances
                 projectile.transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 180);
                 projectile.GetComponent<EnemyProjectile>()
                     .SetProjectileFields(projectile.transform.up * _shotSpeed);
+
+                _attackSound.PlayAttack();
             }
         }
     }

@@ -11,6 +11,9 @@ namespace Game.Items
         private const string PlayerTag = "Player";
 
         [SerializeField] private Panel _panel;
+        [SerializeField] private AudioSource _openChestAudioSource;
+        [SerializeField] private AudioSource _closeChestAudioSource;
+        [SerializeField] private AudioSource _takeItemAudioSource;
 
         private Item _item;
 
@@ -54,8 +57,13 @@ namespace Game.Items
             {
                 if (_item != null)
                 {
+                    if(!_openChestAudioSource.isPlaying && !_panel.gameObject.activeSelf) 
+                    {
+                        _openChestAudioSource.Play();
+                    }
+                    
                     _item.gameObject.SetActive(true);
-                    PanelSetup();
+                    PanelSetup(_item);
                 }
             }
         }
@@ -68,15 +76,20 @@ namespace Game.Items
                 {
                     _item.gameObject.SetActive(false);
                     _panel.gameObject.SetActive(false);
-                }
+                    
+                    if (!_closeChestAudioSource.isPlaying)
+                    {
+                        _closeChestAudioSource.Play();
+                    }
+                }   
             }
         }
 
-        private void PanelSetup()
+        private void PanelSetup(Item item)
         {
             _panel.DestroySegments();
-            _panel.Setup(_item.Infos, _item.Name, _item.Rareness,
-                _item.GetComponentInChildren<SpriteRenderer>().sprite);
+            _panel.Setup(item.Infos, item.Name, item.Rareness,
+                item.GetComponentInChildren<SpriteRenderer>().sprite);
             _panel.gameObject.SetActive(true);
         }
 
@@ -88,14 +101,16 @@ namespace Game.Items
                 if (item == null)
                 {
                     _panel.gameObject.SetActive(false);
+                    _closeChestAudioSource.Play();
                 }
                 else
                 {
-                    _item = item;
-                    _item.transform.SetParent(transform);
-                    _item.transform.position = transform.position + _itemSpawnOffset;
-                    PanelSetup();
+                    item.transform.SetParent(transform);
+                    item.transform.position = transform.position + _itemSpawnOffset;
+                    PanelSetup(item);
                 }
+                
+                _item = item;
             }
             else
             {
@@ -103,15 +118,22 @@ namespace Game.Items
                 if (item == null)
                 {
                     _panel.gameObject.SetActive(false);
+                    _closeChestAudioSource.Play();
                 }
                 else
                 {
                     item.SpriteRenderer.enabled = true;
-                    _item = item;
-                    _item.transform.SetParent(transform);
-                    _item.transform.position = transform.position + _itemSpawnOffset;
-                    PanelSetup();
+                    item.transform.SetParent(transform);
+                    item.transform.position = transform.position + _itemSpawnOffset;
+                    PanelSetup(item);
                 }
+                
+                _item = item;
+            }
+
+            if (!_takeItemAudioSource.isPlaying)
+            {
+                _takeItemAudioSource.Play();
             }
         }
     }

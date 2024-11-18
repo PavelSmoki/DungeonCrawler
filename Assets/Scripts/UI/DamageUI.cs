@@ -27,7 +27,7 @@ namespace Game.UI
             var textDamage = Instantiate(isCrit ? _critTextDamagePrefab : _textDamagePrefab, transform);
             textDamage.text = damage.ToString();
             SelfDestroy(textDamage.gameObject).Forget();
-            
+
             var at = new ActiveText { MaxTime = 1.0f };
             at.Timer = at.MaxTime;
             at.UIText = textDamage;
@@ -60,12 +60,12 @@ namespace Game.UI
                     var color = at.UIText.color;
                     color.a = at.Timer / at.MaxTime;
                     at.UIText.color = color;
-                    
+
                     at.MoveText(_player.GetCamera());
                 }
             }
         }
-        
+
         private class ActiveText
         {
             public TextMeshProUGUI UIText;

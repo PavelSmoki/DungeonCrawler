@@ -1,61 +1,256 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+class Player {
+    - Speed: int
+    - _heartsCount: int
+    - _firstWeapon: WeaponBase
+    - _secondWeapon: WeaponBase
+    - _defaultArmors: List<ArmorSlot>
+    - _defaultSpeedModifier: float
+    - _hearts: Stack<Heart>
+    - _gameUI: GameUI
+    - _gameOverUI: GameOverUI
+    - _currentArmors: Dictionary<ArmorType, Armor>
+    - _currentWeapon: WeaponBase
+    - _playerModifiers: PlayerModifiers
+    - _timeBeforeShoot: float
+    - _isInvincible: bool
+    + Construct(gameUI: GameUI, gameOverUI: GameOverUI): void
+    + Start(): void
+    + Init(): void
+    + InitGameUI(): void
+    + SwitchWeapon(): void
+    + SetWeapon(weaponBase: WeaponBase): void
+    + CalculateModifiers(): void
+    + Move(horizontal: float, vertical: float): void
+    + RotatePlayer(horizontal: float): void
+    + Attack(moveDirection: Vector2, lookDirection: Vector2): void
+    + RotateWeapon(direction: Vector2): void
+    + TakeDamage(other: Collision2D): void
+    + TakingDamageDelay(): UniTaskVoid
+    + GetCurrentPosition(): Vector2
+    + GetCamera(): Camera
+    + TakeItem(item: WeaponBase): WeaponBase
+    + TakeItem(item: Armor): Armor
+    + SwitchArmor(item: Armor, armorType: ArmorType): Armor
+    + OnDestroy(): void
+}
+
+interface IPlayer {
+    + GetCurrentPosition(): Vector2
+    + GetCamera(): Camera
+    + TakeItem(item: WeaponBase): WeaponBase
+    + TakeItem(item: Armor): Armor
+}
+
+class PlayerModifiers {
+    + SpeedModifier: float
+    + DamageModifier: float
+    + CritChanceModifier: float
+    + AttackSpeedModifier: float
+    + AttackRangeModifier: float
+    + ShotSpeedModifier: float
+    + PlayerModifiers(speedModifier: float, damageModifier: float, critChanceModifier: float, 
+    attackSpeedModifier: float, attackRangeModifier: float, shotSpeedModifier: float)
+    
+}
+
+abstract class Item {
+    - Name: string
+    - Rareness: Rareness
+    - Infos: List<ItemInfo>
+}
+
+enum Rareness {
+        Common,
+        Uncommon,
+        Rare,
+        Mythic,
+        Legendary
+}
+
+class Armor {
+    - ArmorType: ArmorType
+    - MoveSpeedBonus: float
+    - DamageBonus: float
+    - CritChanceBonus: float
+    - AttackSpeedBonus: float
+    - AttackRangeBonus: float
+    - ShotSpeedBonus: float
+    - SpriteRenderer: SpriteRenderer
+    # Awake(): void
+}
+
+class ArmorSlot {
+    - ArmorType: ArmorType
+    - Armor: Armor
+}
+
+enum ArmorType {
+    Head
+    Body
+    Foot
+}
+
+abstract class WeaponBase {
+    - Damage: float
+    - CritChance: float
+    - CritModifier: float
+    - AttackSpeed: float
+    - AttackRange: float
+    + {abstract} Attack(damageModifier: float, critChanceModifier: float, 
+    attackRangeModifier: float, shotSpeedModifier: float): List<EnemyBase>
+    # Awake(): void
+    - OnDrawGizmosSelected(): void
+}
+
+class MeleeWeapon {
+    - KnockBack: float
+    + Attack(damageModifier: float, critChanceModifier: float, 
+    attackRangeModifier: float, shotSpeedModifier: float): List<EnemyBase>
+    - IsCrit(critChance: float, damage: float): bool
+    # Awake(): void
+}
+
+class RangedWeapon {
+    - ShotSpeed: float
+    - _projectilePrefab: GameObject
+    + Attack(damageModifier: float, critChanceModifier: float,
+     attackRangeModifier: float, shotSpeedModifier: float): List<EnemyBase>
+    - IsCrit(critChance: float, damage: float): bool
+    # Awake(): void
+}
+
+class SlowingMeleeWeapon {
+    - _slownessDuration: float
+    + Attack(damageModifier: float, critChanceModifier: float, 
+    attackRangeModifier: float, shotSpeedModifier: float): List<EnemyBase>
+    # Awake(): void
+}
+
+class Projectile {
+    - EnemyTag: string
+    - _ammoLifeTime: float
+    - _damage: float
+    - _isCrit: bool
+    + SetProjectileFields(ammoLifeTime: float, damage: float, 
+    force: Vector2, isCrit: bool): void
+    - Life(): UniTaskVoid
+}
+
+class ItemPedestal {
+    - _item: Item
+    - _itemSpawnOffset: Vector3
+    - _isWeapon: bool
+    - _player: IPlayer
+    + Construct(player: IPlayer): void
+    + Start(): void
+    + SpawnItem(): void
+    + PanelSetup(): void
+    + TakeItem(): void
+}
+
+class GameUI {
+    - FloatingJoystick _moveJoystick
+    - FixedJoystick _attackJoystick
+    - GameObject _pausePanel
+    - Button _pauseButton
+    - List<Image> _hearts
+    + Action OnWeaponSwitch
+    + Action<float, float> OnMove
+    + Action<Vector2, Vector2> OnAttack
+    + void OnWeaponSwitchPress()
+    + void SetWeaponSpite(Sprite sprite)
+    + void SetArmorSprite(Sprite sprite, ArmorType armorType)
+    + void ChangeHealthOnUI(int lastHeartAmount)
+    + void SetHealthOnUI(int heartsCount)
+    + void Pause()
+    + void Resume()
+    + void ExitMainMenu()
+    - void FixedUpdate()
+    - void Update()
+}
+
+class DamageUI {
+    - TextMeshProUGUI _textDamagePrefab
+    - TextMeshProUGUI _critTextDamagePrefab
+    - List<ActiveText> _activeTexts
+    - IPlayer _player
+
+    {static} + void Construct(IPlayer player)
+    + void ShowDamage(int damage, Vector2 unitPos, bool isCrit)
+    + UniTaskVoid SelfDestroy(GameObject textDamage)
+    + void Update()
+}
+
 class EnemyBase {
-    - Rb: Rigidbody2D
-    - Animator: Animator
-    - _collider: Collider2D
-    - _spriteRenderer: SpriteRenderer
-    - Speed: float
-    - Health: float
-    - Player: IPlayer
-    - _cancellationTokenSource: CancellationTokenSource
-    - DamageUI: DamageUI
+    # Speed: float
+    # Health: float
+    # Player: IPlayer
+    # DamageUI: DamageUI
     - _roomData: RoomData
     - _isDead: bool
-    - IsDelayed: bool
-    + Construct(player: IPlayer, damageUI: DamageUI): void
-    + Awake(): void
+    # IsDelayed: bool
+    - Construct(player: IPlayer, damageUI: DamageUI): void
+    - Awake(): void
     + SetCurrentRoomData(roomData: RoomData): void
-    + BehaviorDelayAfterSpawn(): UniTaskVoid
-    + Start(): void
-    + Update(): void
-    + Rotate(): void
-    + TakeDamage(damage: float, knockbackDirection: Vector2, knockBack: float, isCrit: bool): void
-    + DelayDestroy(): UniTaskVoid
+    - BehaviorDelayAfterSpawn(): UniTaskVoid
+    # {abstract} Start(): void
+    # {abstract} Update(): void
+    # Rotate(): void
+    + {abstract} TakeDamage(damage: float, knockbackDirection: Vector2, 
+    knockBack: float, isCrit: bool): void
+    - DelayDestroy(): UniTaskVoid
     + SlowDown(duration: float): UniTaskVoid
 }
 
-class GoblinArcher {
-    -arrowCount: int
-    +shootArrow(): void
+class Doll {
+    -_spawn: Vector3
+     + TakeDamage(damage: float, knockbackDirection: Vector2, 
+     knockBack: float, isCrit: bool): void
 }
 
-class Mushroom {
-    +releaseSpores(): void
+class FlyingEye {
+    # Update(): void
+    - Follow(): void
 }
 
-class Player {
-    -health: int
-    -inventory: Inventory
-    +move(): void
-    +attack(): void
+class Goblin {
+    -_shotSpeed: float
+    -_projectilePrefab: Projectile
+    -Attack(): void
 }
 
-class Inventory {
-    -items: List<Item>
-    +addItem(item: Item): void
-    +removeItem(item: Item): void
+class Necromancer {
+    - _shotSpeed: float
+    - _projectilePrefab: Projectile
+    + Attack(): void
 }
 
-class Item {
-    -name: String
-    -description: String
-}
-
-GoblinArcher --|> Enemy : extends
-Mushroom --|> Enemy : extends
-Player "1" -- "*" Inventory : has
-Inventory "1" -- "*" Item : contains
+Player *-- PlayerModifiers
+IPlayer <|.. Player
+Player *-- ArmorSlot
+Player *-- GameUI
+Item *-- Rareness
+Item <|-- Armor
+ArmorSlot *-- Armor
+ArmorSlot *-- ArmorType
+Item <|-- WeaponBase
+WeaponBase <|-- MeleeWeapon
+Player *-- WeaponBase
+WeaponBase <|-- RangedWeapon
+MeleeWeapon <|-- SlowingMeleeWeapon
+RangedWeapon *-- Projectile
+ItemPedestal *-- IPlayer 
+GameUI --> ArmorType
+DamageUI *-- IPlayer 
+EnemyBase *-- IPlayer
+Goblin <|-- EnemyBase
+FlyingEye <|-- EnemyBase
+Necromancer <|-- EnemyBase
+Doll <|-- EnemyBase
+Necromancer *-- Projectile
+Goblin *-- Projectile
 
 @enduml

@@ -8,7 +8,13 @@ namespace Game.Enemies.EnemiesInstances
 
         public override void TakeDamage(float damage, Vector2 knockbackDirection, float knockBack, bool isCrit)
         {
+            DamagedSound.PlayDamaged();
             DamageUI.ShowDamage((int)damage, transform.position, isCrit);
+        }
+
+        protected override void Update()
+        {
+            
         }
     }
 }

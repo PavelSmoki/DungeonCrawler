@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Game.Gameplay;
+using Game.Gameplay.Audio;
 using Game.Player;
 using Game.UI;
 using UnityEngine;
@@ -18,6 +19,8 @@ namespace Game.Enemies
         [SerializeField] protected Animator Animator;
         [SerializeField] private Collider2D _collider;
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private EnemyMoveSound _moveSound;
+        [SerializeField] protected EnemyDamagedSound DamagedSound;
 
         [field: SerializeField] protected float Speed { get; set; }
         [field: SerializeField] protected float Health { get; set; }
@@ -62,6 +65,11 @@ namespace Game.Enemies
         protected virtual void Update()
         {
             Rotate();
+
+            if (!_moveSound.IsPlaying)
+            {
+                _moveSound.PlayMove();
+            }
         }
 
         private void Rotate()
@@ -103,6 +111,8 @@ namespace Game.Enemies
 
                     DelayDestroy().Forget();
                 }
+                
+                DamagedSound.PlayDamaged();
             }
         }
 

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6d1c27f34945a58d2d730e07b339ed, type: 3}
+  m_Name: Lava Wand Clip Bundle
+  m_EditorClassIdentifier: 
+  _clips:
+  - {fileID: 8300000, guid: 8c73afc802fd9d8438b6230f67c8324e, type: 3}
+  - {fileID: 8300000, guid: 39d1d940ba4dc674e8a6b670630d7b19, type: 3}
+  - {fileID: 8300000, guid: 3a228c1effaba034abb3184d4afdb70b, type: 3}
+  - {fileID: 8300000, guid: 8767de1e815238d4c95416ed5cf0050d, type: 3}

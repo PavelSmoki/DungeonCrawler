@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6d1c27f34945a58d2d730e07b339ed, type: 3}
+  m_Name: Move Clip Bundle
+  m_EditorClassIdentifier: 
+  _clips:
+  - {fileID: 8300000, guid: 7fd5284cb8205a7448f5a46364dfae32, type: 3}
+  - {fileID: 8300000, guid: 95b755f16af011549af4fcc5ea751b65, type: 3}
+  - {fileID: 8300000, guid: 8c76fa71e33d54c48a1eb94709a13b2a, type: 3}
+  - {fileID: 8300000, guid: d7024ffdc603f10478e86c8a482faf48, type: 3}
+  - {fileID: 8300000, guid: 537289e35994bb84690c21218fc7eb18, type: 3}
+  - {fileID: 8300000, guid: 5ab62728271c5544da7ca0b74ca5ccb8, type: 3}
+  - {fileID: 8300000, guid: 7c7b7e6d8f5921f4d94cf86f1574c6be, type: 3}
+  - {fileID: 8300000, guid: 2311aa2b91e01474c9d76536fadd8a36, type: 3}
